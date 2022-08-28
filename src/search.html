@@ -6,10 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POOSD</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js"></script>
 </head>
 
 <body>
-    <p>Hello World!</p>
+    <div class="topBar">
+
+    </div>
+    <div class="mainContainer">
+        <table id="contactsTable">
+            <tr class="tableEntry">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Age</th>
+            </tr>
+            <tr class="tableEntry">
+                <td>Tanner</td>
+                <td>Sandlin</td>
+                <td>20</td>
+            </tr>
+            <tr class="tableEntry">
+                <td>Hello</td>
+                <td>World</td>
+                <td>40</td>
+            </tr>
+            <tr class="tableEntry">
+                <td>We</td>
+                <td>Love</td>
+                <td>COP4331</td>
+            </tr>
+        </table>
+    </div>
+    <div class="bottomPane">
+        <div class="inputContainer" id="searchContainer">
+            <h1>Search for a contact</h1>
+            <input type="text" placeholder="Enter a color" id="searchInput" oninput="search()">
+            <span id="searchResult"></span>
+        </div>
+        <div class="inputContainer" id="addContainer">
+            <h1>Add a contact</h1>
+            <input type="text" placeholder="First Name" id="firstNameInput">
+            <input type="text" placeholder="Last Name" id="lastNameInput">
+            <input type="text" placeholder="Last Name" id="ageInput">
+            <span id="addResult"></span>
+        </div>
+    </div>
 </body>
 
 </html>
