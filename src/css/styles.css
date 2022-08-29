@@ -27,12 +27,18 @@ table {
   border-spacing: 10px 5px;
   margin: 20px;
   width: calc(100% - 40px);
+  overflow: scroll;
 }
 
 tr {
   border: 1px solid red;
   background-color: rgb(100, 100, 100);
   border-radius: 10% 10%;
+}
+
+tr:hover{
+  background-color: rgb(120, 120, 120);
+  transition: .5s;
 }
 
 td,
@@ -47,9 +53,31 @@ div {
 
 .inputContainer {
   padding: 10px;
-  align-items: center;
+  display:block;
 }
 
-.inputContainer > h1 {
+h1{
+  text-align: center;
   color: white;
+}
+
+.topBar {
+  background-color: rgb(54, 221, 118);
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+}
+
+.topBar {
+  display: flex;
+}
+
+#form{
+  list-style: none
+}
+
+#addResult{
+text-align: center;
 }

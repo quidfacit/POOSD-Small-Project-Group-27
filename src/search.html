@@ -12,8 +12,10 @@
 
 <body>
     <div class="topBar">
-
+        <h1 class="center">Contact Manager</h1>
+        <button id="logoutBtn">Log out</button>
     </div>
+
     <div class="mainContainer">
         <table id="contactsTable">
             <tr class="tableEntry">
@@ -38,18 +40,22 @@
             </tr>
         </table>
     </div>
+
     <div class="bottomPane">
         <div class="inputContainer" id="searchContainer">
             <h1>Search for a contact</h1>
             <input type="text" placeholder="Enter a color" id="searchInput" oninput="search()">
             <span id="searchResult"></span>
         </div>
+
         <div class="inputContainer" id="addContainer">
             <h1>Add a contact</h1>
-            <input type="text" placeholder="First Name" id="firstNameInput">
-            <input type="text" placeholder="Last Name" id="lastNameInput">
-            <input type="text" placeholder="Last Name" id="ageInput">
-            <span id="addResult"></span>
+            <ul id="form">
+                <li><input type="text" placeholder="First Name" id="firstNameInput"></li>
+                <li><input type="text" placeholder="Last Name" id="lastNameInput"></li>
+                <li><input type="text" placeholder="Age" id="ageInput"></li>
+            </ul>
+            <div class="center" id="addResult">Done</div>
         </div>
     </div>
 </body>
