@@ -1,7 +1,7 @@
-console.log('Hello World!');
+console.log("Hello World!");
 
 function addEntry(firstName, lastName, age) {
-  const table = document.getElementById('contactsTable');
+  const table = document.getElementById("contactsTable");
 
   // Add the new row under the header row
   const row = table.insertRow(1);
@@ -18,12 +18,12 @@ function addEntry(firstName, lastName, age) {
 
 function clearTable() {
   // Remove all children except the headers
-  const tbody = document.getElementById('contactsTable').children[0];
+  const tbody = document.getElementById("contactsTable").children[0];
   tbody.replaceChildren(tbody.children[0]);
 }
 
 function search() {
-  const searchTerm = document.getElementById('searchInput').value;
+  const searchTerm = document.getElementById("searchInput").value;
   console.log(searchTerm);
 
   // clearTable();
@@ -37,10 +37,15 @@ function search() {
   // }
 }
 
-function createContact() {
-  const firstName = document.getElementById('firstNameInput');
-  const lastName = document.getElementById('lastNameInput');
-  const age = document.getElementById('ageInput');
+function addContact() {
+  const firstName = document.getElementById("firstNameInput").value;
+  const lastName = document.getElementById("lastNameInput").value;
+  const number = document.getElementById("numberInput").value;
+  const email = document.getElementById("emailInput").value;
+
+  const dateCreated = Date.now();
+
+  console.log(`${firstName},${lastName},${number},${email},`);
 
   // send to api
 }
