@@ -7,16 +7,14 @@ body {
   background-color: rgb(51, 51, 51);
 }
 
-#searchContainer {
-  padding: 10px;
-}
-
 .mainContainer {
   height: 70%;
 }
 
 .bottomPane {
   display: flex;
+  float:right;
+  width:50%
 }
 
 
@@ -32,12 +30,13 @@ table {
 
 tr {
   border: 1px solid red;
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(40, 208, 214);
   border-radius: 10% 10%;
+  transition: .5s;
 }
 
 tr:hover{
-  background-color: rgb(120, 120, 120);
+  background-color: rgb(45, 248, 255);
   transition: .5s;
 }
 
@@ -52,12 +51,18 @@ div {
 }
 
 .inputContainer {
-  padding: 10px;
+  /* padding: 10px; */
   display:block;
 }
 
 .inputContainer > h1{
   margin:0;
+}
+
+#searchContainer {
+  padding: 10px;
+  float:left;
+  margin-left: 18px;
 }
 
 h1{
@@ -66,7 +71,7 @@ h1{
 }
 
 .topBar {
-  background-color: rgb(54, 221, 118);
+  background-color: rgb(40, 208, 214);
 }
 
 .center {
@@ -90,4 +95,37 @@ h1{
 
 #addResult{
 text-align: center;
+}
+
+.modal{
+  display: block;
+  position: fixed;
+  width:50%;
+  height:50%;
+  background-color: rgb(120,120,120);
+  left:25%;
+  top:25%;
+  z-index: 1; /* ontop */
+  border-radius: 5%;
+}
+
+.modal-content{
+  width: 80%;
+  margin: 5% auto;
+}
+
+#close {
+  color: #ffffff;
+  float: right;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#close:hover{
+  color: black;
+  cursor: pointer;
+}
+
+.haze{
+  filter: brightness(50%);
 }
