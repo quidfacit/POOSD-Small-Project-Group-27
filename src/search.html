@@ -7,16 +7,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POOSD</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script src="js/main.js"></script>
 </head>
 
 <body>
-    <div class="topBar">
-        <h1 class="center">Contact Manager</h1>
-        <button id="logoutBtn">Log out</button>
+    <div class="modal" style="display: none;" id="modal">
+        <div class="modal-content">
+            <span id="close">&times;</span>
+            <div class="inputContainer" style="width:100%" id="addContainer">
+                <h1>Add a contact</h1>
+                <ul id="form">
+                    <li><input on type="text" placeholder="First Name" id="firstNameInput"></li>
+                    <li><input on type="text" placeholder="Last Name" id="lastNameInput"></li>
+                    <li><input on type="text" placeholder="Phone Number" id="numberInput"></li>
+                    <li><input on type="text" placeholder="Email" id="emailInput"></li>
+                    <li><button onclick="addContact()">Add Contact</button></li>
+                </ul>
+                <div class="center" style="display:none" id="addResult">Done</div>
+            </div>
+        </div>
     </div>
 
     <div class="mainContainer">
+        <div class="topBar">
+            <h1 class="center">Contact Manager</h1>
+            <button id="showModalBtn" onclick="showModal()">Add Contact</button>
+            <button id="logoutBtn">Log out</button>
+        </div>
+
+
+        <div class="inputContainer" id="searchContainer">
+            <h1>Search for a contact</h1>
+            <input type="text" placeholder="Enter a seach term" id="searchInput" oninput="search()">
+            <span id="searchResult" style="display: none;">Hello</span>
+        </div>
+
         <table id="contactsTable">
             <tr class="tableEntry">
                 <th>First Name</th>
@@ -48,26 +72,10 @@
             </tr>
         </table>
     </div>
-
-    <div class="bottomPane">
-        <div class="inputContainer" id="searchContainer">
-            <h1>Search for a contact</h1>
-            <input type="text" placeholder="Enter a seach term" id="searchInput" oninput="search()">
-            <span id="searchResult"></span>
-        </div>
-
-        <div class="inputContainer" style="width:100%" id="addContainer">
-            <h1>Add a contact</h1>
-            <ul id="form">
-                <li><input on type="text" placeholder="First Name" id="firstNameInput"></li>
-                <li><input on type="text" placeholder="Last Name" id="lastNameInput"></li>
-                <li><input on type="text" placeholder="Phone Number" id="numberInput"></li>
-                <li><input on type="text" placeholder="Email" id="emailInput"></li>
-                <li><button onclick="addContact()">Add Contact</button></li>
-            </ul>
-            <div class="center" id="addResult">Done</div>
-        </div>
-    </div>
 </body>
+
+<footer>
+    <script src="js/main.js"></script>
+</footer>
 
 </html>
