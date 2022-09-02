@@ -1,0 +1,58 @@
+<?php
+	$res = false;
+	$request = json_decode(file_get_contents("php://input"), true);
+	$id = $request->UserID;
+	$conn = new mysqli("localhost", "admin", "27isBest", "main");
+
+	if($conn->connect_error == null){
+		$data = $conn->query("SELECT * FROM Contacts WHERE UserID = $id");
+
+		if($data->num_rows != 0){
+			$command = "UPDATE Contacs SET";
+
+			if($request->nID != null){
+				$temp = $command;
+				$command.="UserID = $request->nID WHERE UserID = $id";
+				$conn->query(command);
+				$command = $temp;
+			}
+
+			if($request->FirstName != null){
+				$temp = $command;
+				$command.="FirstName = $request->FirstName WHERE UserID = $id";
+				$conn->query(command);
+				$command = $temp;
+			}
+
+			if($request->LastName != null){
+				$temp = $command;
+				$command.="FirstName = $reqeust->FirstName WHERE UserID = $id";
+				$conn->query(command);
+				$command = $temp;
+			}
+
+			if($request->Email != null){
+				$temp = $command;
+				$command.="Email = $request->Email WHERE UserID = $id";
+				$conn->query(command);
+				$command = $temp;
+			}
+
+			if($requets->PhoneNumber != null){
+				$temp = $command;
+				$command.="PhoneNumber = $request->PhoneNumber WHERE UserId = $id";
+				$conn->query(command);
+				$command = $temp;
+			}
+
+			$res = true;
+		}
+
+		$conn->close();
+	}
+
+	header("Content-Type: application/json; charset = utf-8");
+
+	print($res);
+
+?>
