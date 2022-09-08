@@ -1,25 +1,9 @@
 const urlBase = 'http://contacts27.com/LAMPAPI';
 const extension = 'php';
-// let contacts = [];
-let contacts = [
-  {
-    FirstName: 'John',
-    LastName: 'Appleseed',
-    Email: 'Johnnyappleseed@gmail.com',
-    PhoneNumber: '123-456-7890',
-    DateCreated: '10-10-2020',
-  },
-  {
-    FirstName: 'Tanner',
-    LastName: 'Hawkins',
-    Email: 'tanndlin@gmail.com',
-    PhoneNumber: '123-456-7890',
-    DateCreated: '09-26-2001',
-  },
-];
+let contacts = [];
 let contactInModal = null;
 
-showContacts();
+search();
 
 // Set up Modal
 const modals = [].slice.call(document.getElementsByClassName('modal'));
@@ -63,6 +47,7 @@ function showContacts() {
   clearTable();
   const table = document.getElementById('contactsTable');
 
+  // Create new row for each contact
   contacts.forEach((contact) => {
     const row = table.insertRow();
     Object.keys(contact).forEach((key) => {
@@ -83,8 +68,6 @@ function search() {
   const searchTerm = document.getElementById('searchInput').value;
   console.log(searchTerm);
 
-  clearTable();
-
   // Get results from API
   const jsonPayload = JSON.stringify({
     SearchTerm: searchTerm,
@@ -101,21 +84,23 @@ function search() {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById('searchResult').innerHTML =
           'Contacts have been retrieved';
-        const { Contacts: contacts, Error: err } = JSON.parse(xhr.responseText);
-        console.log(contacts);
+        const { Contacts: newContacts, Error: err } = JSON.parse(
+          xhr.responseText
+        );
 
+        // If no contacts found, clear table
         if (err) {
-          throw new Error(err);
+          document.getElementById('searchResult').innerHTML = err;
+          contacts = [];
         }
 
-        contacts.forEach((contact) => {
-          addEntry(contact);
-        });
+        contacts = newContacts;
+        showContacts();
       }
     };
     xhr.send(jsonPayload);
   } catch (err) {
-    document.getElementById('searchResult').innerHTML = err.message;
+    console.log(err);
   }
 }
 
