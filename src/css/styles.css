@@ -98,7 +98,7 @@ text-align: center;
 }
 
 .modal{
-  display: block;
+  display: none;
   position: fixed;
   width:50%;
   height:50%;
@@ -114,14 +114,14 @@ text-align: center;
   margin: 5% auto;
 }
 
-#close {
+.close {
   color: #ffffff;
   float: right;
   font-size: 36px;
   font-weight: bold;
 }
 
-#close:hover{
+.close:hover{
   color: black;
   cursor: pointer;
 }
