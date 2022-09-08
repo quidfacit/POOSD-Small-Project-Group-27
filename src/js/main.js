@@ -3,7 +3,7 @@ const extension = 'php';
 
 // Set up Modal
 
-const modal = document.getElementById('modal');
+const modals = [].slice.call(document.getElementsByClassName('modal'));
 const close = document.getElementById('close');
 const showModalBtn = document.getElementById('showModalBtn');
 const mainContainer = document.getElementsByClassName('mainContainer')[0];
@@ -11,18 +11,23 @@ document.getElementById('close').onclick = closeModal;
 
 // Close on clicking outside of modal
 window.onclick = (e) => {
-  if (!modal.contains(e.target) && e.target !== showModalBtn) {
+  if (
+    !modals.some((modal) => modal.contains(e.target)) &&
+    e.target !== showModalBtn
+  ) {
     closeModal();
   }
 };
 
-function showModal() {
+// Opens modal that called this function
+function showModal(modal) {
   modal.style.display = 'block';
   mainContainer.classList.add('haze');
 }
 
+// Closes all modals
 function closeModal() {
-  modal.style.display = 'none';
+  modals.forEach((modal) => (modal.style.display = 'none'));
   mainContainer.classList.remove('haze');
 }
 

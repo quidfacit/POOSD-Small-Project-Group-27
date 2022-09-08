@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="modal" style="display: none;" id="modal">
+    <div class="modal" style="display: none;" id="addModal">
         <div class="modal-content">
             <span id="close">&times;</span>
             <div class="inputContainer" style="width:100%" id="addContainer">
@@ -27,10 +27,31 @@
         </div>
     </div>
 
+    <div class="modal" style="display: none;" id="contactModal">
+        <div class="modal-content">
+            <span id="close">&times;</span>
+            <div class="inputContainer" style="width:100%" id="addContainer">
+                <h1>Contact</h1>
+                <table id="modalTable">
+                    <tr class="tableEntry">
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Date created</th>
+                    </tr>
+                </table>
+                <div class="center" style="display:none" id="addResult">Done</div>
+            </div>
+        </div>
+    </div>
+
+
+
     <div class="mainContainer">
         <div class="topBar">
             <h1 class="center">Contact Manager</h1>
-            <button id="showModalBtn" onclick="showModal()">Add Contact</button>
+            <button id="showModalBtn" onclick="showModal(document.getElementById('addModal'))">Add Contact</button>
             <button id="logoutBtn">Log out</button>
         </div>
 
