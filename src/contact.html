@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <div class="modal" style="display: none;" id="addModal">
+    <div class="modal" id="addModal">
         <div class="modal-content">
-            <span id="close">&times;</span>
+            <span class="close">&times;</span>
             <div class="inputContainer" style="width:100%" id="addContainer">
                 <h1>Add a contact</h1>
                 <ul id="form">
@@ -27,9 +27,9 @@
         </div>
     </div>
 
-    <div class="modal" style="display: none;" id="contactModal">
+    <div class="modal" id="contactModal">
         <div class="modal-content">
-            <span id="close">&times;</span>
+            <span class="close">&times;</span>
             <div class="inputContainer" style="width:100%" id="addContainer">
                 <h1>Contact</h1>
                 <table id="modalTable">
@@ -40,9 +40,18 @@
                         <th>Phone Number</th>
                         <th>Date created</th>
                     </tr>
+                    <tr>
+                        <td><input type="text" placeholder="First Name" id="updateFirstName"></td>
+                        <td><input type="text" placeholder="Last Name" id="updateLastName"></td>
+                        <td><input type="text" placeholder="Email" id="updateEmail"></td>
+                        <td><input type="text" placeholder="Phone Number" id="updateNumber"></td>
+                        <td id="updateDateCreated"></td>
+                    </tr>
                 </table>
                 <div class="center" style="display:none" id="addResult">Done</div>
             </div>
+            <button onclick="updateContact()">Update Contact</button>
+            <button onclick="deleteContact()">Delete Contact</button>
         </div>
     </div>
 
@@ -62,7 +71,7 @@
             <span id="searchResult"></span>
         </div>
 
-        <table id="contactsTable">
+        <table id="contactsTable" onclick="openContactModal(event)">
             <tr class="tableEntry">
                 <th>First Name</th>
                 <th>Last Name</th>
