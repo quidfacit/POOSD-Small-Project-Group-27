@@ -28,15 +28,17 @@ function closeModal() {
 
 //------------------------------------------------------
 
-function addEntry(firstName, lastName, number, email) {
+function addEntry(contact) {
   const table = document.getElementById('contactsTable');
 
   // Add the new row under the header row
   const row = table.insertRow(1);
+  console.log(contact);
 
-  [firstName, lastName, number, email].forEach((e) => {
+  Object.keys(contact).forEach((key) => {
+    if (key == 'ID') return;
     const cell = row.insertCell();
-    cell.innerHTML = e;
+    cell.innerHTML = contact[key];
   });
 }
 
@@ -54,7 +56,7 @@ function search() {
 
   // Get results from API
   const jsonPayload = JSON.stringify({
-    FirstName: searchTerm,
+    SearchTerm: searchTerm,
     UserID: readCookie(),
   });
 
@@ -64,7 +66,7 @@ function search() {
   xhr.open('POST', url, true);
   xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
   try {
-    xhr.onreadystatechange = () => {
+    xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById('searchResult').innerHTML =
           'Contacts have been retrieved';
@@ -76,12 +78,7 @@ function search() {
         }
 
         contacts.forEach((contact) => {
-          addEntry(
-            contact.FirstName,
-            contact.LastName,
-            contact.PhoneNumber,
-            contact.Email
-          );
+          addEntry(contact);
         });
       }
     };
