@@ -6,16 +6,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>POOSD</title>
         <link rel="stylesheet" href="css/styles.css">
+        <script type="javascript" src="js/main.js"></script>
     </head>
     <body>
         <div class="loginContainer" id="login">
             <h1>Welcome to Contacts27</h1>
-            <div class="loginText" id="loginInfo">
-                <label for="Username">Username:</label>
-                <input type="text" id="Username" name="Username">
-                <label for="Password">Password:</label>
-                <input type="text" id="Password" name="Password">
-                <button id="loginBtn">Log In</button>
+            <div class="loginText" id="loginDiv">
+                <label for="loginName">Username:</label>
+                <input type="text" id="loginName" name="loginName">
+                <label for="loginPassword">Password:</label>
+                <input type="text" id="loginPassword" name="loginPassword">
+                <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
             </div>
 
             <div class="regContainer" id="register">
