@@ -94,17 +94,40 @@ function addContact() {
   const numberField = document.getElementById('numberInput');
   const emailField = document.getElementById('emailInput');
 
-  const dateCreated = Date.now();
-
-  console.log(
-    `${firstNameField.value},${lastNameField.value},${numberField.value},${emailField.value},`
-  );
-
-  [firstNameField, lastNameField, numberField, emailField].forEach(
-    (e) => (e.value = '')
-  );
-
   // send to api
+  const payload = JSON.stringify({
+    FirstName: firstNameField.value,
+    LastName: lastNameField.value,
+    Email: emailField.value,
+    PhoneNumber: numberField.value,
+  });
+
+  let url = urlBase + '/AddContact.' + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', url, true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        const { Error: err } = JSON.parse(xhr.responseText);
+        if (err) {
+          throw new Error(err);
+        }
+
+        console.log('Successfully added contact');
+        addEntry(payload);
+      }
+
+      // Clear fields
+      [(firstNameField, lastNameField, numberField, emailField)].forEach(
+        (e) => (e.value = '')
+      );
+    };
+    xhr.send(payload);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 function readCookie() {
