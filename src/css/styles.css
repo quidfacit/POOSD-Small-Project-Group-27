@@ -129,3 +129,7 @@ text-align: center;
 .haze{
   filter: brightness(50%);
 }
+
+#searchResult, #addResult{
+  color: white;
+}

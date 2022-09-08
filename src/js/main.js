@@ -1,3 +1,6 @@
+const urlBase = 'http://contacts27.com/LAMPAPI';
+const extension = 'php';
+
 // Set up Modal
 
 const modal = document.getElementById('modal');
@@ -6,39 +9,35 @@ const showModalBtn = document.getElementById('showModalBtn');
 const mainContainer = document.getElementsByClassName('mainContainer')[0];
 document.getElementById('close').onclick = closeModal;
 
-// When the user clicks anywhere outside of the modal, close it
+// Close on clicking outside of modal
 window.onclick = (e) => {
   if (!modal.contains(e.target) && e.target !== showModalBtn) {
     closeModal();
   }
 };
 
-function closeModal() {
-  modal.style.display = 'none';
-  mainContainer.classList.remove('haze');
-}
-
 function showModal() {
   modal.style.display = 'block';
   mainContainer.classList.add('haze');
 }
 
+function closeModal() {
+  modal.style.display = 'none';
+  mainContainer.classList.remove('haze');
+}
+
 //------------------------------------------------------
 
-function addEntry(firstName, lastName, age) {
+function addEntry(firstName, lastName, number, email) {
   const table = document.getElementById('contactsTable');
 
   // Add the new row under the header row
   const row = table.insertRow(1);
 
-  const cell1 = row.insertCell(0);
-  const cell2 = row.insertCell(1);
-  const cell3 = row.insertCell(2);
-
-  // TODO: prevent code injection
-  cell1.innerHTML = firstName;
-  cell2.innerHTML = lastName;
-  cell3.innerHTML = age;
+  [firstName, lastName, number, email].forEach((e) => {
+    const cell = row.insertCell();
+    cell.innerHTML = e;
+  });
 }
 
 function clearTable() {
@@ -51,15 +50,45 @@ function search() {
   const searchTerm = document.getElementById('searchInput').value;
   console.log(searchTerm);
 
-  // clearTable();
+  clearTable();
 
   // Get results from API
-  // const apiResult = apiSearch(searchTerm)
-  //
-  // for (const contact of apiResult) {
-  //   const { firstName, lastName, age } = contact;
-  //   addEntry(firstName, lastName, age);
-  // }
+  const jsonPayload = JSON.stringify({
+    FirstName: searchTerm,
+    UserID: readCookie(),
+  });
+
+  let url = urlBase + '/SearchContacts.' + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', url, true);
+  xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+  try {
+    xhr.onreadystatechange = () => {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById('searchResult').innerHTML =
+          'Contacts have been retrieved';
+        const { Contacts: contacts, Error: err } = JSON.parse(xhr.responseText);
+        console.log(contacts);
+
+        if (err) {
+          throw new Error(err);
+        }
+
+        contacts.forEach((contact) => {
+          addEntry(
+            contact.FirstName,
+            contact.LastName,
+            contact.PhoneNumber,
+            contact.Email
+          );
+        });
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    document.getElementById('searchResult').innerHTML = err.message;
+  }
 }
 
 function addContact() {
@@ -79,4 +108,9 @@ function addContact() {
   );
 
   // send to api
+}
+
+function readCookie() {
+  console.log(document.cookie);
+  return 1;
 }
