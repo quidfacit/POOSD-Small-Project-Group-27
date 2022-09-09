@@ -64,11 +64,11 @@ function showContacts() {
 
   // Create new row for each contact
   contacts.forEach((contact) => {
+    const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
     const row = table.insertRow();
-    Object.keys(contact).forEach((key) => {
-      if (key == 'ID') return;
+    [FirstName, LastName, Email, PhoneNumber, DateCreated].forEach((val) => {
       const cell = row.insertCell();
-      cell.innerHTML = contact[key];
+      cell.innerHTML = val;
     });
   });
 }
