@@ -2,12 +2,14 @@ const urlBase = 'http://contacts27.com/LAMPAPI';
 const extension = 'php';
 let contacts = [];
 let contactInModal = null;
+const DISPLAY_AMOUT = 30;
+let displayedAmount = 0;
 
 search();
 
 // For Testing ---------------
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 300; i++) {
   addEntry({
     ID: i,
     FirstName: 'John' + i,
@@ -52,25 +54,56 @@ function closeModal() {
 
 //------------------------------------------------------
 
+// Set up lazy loading
+{
+  const container = document.getElementById('tableContainer');
+  container.addEventListener('scroll', () => {
+    // you're at the bottom of the page
+    if (
+      container.offsetHeight + container.scrollTop >=
+      container.scrollHeight
+    ) {
+      // Max amount shown
+      if (displayedAmount == contacts.length) return;
+
+      console.log(
+        `Showing ${DISPLAY_AMOUT} more contacts\n` +
+          `${displayedAmount + DISPLAY_AMOUT} ` +
+          `out of ${contacts.length} contacts shown`
+      );
+
+      showContacts();
+    }
+  });
+}
+
+//------------------------------------------------------
+
 function addEntry(contact) {
   contacts.push(contact);
 }
 
 // TODO: Do something smart to not create and destroy divs
 // Instead reuse and update text
-function showContacts() {
-  clearTable();
+function showContacts(resetTable) {
+  if (resetTable) {
+    displayedAmount = 0;
+    clearTable();
+  }
+
+  // Show DISPLAY_AMOUNT more contacts
   const table = document.getElementById('contactsTable');
 
-  // Create new row for each contact
-  contacts.forEach((contact) => {
+  for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
+    const contact = contacts[displayedAmount++];
+
     const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
     const row = table.insertRow();
     [FirstName, LastName, Email, PhoneNumber, DateCreated].forEach((val) => {
       const cell = row.insertCell();
       cell.innerHTML = val;
     });
-  });
+  }
 }
 
 function clearTable() {
