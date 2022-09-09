@@ -16,12 +16,16 @@
             <div class="inputContainer" style="width:100%" id="addContainer">
                 <h1>Add a contact</h1>
                 <ul id="form">
-                    <li><input type="text" placeholder="First Name" id="firstNameInput"></li>
-                    <li><input type="text" placeholder="Last Name" id="lastNameInput"></li>
-                    <li><input type="text" placeholder="Phone Number" id="numberInput"></li>
-                    <li><input type="text" placeholder="Email" id="emailInput"></li>
-                    <li><button onclick="addContact()">Add Contact</button></li>
+                    <li><label>First Name</label></li>
+                    <li><input type="text" id="firstNameInput"></li>
+                    <li><label>Last Name</label></li>
+                    <li><input type="text" id="lastNameInput"></li>
+                    <li><label>Phone Number</label></li>
+                    <li><input type="text" id="numberInput"></li>
+                    <li><label>Email</label></li>
+                    <li><input type="text" id="emailInput"></li>
                 </ul>
+                <button id="addButton" onclick="addContact()">Add Contact</button>
                 <div class="center" style="display:none" id="addResult">Done</div>
             </div>
         </div>
@@ -32,26 +36,20 @@
             <span class="close">&times;</span>
             <div class="inputContainer" style="width:100%" id="addContainer">
                 <h1>Contact</h1>
-                <table id="modalTable">
-                    <tr class="tableEntry">
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Date created</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text" placeholder="First Name" id="updateFirstName"></td>
-                        <td><input type="text" placeholder="Last Name" id="updateLastName"></td>
-                        <td><input type="text" placeholder="Email" id="updateEmail"></td>
-                        <td><input type="text" placeholder="Phone Number" id="updateNumber"></td>
-                        <td id="updateDateCreated"></td>
-                    </tr>
-                </table>
+                <ul id="form">
+                    <li><label>First Name</label></li>
+                    <li><input type="text" id="updateFirstName"></li>
+                    <li><label>Last Name</label></li>
+                    <li><input type="text" id="updateLastName"></li>
+                    <li><label>Email</label></li>
+                    <li><input type="text" id="updateNumber"></li>
+                    <li><label>Phone Number</label></li>
+                    <li><input type="text" id="updateEmail"></li>
+                </ul>
+                <button onclick="updateContact()">Update Contact</button>
+                <button id="deleteButton" onclick="deleteContact()"></button>
                 <div class="center" style="display:none" id="addResult">Done</div>
             </div>
-            <button onclick="updateContact()">Update Contact</button>
-            <button onclick="deleteContact()">Delete Contact</button>
         </div>
     </div>
 

@@ -67,6 +67,7 @@ th {
 
 .inputContainer {
   display: block;
+  text-align: center;
 }
 
 .inputContainer > h1 {
@@ -127,6 +128,11 @@ h1 {
   background-color: rgb(41, 147, 179);
 }
 
+.topBar > button {
+  margin: 5px 2px;
+  height: 40px;
+}
+
 .center {
   margin: auto;
   width: 50%;
@@ -138,12 +144,63 @@ h1 {
 
 #form {
   list-style: none;
-  border: 1px solid red;
+  color: white;
+  text-align: left;
 }
 
-#form > li {
-  width: 50%;
-  margin: 5px auto;
+/* Center */
+#form > li > * {
+  display: block;
+  width: 80%;
+  margin: auto;
+  font-size: 20px;
+}
+
+#form > li > input {
+  margin-bottom: 10px;
+}
+
+/* Center button */
+button {
+  border-radius: 20px;
+  background-color: rgb(46, 194, 199);
+  color: white;
+}
+
+.inputContainer > button {
+  width: 200px;
+  height: 50px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.inputContainer > button:hover {
+  background-color: rgb(45, 248, 255);
+  transition: 0.75s;
+}
+
+#deleteButton {
+  width: 50px;
+  height: 50px;
+  float: right;
+  margin-right: 9%;
+
+  background-color: rgb(255, 0, 0);
+  background-image: url('../images/trash-icon.png');
+  background-size: 20px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#deleteButton:hover {
+  background-color: rgb(255, 101, 101);
+  transition: 0.5s;
+}
+
+#deleteButton::after {
+  float: none;
 }
 
 #addResult {
@@ -153,13 +210,14 @@ h1 {
 .modal {
   display: none;
   position: fixed;
+  min-width: 600px;
   width: 50%;
   height: 50%;
-  background-color: rgb(120, 120, 120);
+  background-color: rgb(41, 147, 179);
   left: 25%;
   top: 25%;
   z-index: 1; /* ontop */
-  border-radius: 5%;
+  border-radius: 20px;
 }
 
 .modal-content {
