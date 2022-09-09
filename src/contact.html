@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POOSD</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="inputContainer" style="width:100%" id="addContainer">
+                <h1>Add a contact</h1>
+                <ul id="form">
+                    <li><label>First Name</label></li>
+                    <li><input type="text" id="firstNameInput"></li>
+                    <li><label>Last Name</label></li>
+                    <li><input type="text" id="lastNameInput"></li>
+                    <li><label>Phone Number</label></li>
+                    <li><input type="text" id="numberInput"></li>
+                    <li><label>Email</label></li>
+                    <li><input type="text" id="emailInput"></li>
+                </ul>
+                <button id="addButton" onclick="addContact()">Add Contact</button>
+                <div class="center" style="display:none" id="addResult">Done</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="inputContainer" style="width:100%" id="addContainer">
+                <h1>Contact</h1>
+                <ul id="form">
+                    <li><label>First Name</label></li>
+                    <li><input type="text" id="updateFirstName"></li>
+                    <li><label>Last Name</label></li>
+                    <li><input type="text" id="updateLastName"></li>
+                    <li><label>Email</label></li>
+                    <li><input type="text" id="updateEmail"></li>
+                    <li><label>Phone Number</label></li>
+                    <li><input type="text" id="updateNumber"></li>
+                </ul>
+                <button onclick="updateContact()">Update Contact</button>
+                <button id="deleteButton" onclick="deleteContact()"></button>
+                <div class="center" style="display:none" id="addResult">Done</div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="mainContainer">
+        <div class="topBar">
+            <h1 class="center">Contact Manager</h1>
+            <button id="showModalBtn" onclick="showModal(document.getElementById('addModal'))">Add Contact</button>
+            <button id="logoutBtn">Log out</button>
+        </div>
+
+
+        <div class="inputContainer" id="searchContainer">
+            <input class="center" type="text" placeholder="Search" id="searchInput" oninput="search()">
+            <span id="searchResult"></span>
+        </div>
+
+        <div id="tableContainer">
+
+            <table id="contactsTable" onclick="openContactModal(event)">
+                <tr class="tableEntry">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Date created</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+<footer>
+    <script src="js/main.js"></script>
+</footer>
+
+</html>
