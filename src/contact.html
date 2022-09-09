@@ -66,41 +66,22 @@
 
 
         <div class="inputContainer" id="searchContainer">
-            <h1>Search for a contact</h1>
-            <input type="text" placeholder="Enter a seach term" id="searchInput" oninput="search()">
+            <input class="center" type="text" placeholder="Search" id="searchInput" oninput="search()">
             <span id="searchResult"></span>
         </div>
 
-        <table id="contactsTable" onclick="openContactModal(event)">
-            <tr class="tableEntry">
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Date created</th>
-            </tr>
-            <tr class="tableEntry">
-                <td>Tanner</td>
-                <td>Sandlin</td>
-                <td>(123) 456-7890</td>
-                <td>mycoolemail@gmail.com</td>
-                <td>Jan 1, 1980</td>
-            </tr>
-            <tr class="tableEntry">
-                <td>Tanner</td>
-                <td>Sandlin</td>
-                <td>(123) 456-7890</td>
-                <td>mycoolemail@gmail.com</td>
-                <td>Jan 1, 1980</td>
-            </tr>
-            <tr class="tableEntry">
-                <td>Tanner</td>
-                <td>Sandlin</td>
-                <td>(123) 456-7890</td>
-                <td>mycoolemail@gmail.com</td>
-                <td>Jan 1, 1980</td>
-            </tr>
-        </table>
+        <div id="tableContainer">
+
+            <table id="contactsTable" onclick="openContactModal(event)">
+                <tr class="tableEntry">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Date created</th>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
 
