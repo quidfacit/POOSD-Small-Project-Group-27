@@ -5,6 +5,21 @@ let contactInModal = null;
 
 search();
 
+// For Testing ---------------
+
+for (let i = 0; i < 30; i++) {
+  addEntry({
+    ID: i,
+    FirstName: 'John' + i,
+    LastName: 'Doe' + i,
+    Email: `JohnnyAppleseed${i}@gmail.com`,
+    Phone: '555-555-5555',
+    DateCreated: '1999-01-01',
+  });
+}
+
+showContacts();
+
 // Set up Modal
 const modals = [].slice.call(document.getElementsByClassName('modal'));
 const showModalBtn = document.getElementById('showModalBtn');
@@ -116,6 +131,7 @@ function addContact() {
     LastName: lastNameField.value,
     Email: emailField.value,
     PhoneNumber: numberField.value,
+    UserID: readCookie(),
   });
 
   let url = urlBase + '/AddContact.' + extension;
@@ -152,6 +168,7 @@ function readCookie() {
 }
 
 function openContactModal(e) {
+  closeModal();
   // Get index of contact that was clicked
   const index = e.target.parentNode.rowIndex - 1;
   if (index == -1) return; // Dont show for the header row
@@ -159,19 +176,21 @@ function openContactModal(e) {
 
   contactInModal = contacts[index];
   const contact = contacts[index];
+
   console.log(contact);
 
   const firstNameField = document.getElementById('updateFirstName');
   const lastNameField = document.getElementById('updateLastName');
   const numberField = document.getElementById('updateNumber');
   const emailField = document.getElementById('updateEmail');
-  const dateCreatedTag = document.getElementById('updateDateCreated');
 
   firstNameField.value = contact.FirstName;
   lastNameField.value = contact.LastName;
-  numberField.value = contact.PhoneNumber;
+  numberField.value = contact.Phone;
   emailField.value = contact.Email;
-  dateCreatedTag.innerHTML = contact.DateCreated;
+
+  console.log(contact.Email);
+  console.log(emailField.value);
 }
 
 // TODO: Ask for confirmation
@@ -179,7 +198,7 @@ function deleteContact() {
   if (!contactInModal) return;
   const { ID } = contactInModal;
 
-  // Send Delete Request to API
+  // // Send Delete Request to API
   const payload = JSON.stringify({
     ID,
   });
