@@ -7,7 +7,7 @@ let displayedAmount = 0;
 
 search();
 
-// For Testing ---------------
+// --------------------------- For Testing ---------------------------
 
 for (let i = 0; i < 300; i++) {
   addEntry({
@@ -20,9 +20,9 @@ for (let i = 0; i < 300; i++) {
   });
 }
 
-showContacts();
+showContacts(true);
 
-// Set up Modal
+// -------------------------- Set up Modal --------------------------
 const modals = [].slice.call(document.getElementsByClassName('modal'));
 const showModalBtn = document.getElementById('showModalBtn');
 const mainContainer = document.getElementsByClassName('mainContainer')[0];
@@ -52,9 +52,7 @@ function closeModal() {
   mainContainer.classList.remove('haze');
 }
 
-//------------------------------------------------------
-
-// Set up lazy loading
+// ------------------------ Set up lazy loading ------------------------
 {
   const container = document.getElementById('tableContainer');
   container.addEventListener('scroll', () => {
@@ -72,7 +70,7 @@ function closeModal() {
           `out of ${contacts.length} contacts shown`
       );
 
-      showContacts();
+      showContacts(false);
     }
   });
 }
@@ -143,7 +141,7 @@ function search() {
         }
 
         contacts = newContacts;
-        showContacts();
+        showContacts(true);
       }
     };
     xhr.send(jsonPayload);
