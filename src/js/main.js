@@ -97,9 +97,9 @@ function showContacts(resetTable) {
   for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
     const contact = contacts[displayedAmount++];
 
-    const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
+    const { FirstName, LastName, Email, Phone, DateCreated } = contact;
     const row = table.insertRow();
-    [FirstName, LastName, Email, PhoneNumber, DateCreated].forEach((val) => {
+    [FirstName, LastName, Email, Phone, DateCreated].forEach((val) => {
       const cell = row.insertCell();
       cell.innerHTML = val;
     });
