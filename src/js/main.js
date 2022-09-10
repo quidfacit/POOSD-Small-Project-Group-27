@@ -81,8 +81,6 @@ function addEntry(contact) {
   contacts.push(contact);
 }
 
-// TODO: Do something smart to not create and destroy divs
-// Instead reuse and update text
 function showContacts(resetTable) {
   if (resetTable) {
     displayedAmount = 0;
