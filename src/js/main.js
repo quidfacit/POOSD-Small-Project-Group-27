@@ -50,6 +50,9 @@ function showModal(modal) {
 function closeModal() {
   modals.forEach((modal) => (modal.style.display = 'none'));
   mainContainer.classList.remove('haze');
+
+  addResult = document.getElementById('addResult');
+  addResult.style.display = 'none';
 }
 
 // ------------------------ Set up lazy loading ------------------------
@@ -154,6 +157,20 @@ function addContact() {
   const numberField = document.getElementById('numberInput');
   const emailField = document.getElementById('emailInput');
 
+  const isValid = verifyInput(
+    firstNameField.value,
+    lastNameField.value,
+    numberField.value,
+    emailField.value
+  );
+
+  const addResult = document.getElementById('addResult');
+  if (isValid !== true) {
+    addResult.style.display = 'block';
+    addResult.innerHTML = isValid;
+    return;
+  }
+
   // send to api
   const payload = JSON.stringify({
     FirstName: firstNameField.value,
@@ -183,7 +200,7 @@ function addContact() {
       }
 
       // Clear fields
-      [(firstNameField, lastNameField, numberField, emailField)].forEach(
+      [firstNameField, lastNameField, numberField, emailField].forEach(
         (e) => (e.value = '')
       );
     };
@@ -308,4 +325,26 @@ function updateContact() {
   } catch (e) {
     console.error(e);
   }
+}
+
+function verifyInput(firstName, lastName, phone, email) {
+  if (!firstName || !lastName || !phone || !email)
+    return 'All fields are required';
+
+  if (!verifyPhone(phone))
+    return 'Invalid phone number, please use the format: 555-555-5555';
+
+  if (!verifyEmail(email)) return 'Invalid email';
+
+  return true;
+}
+
+function verifyEmail(email) {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+function verifyPhone(phone) {
+  const re = /^\d{3}-\d{3}-\d{4}$/;
+  return re.test(phone);
 }
