@@ -9,7 +9,7 @@ search();
 
 // --------------------------- For Testing ---------------------------
 
-for (let i = 0; i < 300; i++) {
+for (let i = 0; i < 10; i++) {
   addEntry({
     ID: i,
     FirstName: 'John' + i,
@@ -177,7 +177,9 @@ function addContact() {
         }
 
         console.log('Successfully added contact');
-        addEntry(payload);
+
+        // Call search to add the contact if it matches the search
+        search();
       }
 
       // Clear fields
