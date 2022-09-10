@@ -118,7 +118,7 @@ function search() {
   // Get results from API
   const jsonPayload = JSON.stringify({
     SearchTerm: searchTerm,
-    UserID: readCookie(),
+    UserID: readCookie().userId,
   });
 
   let url = urlBase + '/SearchContacts.' + extension;
@@ -177,7 +177,7 @@ function addContact() {
     LastName: lastNameField.value,
     Email: emailField.value,
     PhoneNumber: numberField.value,
-    UserID: readCookie(),
+    UserID: readCookie().userId,
   });
 
   let url = urlBase + '/AddContact.' + extension;
@@ -211,8 +211,31 @@ function addContact() {
 }
 
 function readCookie() {
-  console.log(document.cookie);
-  return 1;
+  const loginCookie = document.cookie
+    .split(';')
+    .find((c) => c.includes('firstName'));
+
+  if (!loginCookie) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  const details = loginCookie.split(',').map((e) => e.split('=')[1]);
+  console.log(details);
+
+  // Not logged in
+  // send to login page
+  if (details.length != 3) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  return { firstName: details[0], lastName: details[1], userId: +details[2] };
+}
+
+function logout() {
+  document.cookie = 'firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+  window.location.href = 'index.html';
 }
 
 function openContactModal(e) {
