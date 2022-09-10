@@ -15,7 +15,7 @@ for (let i = 0; i < 10; i++) {
     FirstName: 'John' + i,
     LastName: 'Doe' + i,
     Email: `JohnnyAppleseed${i}@gmail.com`,
-    Phone: '555-555-5555',
+    PhoneNumber: '555-555-5555',
     DateCreated: '1999-01-01',
   });
 }
@@ -96,9 +96,9 @@ function showContacts(resetTable) {
   for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
     const contact = contacts[displayedAmount++];
 
-    const { FirstName, LastName, Email, Phone, DateCreated } = contact;
+    const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
     const row = table.insertRow();
-    [FirstName, LastName, Email, Phone, DateCreated].forEach((val) => {
+    [FirstName, LastName, Email, PhoneNumber, DateCreated].forEach((val) => {
       const cell = row.insertCell();
       cell.innerHTML = val;
     });
@@ -234,7 +234,7 @@ function openContactModal(e) {
 
   firstNameField.value = contact.FirstName;
   lastNameField.value = contact.LastName;
-  numberField.value = contact.Phone;
+  numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
 
   console.log(contact.Email);
