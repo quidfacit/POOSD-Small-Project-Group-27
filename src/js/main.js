@@ -2,25 +2,27 @@ const urlBase = 'http://contacts27.com/LAMPAPI';
 const extension = 'php';
 let contacts = [];
 let contactInModal = null;
+const DISPLAY_AMOUT = 30;
+let displayedAmount = 0;
 
 search();
 
-// For Testing ---------------
+// --------------------------- For Testing ---------------------------
 
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 10; i++) {
   addEntry({
     ID: i,
     FirstName: 'John' + i,
     LastName: 'Doe' + i,
     Email: `JohnnyAppleseed${i}@gmail.com`,
-    Phone: '555-555-5555',
+    PhoneNumber: '555-555-5555',
     DateCreated: '1999-01-01',
   });
 }
 
-showContacts();
+showContacts(true);
 
-// Set up Modal
+// -------------------------- Set up Modal --------------------------
 const modals = [].slice.call(document.getElementsByClassName('modal'));
 const showModalBtn = document.getElementById('showModalBtn');
 const mainContainer = document.getElementsByClassName('mainContainer')[0];
@@ -48,6 +50,32 @@ function showModal(modal) {
 function closeModal() {
   modals.forEach((modal) => (modal.style.display = 'none'));
   mainContainer.classList.remove('haze');
+
+  addResult = document.getElementById('addResult');
+  addResult.style.display = 'none';
+}
+
+// ------------------------ Set up lazy loading ------------------------
+{
+  const container = document.getElementById('tableContainer');
+  container.addEventListener('scroll', () => {
+    // you're at the bottom of the page
+    if (
+      container.offsetHeight + container.scrollTop >=
+      container.scrollHeight
+    ) {
+      // Max amount shown
+      if (displayedAmount == contacts.length) return;
+
+      console.log(
+        `Showing ${DISPLAY_AMOUT} more contacts\n` +
+          `${displayedAmount + DISPLAY_AMOUT} ` +
+          `out of ${contacts.length} contacts shown`
+      );
+
+      showContacts(false);
+    }
+  });
 }
 
 //------------------------------------------------------
@@ -56,21 +84,25 @@ function addEntry(contact) {
   contacts.push(contact);
 }
 
-// TODO: Do something smart to not create and destroy divs
-// Instead reuse and update text
-function showContacts() {
-  clearTable();
+function showContacts(resetTable) {
+  if (resetTable) {
+    displayedAmount = 0;
+    clearTable();
+  }
+
+  // Show DISPLAY_AMOUNT more contacts
   const table = document.getElementById('contactsTable');
 
-  // Create new row for each contact
-  contacts.forEach((contact) => {
+  for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
+    const contact = contacts[displayedAmount++];
+
     const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
     const row = table.insertRow();
     [FirstName, LastName, Email, PhoneNumber, DateCreated].forEach((val) => {
       const cell = row.insertCell();
       cell.innerHTML = val;
     });
-  });
+  }
 }
 
 function clearTable() {
@@ -86,7 +118,7 @@ function search() {
   // Get results from API
   const jsonPayload = JSON.stringify({
     SearchTerm: searchTerm,
-    UserID: readCookie(),
+    UserID: readCookie().userId,
   });
 
   let url = urlBase + '/SearchContacts.' + extension;
@@ -110,7 +142,7 @@ function search() {
         }
 
         contacts = newContacts;
-        showContacts();
+        showContacts(true);
       }
     };
     xhr.send(jsonPayload);
@@ -125,13 +157,27 @@ function addContact() {
   const numberField = document.getElementById('numberInput');
   const emailField = document.getElementById('emailInput');
 
+  const isValid = verifyInput(
+    firstNameField.value,
+    lastNameField.value,
+    numberField.value,
+    emailField.value
+  );
+
+  const addResult = document.getElementById('addResult');
+  if (isValid !== true) {
+    addResult.style.display = 'block';
+    addResult.innerHTML = isValid;
+    return;
+  }
+
   // send to api
   const payload = JSON.stringify({
     FirstName: firstNameField.value,
     LastName: lastNameField.value,
     Email: emailField.value,
     PhoneNumber: numberField.value,
-    UserID: readCookie(),
+    UserID: readCookie().userId,
   });
 
   let url = urlBase + '/AddContact.' + extension;
@@ -148,11 +194,13 @@ function addContact() {
         }
 
         console.log('Successfully added contact');
-        addEntry(payload);
+
+        // Call search to add the contact if it matches the search
+        search();
       }
 
       // Clear fields
-      [(firstNameField, lastNameField, numberField, emailField)].forEach(
+      [firstNameField, lastNameField, numberField, emailField].forEach(
         (e) => (e.value = '')
       );
     };
@@ -163,8 +211,31 @@ function addContact() {
 }
 
 function readCookie() {
-  console.log(document.cookie);
-  return 1;
+  const loginCookie = document.cookie
+    .split(';')
+    .find((c) => c.includes('firstName'));
+
+  if (!loginCookie) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  const details = loginCookie.split(',').map((e) => e.split('=')[1]);
+  console.log(details);
+
+  // Not logged in
+  // send to login page
+  if (details.length != 3) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  return { firstName: details[0], lastName: details[1], userId: +details[2] };
+}
+
+function logout() {
+  document.cookie = 'firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+  window.location.href = 'index.html';
 }
 
 function openContactModal(e) {
@@ -186,7 +257,7 @@ function openContactModal(e) {
 
   firstNameField.value = contact.FirstName;
   lastNameField.value = contact.LastName;
-  numberField.value = contact.Phone;
+  numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
 
   console.log(contact.Email);
@@ -277,4 +348,26 @@ function updateContact() {
   } catch (e) {
     console.error(e);
   }
+}
+
+function verifyInput(firstName, lastName, phone, email) {
+  if (!firstName || !lastName || !phone || !email)
+    return 'All fields are required';
+
+  if (!verifyPhone(phone))
+    return 'Invalid phone number, please use the format: 555-555-5555';
+
+  if (!verifyEmail(email)) return 'Invalid email';
+
+  return true;
+}
+
+function verifyEmail(email) {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+function verifyPhone(phone) {
+  const re = /^\d{3}-\d{3}-\d{4}$/;
+  return re.test(phone);
 }

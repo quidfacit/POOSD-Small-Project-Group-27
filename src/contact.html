@@ -17,13 +17,13 @@
                 <h1>Add a contact</h1>
                 <ul id="form">
                     <li><label>First Name</label></li>
-                    <li><input type="text" id="firstNameInput"></li>
+                    <li><input type="text" maxlength="20" id="firstNameInput"></li>
                     <li><label>Last Name</label></li>
-                    <li><input type="text" id="lastNameInput"></li>
-                    <li><label>Phone Number</label></li>
-                    <li><input type="text" id="numberInput"></li>
+                    <li><input type="text" maxlength="20" id="lastNameInput"></li>
                     <li><label>Email</label></li>
-                    <li><input type="text" id="emailInput"></li>
+                    <li><input type="text" maxlength="30" id="emailInput"></li>
+                    <li><label>Phone Number</label></li>
+                    <li><input type="text" maxlength="12" id="numberInput"></li>
                 </ul>
                 <button id="addButton" onclick="addContact()">Add Contact</button>
                 <div class="center" style="display:none" id="addResult">Done</div>
@@ -38,13 +38,13 @@
                 <h1>Contact</h1>
                 <ul id="form">
                     <li><label>First Name</label></li>
-                    <li><input type="text" id="updateFirstName"></li>
+                    <li><input type="text" maxlength="20" id="updateFirstName"></li>
                     <li><label>Last Name</label></li>
-                    <li><input type="text" id="updateLastName"></li>
+                    <li><input type="text" maxlength="20" id="updateLastName"></li>
                     <li><label>Email</label></li>
-                    <li><input type="text" id="updateEmail"></li>
+                    <li><input type="text" maxlength="30" id="updateEmail"></li>
                     <li><label>Phone Number</label></li>
-                    <li><input type="text" id="updateNumber"></li>
+                    <li><input type="text" maxlength="12" id="updateNumber"></li>
                 </ul>
                 <button onclick="updateContact()">Update Contact</button>
                 <button id="deleteButton" onclick="deleteContact()"></button>
@@ -59,7 +59,7 @@
         <div class="topBar">
             <h1 class="center">Contact Manager</h1>
             <button id="showModalBtn" onclick="showModal(document.getElementById('addModal'))">Add Contact</button>
-            <button id="logoutBtn">Log out</button>
+            <button id="logoutBtn" onclick="logout()">Log out</button>
         </div>
 
 
