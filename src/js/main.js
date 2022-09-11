@@ -2,6 +2,7 @@ const urlBase = 'http://contacts27.com/LAMPAPI';
 const extension = 'php';
 let contacts = [];
 let contactInModal = null;
+let modalIndex = -1;
 const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
 
@@ -246,6 +247,7 @@ function openContactModal(e) {
   showModal(document.getElementById('contactModal'));
 
   contactInModal = contacts[index];
+  modalIndex = index;
   const contact = contacts[index];
 
   console.log(contact);
@@ -288,6 +290,15 @@ function deleteContact() {
         }
 
         console.log('Successfully deleted contact');
+
+        // Remove the contact from the table
+        const table = document.getElementById('contactsTable');
+        table.deleteRow(modalIndex + 1);
+
+        // Remove contact from contacts array
+        contacts.splice(modalIndex, 1);
+
+        contactInModal = null;
         closeModal();
       }
     };
