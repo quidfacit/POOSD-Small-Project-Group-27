@@ -217,8 +217,8 @@ function readCookie() {
     .find((c) => c.includes("firstName"));
 
   if (!loginCookie) {
-    window.location.href = "index.html";
-    return -1;
+    // window.location.href = "index.html";
+    return 1;
   }
 
   const details = loginCookie.split(",").map((e) => e.split("=")[1]);
@@ -366,8 +366,15 @@ function updateContact() {
         contactInModal.Email = emailField.value;
         contactInModal.PhoneNumber = numberField.value;
 
+        // Change the html of the contact in thet table
+        const table = document.getElementById("contactsTable");
+        const row = table.rows[modalIndex + 1];
+        row.cells[0].innerHTML = firstNameField.value;
+        row.cells[1].innerHTML = lastNameField.value;
+        row.cells[2].innerHTML = numberField.value;
+        row.cells[3].innerHTML = emailField.value;
+
         updateResult.style.display = "none";
-        showContacts();
       }
     };
     xhr.send(payload);
