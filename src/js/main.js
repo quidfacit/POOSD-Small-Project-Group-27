@@ -1,5 +1,5 @@
-const urlBase = 'http://contacts27.com/LAMPAPI';
-const extension = 'php';
+const urlBase = "http://contacts27.com/LAMPAPI";
+const extension = "php";
 let contacts = [];
 let contactInModal = null;
 let modalIndex = -1;
@@ -13,22 +13,22 @@ search();
 for (let i = 0; i < 10; i++) {
   addEntry({
     ID: i,
-    FirstName: 'John' + i,
-    LastName: 'Doe' + i,
+    FirstName: "John" + i,
+    LastName: "Doe" + i,
     Email: `JohnnyAppleseed${i}@gmail.com`,
-    PhoneNumber: '555-555-5555',
-    DateCreated: '1999-01-01',
+    PhoneNumber: "555-555-5555",
+    DateCreated: "1999-01-01",
   });
 }
 
 showContacts(true);
 
 // -------------------------- Set up Modal --------------------------
-const modals = [].slice.call(document.getElementsByClassName('modal'));
-const showModalBtn = document.getElementById('showModalBtn');
-const mainContainer = document.getElementsByClassName('mainContainer')[0];
+const modals = [].slice.call(document.getElementsByClassName("modal"));
+const showModalBtn = document.getElementById("showModalBtn");
+const mainContainer = document.getElementsByClassName("mainContainer")[0];
 [].slice
-  .call(document.getElementsByClassName('close'))
+  .call(document.getElementsByClassName("close"))
   .forEach((c) => (c.onclick = closeModal));
 
 // Close on clicking outside of modal
@@ -43,23 +43,23 @@ const mainContainer = document.getElementsByClassName('mainContainer')[0];
 
 // Opens modal that called this function
 function showModal(modal) {
-  modal.style.display = 'block';
-  mainContainer.classList.add('haze');
+  modal.style.display = "block";
+  mainContainer.classList.add("haze");
 }
 
 // Closes all modals
 function closeModal() {
-  modals.forEach((modal) => (modal.style.display = 'none'));
-  mainContainer.classList.remove('haze');
+  modals.forEach((modal) => (modal.style.display = "none"));
+  mainContainer.classList.remove("haze");
 
-  addResult = document.getElementById('addResult');
-  addResult.style.display = 'none';
+  addResult = document.getElementById("addResult");
+  addResult.style.display = "none";
 }
 
 // ------------------------ Set up lazy loading ------------------------
 {
-  const container = document.getElementById('tableContainer');
-  container.addEventListener('scroll', () => {
+  const container = document.getElementById("tableContainer");
+  container.addEventListener("scroll", () => {
     // you're at the bottom of the page
     if (
       container.offsetHeight + container.scrollTop >=
@@ -92,7 +92,7 @@ function showContacts(resetTable) {
   }
 
   // Show DISPLAY_AMOUNT more contacts
-  const table = document.getElementById('contactsTable');
+  const table = document.getElementById("contactsTable");
 
   for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
     const contact = contacts[displayedAmount++];
@@ -108,12 +108,12 @@ function showContacts(resetTable) {
 
 function clearTable() {
   // Remove all children except the headers
-  const tbody = document.getElementById('contactsTable').children[0];
+  const tbody = document.getElementById("contactsTable").children[0];
   tbody.replaceChildren(tbody.children[0]);
 }
 
 function search() {
-  const searchTerm = document.getElementById('searchInput').value;
+  const searchTerm = document.getElementById("searchInput").value;
   console.log(searchTerm);
 
   // Get results from API
@@ -122,23 +122,23 @@ function search() {
     UserID: readCookie().userId,
   });
 
-  let url = urlBase + '/SearchContacts.' + extension;
+  let url = urlBase + "/SearchContacts." + extension;
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById('searchResult').innerHTML =
-          'Contacts have been retrieved';
+        document.getElementById("searchResult").innerHTML =
+          "Contacts have been retrieved";
         const { Contacts: newContacts, Error: err } = JSON.parse(
           xhr.responseText
         );
 
         // If no contacts found, clear table
         if (err) {
-          document.getElementById('searchResult').innerHTML = err;
+          document.getElementById("searchResult").innerHTML = err;
           contacts = [];
         }
 
@@ -153,10 +153,10 @@ function search() {
 }
 
 function addContact() {
-  const firstNameField = document.getElementById('firstNameInput');
-  const lastNameField = document.getElementById('lastNameInput');
-  const numberField = document.getElementById('numberInput');
-  const emailField = document.getElementById('emailInput');
+  const firstNameField = document.getElementById("firstNameInput");
+  const lastNameField = document.getElementById("lastNameInput");
+  const numberField = document.getElementById("numberInput");
+  const emailField = document.getElementById("emailInput");
 
   const isValid = verifyInput(
     firstNameField.value,
@@ -165,9 +165,9 @@ function addContact() {
     emailField.value
   );
 
-  const addResult = document.getElementById('addResult');
+  const addResult = document.getElementById("addResult");
   if (isValid !== true) {
-    addResult.style.display = 'block';
+    addResult.style.display = "block";
     addResult.innerHTML = isValid;
     return;
   }
@@ -181,11 +181,11 @@ function addContact() {
     UserID: readCookie().userId,
   });
 
-  let url = urlBase + '/AddContact.' + extension;
+  let url = urlBase + "/AddContact." + extension;
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -194,7 +194,7 @@ function addContact() {
           throw new Error(err);
         }
 
-        console.log('Successfully added contact');
+        console.log("Successfully added contact");
 
         // Call search to add the contact if it matches the search
         search();
@@ -202,7 +202,7 @@ function addContact() {
 
       // Clear fields
       [firstNameField, lastNameField, numberField, emailField].forEach(
-        (e) => (e.value = '')
+        (e) => (e.value = "")
       );
     };
     xhr.send(payload);
@@ -213,21 +213,21 @@ function addContact() {
 
 function readCookie() {
   const loginCookie = document.cookie
-    .split(';')
-    .find((c) => c.includes('firstName'));
+    .split(";")
+    .find((c) => c.includes("firstName"));
 
   if (!loginCookie) {
-    window.location.href = 'index.html';
-    return;
+    window.location.href = "index.html";
+    return -1;
   }
 
-  const details = loginCookie.split(',').map((e) => e.split('=')[1]);
+  const details = loginCookie.split(",").map((e) => e.split("=")[1]);
   console.log(details);
 
   // Not logged in
   // send to login page
   if (details.length != 3) {
-    window.location.href = 'index.html';
+    window.location.href = "index.html";
     return;
   }
 
@@ -235,8 +235,8 @@ function readCookie() {
 }
 
 function logout() {
-  document.cookie = 'firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
-  window.location.href = 'index.html';
+  document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+  window.location.href = "index.html";
 }
 
 function openContactModal(e) {
@@ -244,7 +244,7 @@ function openContactModal(e) {
   // Get index of contact that was clicked
   const index = e.target.parentNode.rowIndex - 1;
   if (index == -1) return; // Dont show for the header row
-  showModal(document.getElementById('contactModal'));
+  showModal(document.getElementById("contactModal"));
 
   contactInModal = contacts[index];
   modalIndex = index;
@@ -252,10 +252,10 @@ function openContactModal(e) {
 
   console.log(contact);
 
-  const firstNameField = document.getElementById('updateFirstName');
-  const lastNameField = document.getElementById('updateLastName');
-  const numberField = document.getElementById('updateNumber');
-  const emailField = document.getElementById('updateEmail');
+  const firstNameField = document.getElementById("updateFirstName");
+  const lastNameField = document.getElementById("updateLastName");
+  const numberField = document.getElementById("updateNumber");
+  const emailField = document.getElementById("updateEmail");
 
   firstNameField.value = contact.FirstName;
   lastNameField.value = contact.LastName;
@@ -276,11 +276,11 @@ function deleteContact() {
     ID,
   });
 
-  let url = urlBase + '/DeleteContact.' + extension;
+  let url = urlBase + "/DeleteContact." + extension;
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -289,10 +289,10 @@ function deleteContact() {
           throw new Error(err);
         }
 
-        console.log('Successfully deleted contact');
+        console.log("Successfully deleted contact");
 
         // Remove the contact from the table
-        const table = document.getElementById('contactsTable');
+        const table = document.getElementById("contactsTable");
         table.deleteRow(modalIndex + 1);
 
         // Remove contact from contacts array
@@ -317,10 +317,24 @@ function deleteContact() {
 function updateContact() {
   if (!contactInModal) return;
 
-  const firstNameField = document.getElementById('updateFirstName');
-  const lastNameField = document.getElementById('updateLastName');
-  const numberField = document.getElementById('updateNumber');
-  const emailField = document.getElementById('updateEmail');
+  const firstNameField = document.getElementById("updateFirstName");
+  const lastNameField = document.getElementById("updateLastName");
+  const numberField = document.getElementById("updateNumber");
+  const emailField = document.getElementById("updateEmail");
+
+  const isValid = verifyInput(
+    firstNameField.value,
+    lastNameField.value,
+    numberField.value,
+    emailField.value
+  );
+
+  const updateResult = document.getElementById("updateResult");
+  if (isValid !== true) {
+    updateResult.style.display = "block";
+    updateResult.innerHTML = isValid;
+    return;
+  }
 
   const payload = JSON.stringify({
     ID: contactInModal.ID,
@@ -330,11 +344,11 @@ function updateContact() {
     NewNumber: numberField.value,
   });
 
-  let url = urlBase + '/UpdateContact.' + extension;
+  let url = urlBase + "/UpdateContact." + extension;
 
   let xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
@@ -343,7 +357,7 @@ function updateContact() {
           throw new Error(err);
         }
 
-        console.log('Successfully updated contact');
+        console.log("Successfully updated contact");
         closeModal();
 
         // Update contact in contacts array
@@ -352,6 +366,7 @@ function updateContact() {
         contactInModal.Email = emailField.value;
         contactInModal.PhoneNumber = numberField.value;
 
+        updateResult.style.display = "none";
         showContacts();
       }
     };
@@ -363,12 +378,12 @@ function updateContact() {
 
 function verifyInput(firstName, lastName, phone, email) {
   if (!firstName || !lastName || !phone || !email)
-    return 'All fields are required';
+    return "All fields are required";
 
   if (!verifyPhone(phone))
-    return 'Invalid phone number, please use the format: 555-555-5555';
+    return "Invalid phone number, please use the format: 555-555-5555";
 
-  if (!verifyEmail(email)) return 'Invalid email';
+  if (!verifyEmail(email)) return "Invalid email";
 
   return true;
 }
