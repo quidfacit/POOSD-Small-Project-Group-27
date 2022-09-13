@@ -4,10 +4,10 @@ function doRegister() {
       const extension = 'php';
 
       const payload = JSON.stringify({
+          Login: document.getElementById("regUsername").value,
+          Password: document.getElementById("regPassword").value,
           FirstName: document.getElementById("firstName").value,
-          LastName: document.getElementById("lastName").value,
-          UserID: document.getElementById("regUsername").value,
-          UserPassword: document.getElementById("regPassword").value
+          LastName: document.getElementById("lastName").value  
       });
 
       let url = urlBase + "/Register." + extension;
