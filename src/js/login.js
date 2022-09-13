@@ -1,53 +1,51 @@
-function doLogin() {
-    function doLogin()
-  {
-      ID = 0;
-      FirstName = "";
-      LastName = "";
+function doLogin()
+{
+    ID = 0;
+    FirstName = "";
+    LastName = "";
 
-      let Login = document.getElementById("Login").value;
-      let Password = document.getElementById("Password").value;
+    let Login = document.getElementById("Login").value;
+    let Password = document.getElementById("Password").value;
 
-      document.getElementById("LoginResult").innerHTML = "";
+    document.getElementById("LoginResult").innerHTML = "";
 
-      let tmp = {Login:Login,Password:Password};
-      let jsonPayload = JSON.stringify( tmp );
+    let tmp = {Login:Login,Password:Password};
+    let jsonPayload = JSON.stringify( tmp );
 
-      let url = urlBase + '/Login.' + extension;
+    let url = urlBase + '/Login.' + extension;
 
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-      try
-      {
-          xhr.onreadystatechange = function()
-          {
-              if (this.readyState == 4 && this.status == 200)
-              {
-                  let jsonObject = JSON.parse( xhr.responseText );
-                  ID = jsonObject.id;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        xhr.onreadystatechange = function()
+        {
+            if (this.readyState == 4 && this.status == 200)
+            {
+                let jsonObject = JSON.parse( xhr.responseText );
+                ID = jsonObject.id;
 
-                  if( ID < 1 )
-                  {
-                      document.getElementById("LoginResult").innerHTML = "User/Password combination incorrect";
-                      return;
-                  }
+                if( ID < 1 )
+                {
+                    document.getElementById("LoginResult").innerHTML = "User/Password combination incorrect";
+                    return;
+                }
 
-                  FirstName = jsonObject.FirstName;
-                  LastName = jsonObject.LastName;
+                FirstName = jsonObject.FirstName;
+                LastName = jsonObject.LastName;
 
-                  saveCookie();
+                saveCookie();
 
-                  window.location.href = "search.html";
-              }
-          };
-          xhr.send(jsonPayload);
-      }
-      catch(err)
-      {
-          document.getElementById("LoginResult").innerHTML = err.message;
-      }
-  }
+                window.location.href = "search.html";
+            }
+        };
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        document.getElementById("LoginResult").innerHTML = err.message;
+    }
 }
 
 function doRegister() {
