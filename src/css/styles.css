@@ -12,8 +12,8 @@ body {
 
 body {
   background-color: rgb(51, 51, 51);
-  background-image: url("../images/Glacier.jpg");
-  font-family: "Roboto", sans-serif;
+  background-image: url('../images/Glacier.jpg');
+  font-family: 'Roboto', sans-serif;
 }
 
 .mainContainer {
@@ -29,7 +29,6 @@ body {
 table {
   border-collapse: collapse;
   margin: auto;
-  /* margin-top: 10px; */
   width: 100%;
 }
 
@@ -51,16 +50,13 @@ tr {
 
 #contactsTable > tbody > tr:hover {
   background-color: rgb(45, 248, 255);
-  /* transform: scale(1, 1.2); */
-  /* height: 50px; */
   height: 60px;
   transition: 0.75s;
 }
 
 td,
 th {
-  padding: 10px 10px;
-  height: 20px;
+  height: 40px;
   border: 1px solid black;
   width: 100px;
 }
@@ -80,7 +76,7 @@ th {
   margin-top: 20px;
   background-color: rgb(41, 147, 179);
 
-  background-image: url("../images/search-icon.png");
+  background-image: url('../images/search-icon.png');
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -188,7 +184,7 @@ button:hover {
   margin-right: 9%;
 
   background-color: rgb(255, 0, 0);
-  background-image: url("../images/trash-icon.png");
+  background-image: url('../images/trash-icon.png');
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -213,7 +209,6 @@ button:hover {
   position: fixed;
   min-width: 600px;
   width: 50%;
-  /* height: 50%; */
   min-height: 50%;
   background-color: rgb(41, 147, 179);
   left: 25%;
