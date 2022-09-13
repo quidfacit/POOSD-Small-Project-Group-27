@@ -35,6 +35,26 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
+  (id) => {
+    document.getElementById(id).addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        addContact();
+      }
+    });
+  }
+);
+
+['updateFirstName', 'updateLastName', 'updateEmail', 'updateNumber'].forEach(
+  (id) => {
+    document.getElementById(id).addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        updateContact();
+      }
+    });
+  }
+);
+
 // Opens modal that called this function
 function showModal(modal) {
   modal.style.display = 'block';
@@ -123,9 +143,7 @@ function search() {
       document.getElementById('searchResult').innerHTML =
         'Contacts have been retrieved';
 
-      const { Contacts: newContacts, Error: err } = JSON.parse(
-        res.responseText
-      );
+      const { Contacts: newContacts } = JSON.parse(res.responseText);
       contacts = newContacts;
       showContacts(true);
     },
@@ -228,9 +246,6 @@ function openContactModal(e) {
   lastNameField.value = contact.LastName;
   numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
-
-  console.log(contact.Email);
-  console.log(emailField.value);
 }
 
 // TODO: Ask for confirmation
@@ -288,26 +303,34 @@ function updateContact() {
     NewNumber: numberField.value,
   });
 
-  sendRequest('UpdateContact', payload, (res) => {
-    console.log('Successfully updated contact');
-    closeModal();
+  sendRequest(
+    'UpdateContact',
+    payload,
+    (res) => {
+      console.log('Successfully updated contact');
+      closeModal();
 
-    // Update contact in contacts array
-    contactInModal.FirstName = firstNameField.value;
-    contactInModal.LastName = lastNameField.value;
-    contactInModal.Email = emailField.value;
-    contactInModal.PhoneNumber = numberField.value;
+      // Update contact in contacts array
+      contactInModal.FirstName = firstNameField.value;
+      contactInModal.LastName = lastNameField.value;
+      contactInModal.Email = emailField.value;
+      contactInModal.PhoneNumber = numberField.value;
 
-    // Change the html of the contact in thet table
-    const table = document.getElementById('contactsTable');
-    const row = table.rows[modalIndex + 1];
-    row.cells[0].innerHTML = firstNameField.value;
-    row.cells[1].innerHTML = lastNameField.value;
-    row.cells[2].innerHTML = numberField.value;
-    row.cells[3].innerHTML = emailField.value;
+      // Change the html of the contact in thet table
+      const table = document.getElementById('contactsTable');
+      const row = table.rows[modalIndex + 1];
+      row.cells[0].innerHTML = firstNameField.value;
+      row.cells[1].innerHTML = lastNameField.value;
+      row.cells[2].innerHTML = emailField.value;
+      row.cells[3].innerHTML = numberField.value;
 
-    updateResult.style.display = 'none';
-  });
+      updateResult.style.display = 'none';
+    },
+    (err) => {
+      updateResult.style.display = 'block';
+      updateResult.innerHTML = err;
+    }
+  );
 }
 
 function verifyInput(firstName, lastName, phone, email) {
