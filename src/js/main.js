@@ -230,7 +230,7 @@ function readCookie() {
 
   if (!loginCookie) {
     // window.location.href = "index.html";
-    return 1;
+    return { userId: 1 };
   }
 
   const details = loginCookie.split(',').map((e) => e.split('=')[1]);
@@ -252,6 +252,27 @@ function logout() {
 }
 
 function openContactModal(e) {
+  function findIndex(e) {
+    // Grid display mode
+    if (displayMode === 'grid') {
+      let target = e.target;
+      while (!target.classList.contains('card')) {
+        target = target.parentNode;
+
+        // If we reach the body, we are not in a card
+        if (target == document.body) return -1;
+      }
+
+      console.log(target);
+      return Array.from(
+        document.getElementById('cardsContainer').children
+      ).indexOf(target);
+    }
+
+    // List display mode
+    return e.target.parentNode.rowIndex - 1;
+  }
+
   closeModal();
   // Get index of contact that was clicked
 
@@ -275,27 +296,6 @@ function openContactModal(e) {
   lastNameField.value = contact.LastName;
   numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
-}
-
-function findIndex(e) {
-  // Grid display mode
-  if (displayMode === 'grid') {
-    let target = e.target;
-    while (!target.classList.contains('card')) {
-      target = target.parentNode;
-
-      // If we reach the body, we are not in a card
-      if (target == document.body) return -1;
-    }
-
-    console.log(target);
-    return Array.from(
-      document.getElementById('cardsContainer').children
-    ).indexOf(target);
-  }
-
-  // List display mode
-  return e.target.parentNode.rowIndex - 1;
 }
 
 // TODO: Ask for confirmation
@@ -366,13 +366,22 @@ function updateContact() {
       contactInModal.Email = emailField.value;
       contactInModal.PhoneNumber = numberField.value;
 
-      // Change the html of the contact in thet table
+      // Change the html of the contact in the table
       const table = document.getElementById('contactsTable');
       const row = table.rows[modalIndex + 1];
       row.cells[0].innerHTML = firstNameField.value;
       row.cells[1].innerHTML = lastNameField.value;
       row.cells[2].innerHTML = emailField.value;
       row.cells[3].innerHTML = numberField.value;
+
+      // Change the html of the contact in the cards
+      const card =
+        document.getElementById('cardsContainer').children[modalIndex];
+      card.children[0].innerHTML = `${firstNameField.value} ${lastNameField.value}`;
+
+      const cardContent = card.children[1];
+      cardContent.children[0].innerHTML = emailField.value;
+      cardContent.children[1].innerHTML = numberField.value;
 
       updateResult.style.display = 'none';
     },
@@ -407,6 +416,10 @@ function verifyPhone(phone) {
 
 function sendRequest(path, payload, callback, errorCallback) {
   const url = `http://contacts27.com/LAMPAPI/${path}.php`;
+
+  console.log(url);
+  console.log(payload);
+
   let xhr = new XMLHttpRequest();
   xhr.open('POST', url, true);
   xhr.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
