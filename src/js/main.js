@@ -3,6 +3,7 @@ let contactInModal = null;
 let modalIndex = -1;
 const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
+let displayMode = 'list';
 
 search();
 
@@ -253,7 +254,9 @@ function logout() {
 function openContactModal(e) {
   closeModal();
   // Get index of contact that was clicked
-  const index = e.target.parentNode.rowIndex - 1;
+
+  const index = findIndex(e);
+  console.log(index);
   if (index == -1) return; // Dont show for the header row
   showModal(document.getElementById('contactModal'));
 
@@ -272,6 +275,27 @@ function openContactModal(e) {
   lastNameField.value = contact.LastName;
   numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
+}
+
+function findIndex(e) {
+  // Grid display mode
+  if (displayMode === 'grid') {
+    let target = e.target;
+    while (!target.classList.contains('card')) {
+      target = target.parentNode;
+
+      // If we reach the body, we are not in a card
+      if (target == document.body) return -1;
+    }
+
+    console.log(target);
+    return Array.from(
+      document.getElementById('cardsContainer').children
+    ).indexOf(target);
+  }
+
+  // List display mode
+  return e.target.parentNode.rowIndex - 1;
 }
 
 // TODO: Ask for confirmation
@@ -406,6 +430,8 @@ function gridLayout() {
   tableContainer.style.display = 'none';
   const cardsContainer = document.getElementById('cardsContainer');
   cardsContainer.style.display = 'flex';
+
+  displayMode = 'grid';
 }
 
 function listLayout() {
@@ -413,4 +439,6 @@ function listLayout() {
   tableContainer.style.display = 'block';
   const cardsContainer = document.getElementById('cardsContainer');
   cardsContainer.style.display = 'none';
+
+  displayMode = 'list';
 }
