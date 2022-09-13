@@ -342,7 +342,7 @@ button:hover {
 .card {
   padding: 10px;
   min-width: 380px;
-  min-height: 180px;
+  height: 193px;
   margin: 10px;
   border-radius: 20px;
 
