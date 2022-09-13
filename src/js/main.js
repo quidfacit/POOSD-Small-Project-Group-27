@@ -8,7 +8,7 @@ search();
 
 // --------------------------- For Testing ---------------------------
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 300; i++) {
   addEntry({
     ID: i,
     FirstName: 'John' + i,
@@ -20,40 +20,41 @@ for (let i = 0; i < 10; i++) {
 }
 
 showContacts(true);
+{
+  // -------------------------- Set up Modal --------------------------
+  const modals = [].slice.call(document.getElementsByClassName('modal'));
+  const showModalBtn = document.getElementById('showModalBtn');
+  const mainContainer = document.getElementsByClassName('mainContainer')[0];
+  [].slice
+    .call(document.getElementsByClassName('close'))
+    .forEach((c) => (c.onclick = closeModal));
 
-// -------------------------- Set up Modal --------------------------
-const modals = [].slice.call(document.getElementsByClassName('modal'));
-const showModalBtn = document.getElementById('showModalBtn');
-const mainContainer = document.getElementsByClassName('mainContainer')[0];
-[].slice
-  .call(document.getElementsByClassName('close'))
-  .forEach((c) => (c.onclick = closeModal));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
 
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeModal();
-  }
-});
+  ['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
+    (id) => {
+      document.getElementById(id).addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          addContact();
+        }
+      });
+    }
+  );
 
-['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
-  (id) => {
-    document.getElementById(id).addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        addContact();
-      }
-    });
-  }
-);
-
-['updateFirstName', 'updateLastName', 'updateEmail', 'updateNumber'].forEach(
-  (id) => {
-    document.getElementById(id).addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        updateContact();
-      }
-    });
-  }
-);
+  ['updateFirstName', 'updateLastName', 'updateEmail', 'updateNumber'].forEach(
+    (id) => {
+      document.getElementById(id).addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+          updateContact();
+        }
+      });
+    }
+  );
+}
 
 // Opens modal that called this function
 function showModal(modal) {
@@ -118,6 +119,9 @@ function showContacts(resetTable) {
       cell.innerHTML = val;
     });
   }
+
+  const displayLabel = document.getElementById('displayLabel');
+  displayLabel.innerHTML = `<b>${displayedAmount} - ${contacts.length} displayed</b>`;
 }
 
 function clearTable() {
