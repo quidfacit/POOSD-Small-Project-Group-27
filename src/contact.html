@@ -46,8 +46,12 @@
                     <li><label>Phone Number</label></li>
                     <li><input type="text" maxlength="12" id="updateNumber"></li>
                 </ul>
-                <button onclick="updateContact()">Update Contact</button>
-                <button id="deleteButton" onclick="deleteContact()"></button>
+
+                <span id="updateButtonContainer">
+                    <div></div>
+                    <button id="updateButton" onclick="updateContact()">Update Contact</button>
+                    <button id="deleteButton" onclick="deleteContact()"></button>
+                </span>
                 <div class="center" style="display:none" id="updateResult">Done</div>
             </div>
         </div>
