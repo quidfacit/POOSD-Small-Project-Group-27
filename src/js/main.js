@@ -398,3 +398,17 @@ function sendRequest(path, payload, callback, errorCallback) {
 
   xhr.send(payload);
 }
+
+function gridLayout() {
+  const tableContainer = document.getElementById('tableContainer');
+  tableContainer.style.display = 'none';
+  const cardsContainer = document.getElementById('cardsContainer');
+  cardsContainer.style.display = 'flex';
+}
+
+function listLayout() {
+  const tableContainer = document.getElementById('tableContainer');
+  tableContainer.style.display = 'block';
+  const cardsContainer = document.getElementById('cardsContainer');
+  cardsContainer.style.display = 'none';
+}

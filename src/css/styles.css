@@ -33,7 +33,7 @@ table {
 }
 
 #tableContainer {
-  display: none;
+  display: block;
   overflow: auto;
   height: 1000px;
   background-color: rgba(41, 147, 179, 0.5);
@@ -285,7 +285,11 @@ button:hover {
   background-color: rgba(41, 147, 179, 0.5);
   border-radius: 20px;
 
-  display: flex;
+  /* On show */
+  /* display: flex; */
+
+  /* On hide */
+  display: none;
   flex-wrap: wrap;
   overflow: auto;
   justify-content: center;
@@ -321,4 +325,29 @@ button:hover {
 
 .card-content > p {
   margin: 5px;
+}
+
+#gridLayoutButton,
+#listLayoutButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(46, 194, 199);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#gridLayoutButton {
+  background-image: url('../images/grid-icon.png');
+}
+
+#listLayoutButton {
+  background-image: url('../images/list-icon.png');
+}
+
+#gridLayoutButton:hover,
+#listLayoutButton:hover {
+  background-color: rgb(45, 248, 255);
+  transition: 0.75s;
 }
