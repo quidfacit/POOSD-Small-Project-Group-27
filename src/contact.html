@@ -54,7 +54,6 @@
     </div>
 
 
-
     <div class="mainContainer">
         <div class="topBar">
             <h1 class="center">Contact Manager</h1>
@@ -62,14 +61,16 @@
             <button id="logoutBtn" onclick="logout()">Log out</button>
         </div>
 
+        <div class="toolBar">
+            <div class="inputContainer" id="searchContainer">
+                <input class="center" type="text" placeholder="Search" id="searchInput" oninput="search()">
+                <span id="searchResult"></span>
+            </div>
 
-        <div class="inputContainer" id="searchContainer">
-            <input class="center" type="text" placeholder="Search" id="searchInput" oninput="search()">
-            <span id="searchResult"></span>
+            <span id="displayLabel"><b>0 - 100 displayed</b></span>
         </div>
 
         <div id="tableContainer">
-
             <table id="contactsTable" onclick="openContactModal(event)">
                 <tr class="tableEntry">
                     <th>First Name</th>

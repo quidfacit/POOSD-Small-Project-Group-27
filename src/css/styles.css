@@ -71,9 +71,7 @@ th {
 }
 
 #searchContainer {
-  padding: 5px;
   margin-left: 40px;
-  margin-top: 20px;
   background-color: rgb(41, 147, 179);
 
   background-image: url('../images/search-icon.png');
@@ -82,8 +80,8 @@ th {
   background-repeat: no-repeat;
   background-position: center;
 
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   font-size: 0%;
   transition: 0.75s;
 }
@@ -92,7 +90,7 @@ th {
   background-color: rgba(45, 248, 255, 0);
   background-image: none;
   width: 300px;
-  height: 30px;
+  /* height: 30px; */
   border-radius: 20px;
   font-size: 90%;
   transition: 0.75s;
@@ -263,4 +261,19 @@ button:hover {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(160, 209, 224);
+}
+
+.toolBar {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#displayLabel {
+  margin-right: 40px;
+  padding: 10px;
+  width: calc(190px - 20px);
+  border-radius: 20px;
+
+  background-color: rgb(41, 147, 179);
 }
