@@ -159,6 +159,7 @@ button {
   border-radius: 20px;
   background-color: rgb(46, 194, 199);
   color: white;
+  cursor: pointer;
 }
 
 button:hover {
@@ -303,6 +304,8 @@ button:hover {
   border-radius: 20px;
 
   background-color: rgb(46, 194, 199);
+
+  cursor: pointer;
 }
 
 .card > h1 {
