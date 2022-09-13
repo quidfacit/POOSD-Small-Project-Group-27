@@ -20,13 +20,65 @@
             </div>
 
             <div class="regContainer" id="register">
-                <h2>New? Register a contact below!</h2>
+                <h2 id="poo">New? Register a contact below!</h2>
                 <div class="registerText" id="registerInfo">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName">
+                    <br>
+                    <label for="lastName">Last Name: </label>
+                    <input type="text" id="lastName" name="lastName">
+                    <br>
                     <label for="regUsername">Username:</label>
                     <input type="text" id="regUsername" name="regUsername">
+                    <br>
                     <label for="regPassword">Password:</label>
                     <input type="text" id="regPassword" name="regPassword">
-                    <button id="signupBtn">Sign Up</button>
+                    <button onclick="doRegister()"id="signupBtn">Sign Up</button>
+
+                    <script>
+                        function doRegister() {
+                          // send to api
+                            const urlBase = 'http://contacts27.com/LAMPAPI';
+                            const extension = 'php';
+
+                            const payload = JSON.stringify({
+                                FirstName: document.getElementById("firstName").value,
+                                LastName: document.getElementById("lastName").value,
+                                UserID: document.getElementById("regUsername").value,
+                                UserPassword: document.getElementById("regPassword").value
+                            });
+
+                            let url = urlBase + "/Register." + extension;
+
+                            let xhr = new XMLHttpRequest();
+                            xhr.open("POST", url, true);
+                            xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+                            try {
+                                xhr.onreadystatechange = function () {
+                                    if (this.readyState == 4 && this.status == 200) {
+                                        const { Error: err } = JSON.parse(xhr.responseText);
+                                        if (err) {
+                                            throw new Error(err);
+                                        }
+
+                                        console.log("Successfully registered user.");
+
+                                        //Check if the user exists already
+                                    }
+
+                                // Clear fields
+                                    document.getElementById("firstName").value = "";
+                                    document.getElementById("lastName").value = "";
+                                    document.getElementById("regUserName").value = "";
+                                    document.getElementById("regPassword").value = "";
+                                };
+                                
+                                xhr.send(payload);
+                            } catch (e) {
+                                console.error(e);
+                            }     
+                        }
+                    </script>
                 </div>
             </div>
         </div>
