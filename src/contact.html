@@ -15,15 +15,44 @@
             <span class="close">&times;</span>
             <div class="inputContainer" style="width:100%" id="addContainer">
                 <h1>Add a contact</h1>
-                <ul id="form">
-                    <li><label>First Name</label></li>
-                    <li><input type="text" maxlength="20" id="firstNameInput"></li>
-                    <li><label>Last Name</label></li>
-                    <li><input type="text" maxlength="20" id="lastNameInput"></li>
-                    <li><label>Email</label></li>
-                    <li><input type="text" maxlength="30" id="emailInput"></li>
-                    <li><label>Phone Number</label></li>
-                    <li><input type="text" maxlength="12" id="numberInput"></li>
+                <ul class="form">
+                    <li>
+                        <label>First Name</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="20" id="firstNameInput">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please fill in this field</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>Last Name</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="20" id="lastNameInput">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please fill in this field</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>Email</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="30" id="emailInput">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please enter a valid email</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>Phone Number</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="12" id="numberInput">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please enter a number in the form 555-555-5555</span>
+                            </div>
+                        </div>
+                    </li>
+
                 </ul>
                 <button id="addButton" onclick="addContact()">Add Contact</button>
                 <div class="center" style="display:none" id="addResult">Done</div>
@@ -36,15 +65,44 @@
             <span class="close">&times;</span>
             <div class="inputContainer" style="width:100%" id="addContainer">
                 <h1>Contact</h1>
-                <ul id="form">
-                    <li><label>First Name</label></li>
-                    <li><input type="text" maxlength="20" id="updateFirstName"></li>
-                    <li><label>Last Name</label></li>
-                    <li><input type="text" maxlength="20" id="updateLastName"></li>
-                    <li><label>Email</label></li>
-                    <li><input type="text" maxlength="30" id="updateEmail"></li>
-                    <li><label>Phone Number</label></li>
-                    <li><input type="text" maxlength="12" id="updateNumber"></li>
+                <ul class="form">
+                    <li>
+                        <label>First Name</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="20" id="updateFirstName">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please fill in this field</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>Last Name</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="20" id="updateLastName">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please fill in this field</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>Email</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="30" id="updateEmail">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please enter a valid email</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label>Phone Number</label>
+                        <div class="formInputContainer">
+                            <input type="text" maxlength="12" id="updateNumber">
+                            <div class="tooltip incorrectLabel">
+                                <span class="tooltiptext">Please enter a number in the form 555-555-5555</span>
+                            </div>
+                        </div>
+                    </li>
+
                 </ul>
 
                 <span id="updateButtonContainer">
