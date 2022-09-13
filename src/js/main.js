@@ -5,6 +5,7 @@ const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
 let displayMode = 'list';
 
+setUserNameLabel();
 search();
 
 // --------------------------- For Testing ---------------------------
@@ -229,8 +230,8 @@ function readCookie() {
     .find((c) => c.includes('firstName'));
 
   if (!loginCookie) {
-    // window.location.href = "index.html";
-    return { userId: 1 };
+    window.location.href = 'index.html';
+    return { firstName: 'Lab', lastName: 'Rat', userId: -1 };
   }
 
   const details = loginCookie.split(',').map((e) => e.split('=')[1]);
@@ -454,4 +455,10 @@ function listLayout() {
   cardsContainer.style.display = 'none';
 
   displayMode = 'list';
+}
+
+function setUserNameLabel() {
+  const { firstName, lastName } = readCookie();
+  const userNameLabel = document.getElementById('userNameLabel');
+  userNameLabel.innerHTML = `Logged in as: ${firstName} ${lastName}`;
 }

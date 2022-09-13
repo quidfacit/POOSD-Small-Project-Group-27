@@ -60,13 +60,16 @@
 
     <div class="mainContainer">
         <div class="topBar">
+            <h3 id="userNameLabel">Logged in as: First Last</h3>
             <h1 class="center">Contact Manager</h1>
 
-            <button onclick="gridLayout()" id="gridLayoutButton"></button>
-            <button onclick="listLayout()" id="listLayoutButton"></button>
+            <div id="optionsContainer">
+                <button onclick="gridLayout()" id="gridLayoutButton"></button>
+                <button onclick="listLayout()" id="listLayoutButton"></button>
 
-            <button id="showModalBtn" onclick="showModal(document.getElementById('addModal'))">Add Contact</button>
-            <button id="logoutBtn" onclick="logout()">Log out</button>
+                <button id="showModalBtn" onclick="showModal(document.getElementById('addModal'))">Add Contact</button>
+                <button id="logoutBtn" onclick="logout()">Log out</button>
+            </div>
         </div>
 
         <div class="toolBar">
