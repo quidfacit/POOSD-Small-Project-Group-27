@@ -72,8 +72,10 @@ function closeModal() {
 }
 
 // ------------------------ Set up lazy loading ------------------------
-{
-  const container = document.getElementById('tableContainer');
+[
+  document.getElementById('tableContainer'),
+  document.getElementById('cardsContainer'),
+].forEach((container) => {
   container.addEventListener('scroll', () => {
     // you're at the bottom of the page
     if (
@@ -92,7 +94,7 @@ function closeModal() {
       showContacts(false);
     }
   });
-}
+});
 
 //------------------------------------------------------
 
