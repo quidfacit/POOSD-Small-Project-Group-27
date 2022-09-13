@@ -7,10 +7,13 @@
         <title>POOSD</title>
         <link rel="stylesheet" href="css/login.css">
         <script type="javascript" src="js/main.js"></script>
+        <script type="javascript" src="js/login.js"></script>
     </head>
     <body>
         <div class="loginContainer" id="login">
             <h1>Welcome to Contacts27</h1>
+            <button type="button" id="toggleLoginBtn" class="togButtons" onclick="loginToggle();"> Login </button>
+            <button type="button" id="toggleRegisterBtn" class="togButtons" onclick="registerToggle();"> Register </button>
             <div class="loginText" id="loginDiv">
                 <label for="loginName">Username:</label>
                 <input type="text" id="loginName" name="loginName">
@@ -42,10 +45,10 @@
                             const extension = 'php';
 
                             const payload = JSON.stringify({
+                                Login: document.getElementById("regUsername").value,
+                                Password: document.getElementById("regPassword").value,
                                 FirstName: document.getElementById("firstName").value,
-                                LastName: document.getElementById("lastName").value,
-                                UserID: document.getElementById("regUsername").value,
-                                UserPassword: document.getElementById("regPassword").value
+                                LastName: document.getElementById("lastName").value  
                             });
 
                             let url = urlBase + "/Register." + extension;
@@ -72,11 +75,27 @@
                                     document.getElementById("regUsername").value = "";
                                     document.getElementById("regPassword").value = "";
                                 };
-                                
+
                                 xhr.send(payload);
                             } catch (e) {
                                 console.error(e);
                             }     
+                        }
+
+                        function loginToggle() {
+                            let divShown = document.getElementById("loginDiv")
+                            let divHidden = document.getElementById("register")
+
+                            divShown.style.display = "block";
+                            divHidden.style.display = "none";
+                        }
+
+                        function registerToggle() {
+                            let divShown = document.getElementById("register")
+                            let divHidden = document.getElementById("loginDiv")
+
+                            divShown.style.display = "block";
+                            divHidden.style.display = "none";
                         }
                     </script>
                 </div>
