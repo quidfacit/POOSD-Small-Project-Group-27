@@ -71,6 +71,10 @@ function closeModal() {
 
   addResult = document.getElementById('addResult');
   addResult.style.display = 'none';
+
+  Array.from(document.getElementsByClassName('incorrectLabel')).forEach((e) =>
+    e.classList.add('hidden')
+  );
 }
 
 // ------------------------ Set up lazy loading ------------------------
