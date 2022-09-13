@@ -112,6 +112,8 @@ function showContacts(resetTable) {
   for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
     const contact = contacts[displayedAmount++];
 
+    addCard(contact);
+
     const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
     const row = table.insertRow();
     [FirstName, LastName, Email, PhoneNumber, DateCreated].forEach((val) => {
@@ -124,10 +126,28 @@ function showContacts(resetTable) {
   displayLabel.innerHTML = `<b>${displayedAmount} - ${contacts.length} displayed</b>`;
 }
 
+function addCard(contact) {
+  const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
+
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.innerHTML = `<h1>${FirstName} ${LastName}</h1>
+  <div class="card-content">
+  <p>${Email}</p>
+  <p>${PhoneNumber}</p>
+  <p>${DateCreated}</p>
+  </div>`;
+
+  document.getElementById('cardsContainer').appendChild(div);
+}
+
 function clearTable() {
   // Remove all children except the headers
   const tbody = document.getElementById('contactsTable').children[0];
   tbody.replaceChildren(tbody.children[0]);
+
+  const cardsContainer = document.getElementById('cardsContainer');
+  cardsContainer.replaceChildren();
 }
 
 function search() {

@@ -33,11 +33,10 @@ table {
 }
 
 #tableContainer {
+  display: none;
   overflow: auto;
   height: 1000px;
   background-color: rgba(41, 147, 179, 0.5);
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   border-radius: 20px;
   margin: 10px 40px 0 40px;
 }
@@ -276,4 +275,50 @@ button:hover {
   border-radius: 20px;
 
   background-color: rgb(41, 147, 179);
+}
+
+#cardsContainer {
+  height: 1000px;
+  margin-top: 5px;
+  margin: 10px 40px;
+
+  background-color: rgba(41, 147, 179, 0.5);
+  border-radius: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: center;
+}
+
+.card {
+  padding: 10px;
+  min-width: 380px;
+  min-height: 180px;
+  margin: 10px;
+  border-radius: 20px;
+
+  background-color: rgb(46, 194, 199);
+}
+
+.card > h1 {
+  text-align: left;
+  color: black;
+}
+
+.card-content {
+  background-color: rgb(41, 147, 179);
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.card-content > * {
+  padding: 5px;
+  display: flex;
+  text-align: left;
+  color: black;
+}
+
+.card-content > p {
+  margin: 5px;
 }
