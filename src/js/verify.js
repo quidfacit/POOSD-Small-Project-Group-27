@@ -19,3 +19,20 @@ function verifyPhone(phone) {
   const re = /^\d{3}-\d{3}-\d{4}$/;
   return re.test(phone);
 }
+
+function verifyName(name) {
+  const re = /^[a-zA-Z]+$/;
+  return re.test(name);
+}
+
+function inputEdit(e, validateFunction) {
+  if (validateFunction(e.value)) {
+    e.nextElementSibling.classList.add('hidden');
+    return true;
+  }
+
+  // Show the incorrectLabel
+  // Which is a sibling of the input
+  e.nextElementSibling.classList.remove('hidden');
+  return false;
+}
