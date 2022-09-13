@@ -178,3 +178,12 @@ label{
   text-align: center;
   color: #ffffff;
 }
+
+.toggleDiv{
+  display: block;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
+  padding: 10px;
+}

@@ -1,3 +1,7 @@
+function doLogin() {
+
+}
+
 function doRegister() {
     // send to api
       const urlBase = 'http://contacts27.com/LAMPAPI';

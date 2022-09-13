@@ -11,8 +11,10 @@
     <body>
         <div class="loginContainer" id="login">
             <h1>Welcome to Contacts27</h1>
-            <button type="button" id="toggleLoginBtn" class="togButtons" onclick="loginToggle();"> Login </button>
-            <button type="button" id="toggleRegisterBtn" class="togButtons" onclick="registerToggle();"> Register </button>
+            <div class="toggleDiv">
+                <button type="button" id="toggleLoginBtn" class="togButtons" onclick="loginToggle();"> Login </button>
+                <button type="button" id="toggleRegisterBtn" class="togButtons" onclick="registerToggle();"> Register </button>
+            </div>
             <div class="loginText" id="loginDiv">
                 <label for="loginName">Username:</label>
                 <input type="text" id="loginName" name="loginName">
