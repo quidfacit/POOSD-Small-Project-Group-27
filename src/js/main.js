@@ -20,41 +20,41 @@ for (let i = 0; i < 300; i++) {
 }
 
 showContacts(true);
-{
-  // -------------------------- Set up Modal --------------------------
-  const modals = [].slice.call(document.getElementsByClassName('modal'));
-  const showModalBtn = document.getElementById('showModalBtn');
-  const mainContainer = document.getElementsByClassName('mainContainer')[0];
-  [].slice
-    .call(document.getElementsByClassName('close'))
-    .forEach((c) => (c.onclick = closeModal));
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-  });
+// -------------------------- Set up Modal --------------------------
 
-  ['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
-    (id) => {
-      document.getElementById(id).addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-          addContact();
-        }
-      });
-    }
-  );
+const modals = [].slice.call(document.getElementsByClassName('modal'));
+const showModalBtn = document.getElementById('showModalBtn');
+const mainContainer = document.getElementsByClassName('mainContainer')[0];
+[].slice
+  .call(document.getElementsByClassName('close'))
+  .forEach((c) => (c.onclick = closeModal));
 
-  ['updateFirstName', 'updateLastName', 'updateEmail', 'updateNumber'].forEach(
-    (id) => {
-      document.getElementById(id).addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-          updateContact();
-        }
-      });
-    }
-  );
-}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});
+
+['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
+  (id) => {
+    document.getElementById(id).addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        addContact();
+      }
+    });
+  }
+);
+
+['updateFirstName', 'updateLastName', 'updateEmail', 'updateNumber'].forEach(
+  (id) => {
+    document.getElementById(id).addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        updateContact();
+      }
+    });
+  }
+);
 
 // Opens modal that called this function
 function showModal(modal) {
