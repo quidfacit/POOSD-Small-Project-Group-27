@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>POOSD</title>
+        <link rel="stylesheet" href="css/login.css">
+        <script src="js/login.js"></script>
+    </head>
+    <body>
+        <div class="loginContainer" id="login">
+            <h1>Welcome to Contacts27</h1>
+            <button type="button" id="toggleLoginBtn" class="togButtons" onclick="loginToggle();"> Login </button>
+            <button type="button" id="toggleRegisterBtn" class="togButtons" onclick="registerToggle();"> Register </button>
+            <div class="loginText" id="loginDiv">
+                <label for="loginName">Username:</label>
+                <input type="text" id="loginName" name="loginName">
+                <label for="loginPassword">Password:</label>
+                <input type="text" id="loginPassword" name="loginPassword">
+                <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Do It </button>
+            </div>
+
+            <div class="regContainer" id="register">
+                <h2 id="poo">New? Register a contact below!</h2>
+                <div class="registerText" id="registerInfo">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName">
+                    <br>
+                    <label for="lastName">Last Name: </label>
+                    <input type="text" id="lastName" name="lastName">
+                    <br>
+                    <label for="regUsername">Username:</label>
+                    <input type="text" id="regUsername" name="regUsername">
+                    <br>
+                    <label for="regPassword">Password:</label>
+                    <input type="text" id="regPassword" name="regPassword">
+                    <button onclick="doRegister()"id="signupBtn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    <footer>
+    </footer>
+</html>
