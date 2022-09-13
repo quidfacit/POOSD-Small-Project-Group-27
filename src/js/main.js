@@ -3,7 +3,7 @@ let contactInModal = null;
 let modalIndex = -1;
 const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
-let displayMode = "list";
+let displayMode = 'list';
 
 setUserNameLabel();
 search();
@@ -13,11 +13,11 @@ search();
 for (let i = 0; i < 300; i++) {
   addEntry({
     ID: i,
-    FirstName: "John" + i,
-    LastName: "Doe" + i,
+    FirstName: 'John' + i,
+    LastName: 'Doe' + i,
     Email: `JohnnyAppleseed${i}@gmail.com`,
-    PhoneNumber: "555-555-5555",
-    DateCreated: "1999-01-01",
+    PhoneNumber: '555-555-5555',
+    DateCreated: '1999-01-01',
   });
 }
 
@@ -25,33 +25,33 @@ showContacts(true);
 
 // -------------------------- Set up Modal --------------------------
 
-const modals = [].slice.call(document.getElementsByClassName("modal"));
-const showModalBtn = document.getElementById("showModalBtn");
-const mainContainer = document.getElementsByClassName("mainContainer")[0];
+const modals = [].slice.call(document.getElementsByClassName('modal'));
+const showModalBtn = document.getElementById('showModalBtn');
+const mainContainer = document.getElementsByClassName('mainContainer')[0];
 [].slice
-  .call(document.getElementsByClassName("close"))
+  .call(document.getElementsByClassName('close'))
   .forEach((c) => (c.onclick = closeModal));
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
     closeModal();
   }
 });
 
-["firstNameInput", "lastNameInput", "emailInput", "numberInput"].forEach(
+['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
   (id) => {
-    document.getElementById(id).addEventListener("keyup", (e) => {
-      if (e.key === "Enter") {
+    document.getElementById(id).addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
         addContact();
       }
     });
   }
 );
 
-["updateFirstName", "updateLastName", "updateEmail", "updateNumber"].forEach(
+['updateFirstName', 'updateLastName', 'updateEmail', 'updateNumber'].forEach(
   (id) => {
-    document.getElementById(id).addEventListener("keyup", (e) => {
-      if (e.key === "Enter") {
+    document.getElementById(id).addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
         updateContact();
       }
     });
@@ -60,25 +60,25 @@ document.addEventListener("keydown", (e) => {
 
 // Opens modal that called this function
 function showModal(modal) {
-  modal.style.display = "block";
-  mainContainer.classList.add("haze");
+  modal.style.display = 'block';
+  mainContainer.classList.add('haze');
 }
 
 // Closes all modals
 function closeModal() {
-  modals.forEach((modal) => (modal.style.display = "none"));
-  mainContainer.classList.remove("haze");
+  modals.forEach((modal) => (modal.style.display = 'none'));
+  mainContainer.classList.remove('haze');
 
-  addResult = document.getElementById("addResult");
-  addResult.style.display = "none";
+  addResult = document.getElementById('addResult');
+  addResult.style.display = 'none';
 }
 
 // ------------------------ Set up lazy loading ------------------------
 [
-  document.getElementById("tableContainer"),
-  document.getElementById("cardsContainer"),
+  document.getElementById('tableContainer'),
+  document.getElementById('cardsContainer'),
 ].forEach((container) => {
-  container.addEventListener("scroll", () => {
+  container.addEventListener('scroll', () => {
     // you're at the bottom of the page
     if (
       container.offsetHeight + container.scrollTop >=
@@ -111,7 +111,7 @@ function showContacts(resetTable) {
   }
 
   // Show DISPLAY_AMOUNT more contacts
-  const table = document.getElementById("contactsTable");
+  const table = document.getElementById('contactsTable');
 
   for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
     const contact = contacts[displayedAmount++];
@@ -126,15 +126,15 @@ function showContacts(resetTable) {
     });
   }
 
-  const displayLabel = document.getElementById("displayLabel");
+  const displayLabel = document.getElementById('displayLabel');
   displayLabel.innerHTML = `<b>${displayedAmount} - ${contacts.length} displayed</b>`;
 }
 
 function addCard(contact) {
   const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
 
-  const div = document.createElement("div");
-  div.className = "card";
+  const div = document.createElement('div');
+  div.className = 'card';
   div.innerHTML = `<h1>${FirstName} ${LastName}</h1>
   <div class="card-content">
   <p>${Email}</p>
@@ -142,20 +142,20 @@ function addCard(contact) {
   <p>${DateCreated}</p>
   </div>`;
 
-  document.getElementById("cardsContainer").appendChild(div);
+  document.getElementById('cardsContainer').appendChild(div);
 }
 
 function clearTable() {
   // Remove all children except the headers
-  const tbody = document.getElementById("contactsTable").children[0];
+  const tbody = document.getElementById('contactsTable').children[0];
   tbody.replaceChildren(tbody.children[0]);
 
-  const cardsContainer = document.getElementById("cardsContainer");
+  const cardsContainer = document.getElementById('cardsContainer');
   cardsContainer.replaceChildren();
 }
 
 function search() {
-  const searchTerm = document.getElementById("searchInput").value;
+  const searchTerm = document.getElementById('searchInput').value;
   console.log(searchTerm);
 
   // Get results from API
@@ -165,11 +165,11 @@ function search() {
   });
 
   sendRequest(
-    "SearchContacts",
+    'SearchContacts',
     jsonPayload,
     (res) => {
-      document.getElementById("searchResult").innerHTML =
-        "Contacts have been retrieved";
+      document.getElementById('searchResult').innerHTML =
+        'Contacts have been retrieved';
 
       const { Contacts: newContacts } = JSON.parse(res.responseText);
       contacts = newContacts;
@@ -177,17 +177,17 @@ function search() {
     },
     (err) => {
       // If no contacts found, clear table
-      document.getElementById("searchResult").innerHTML = err;
+      document.getElementById('searchResult').innerHTML = err;
       contacts = [];
     }
   );
 }
 
 function addContact() {
-  const firstNameField = document.getElementById("firstNameInput");
-  const lastNameField = document.getElementById("lastNameInput");
-  const numberField = document.getElementById("numberInput");
-  const emailField = document.getElementById("emailInput");
+  const firstNameField = document.getElementById('firstNameInput');
+  const lastNameField = document.getElementById('lastNameInput');
+  const numberField = document.getElementById('numberInput');
+  const emailField = document.getElementById('emailInput');
 
   const isValid = verifyInput(
     firstNameField.value,
@@ -196,9 +196,9 @@ function addContact() {
     emailField.value
   );
 
-  const addResult = document.getElementById("addResult");
+  const addResult = document.getElementById('addResult');
   if (isValid !== true) {
-    addResult.style.display = "block";
+    addResult.style.display = 'block';
     addResult.innerHTML = isValid;
     return;
   }
@@ -212,35 +212,35 @@ function addContact() {
     UserID: readCookie().userId,
   });
 
-  sendRequest("AddContact", payload, (res) => {
-    console.log("Successfully added contact");
+  sendRequest('AddContact', payload, (res) => {
+    console.log('Successfully added contact');
     // Call search to add the contact if it matches the search
     search();
 
     // Clear fields
     [firstNameField, lastNameField, numberField, emailField].forEach(
-      (e) => (e.value = "")
+      (e) => (e.value = '')
     );
   });
 }
 
 function readCookie() {
   const loginCookie = document.cookie
-    .split(";")
-    .find((c) => c.includes("firstName"));
+    .split(';')
+    .find((c) => c.includes('firstName'));
 
   if (!loginCookie) {
-    window.location.href = "index.html";
-    return { firstName: "Lab", lastName: "Rat", userId: -1 };
+    window.location.href = 'index.html';
+    return { firstName: 'Lab', lastName: 'Rat', userId: -1 };
   }
 
-  const details = loginCookie.split(",").map((e) => e.split("=")[1]);
+  const details = loginCookie.split(',').map((e) => e.split('=')[1]);
   console.log(details);
 
   // Not logged in
   // send to login page
   if (details.length != 3) {
-    window.location.href = "index.html";
+    window.location.href = 'index.html';
     return;
   }
 
@@ -248,16 +248,16 @@ function readCookie() {
 }
 
 function logout() {
-  document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-  window.location.href = "index.html";
+  document.cookie = 'firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT';
+  window.location.href = 'index.html';
 }
 
 function openContactModal(e) {
   function findIndex(e) {
     // Grid display mode
-    if (displayMode === "grid") {
+    if (displayMode === 'grid') {
       let target = e.target;
-      while (!target.classList.contains("card")) {
+      while (!target.classList.contains('card')) {
         target = target.parentNode;
 
         // If we reach the body, we are not in a card
@@ -266,7 +266,7 @@ function openContactModal(e) {
 
       console.log(target);
       return Array.from(
-        document.getElementById("cardsContainer").children
+        document.getElementById('cardsContainer').children
       ).indexOf(target);
     }
 
@@ -280,7 +280,7 @@ function openContactModal(e) {
   const index = findIndex(e);
   console.log(index);
   if (index == -1) return; // Dont show for the header row
-  showModal(document.getElementById("contactModal"));
+  showModal(document.getElementById('contactModal'));
 
   contactInModal = contacts[index];
   modalIndex = index;
@@ -288,10 +288,10 @@ function openContactModal(e) {
 
   console.log(contact);
 
-  const firstNameField = document.getElementById("updateFirstName");
-  const lastNameField = document.getElementById("updateLastName");
-  const numberField = document.getElementById("updateNumber");
-  const emailField = document.getElementById("updateEmail");
+  const firstNameField = document.getElementById('updateFirstName');
+  const lastNameField = document.getElementById('updateLastName');
+  const numberField = document.getElementById('updateNumber');
+  const emailField = document.getElementById('updateEmail');
 
   firstNameField.value = contact.FirstName;
   lastNameField.value = contact.LastName;
@@ -309,11 +309,11 @@ function deleteContact() {
     ID,
   });
 
-  sendRequest("DeleteContact", payload, (res) => {
-    console.log("Successfully deleted contact");
+  sendRequest('DeleteContact', payload, (res) => {
+    console.log('Successfully deleted contact');
 
     // Remove the contact from the table
-    const table = document.getElementById("contactsTable");
+    const table = document.getElementById('contactsTable');
     table.deleteRow(modalIndex + 1);
 
     // Remove contact from contacts array
@@ -327,10 +327,10 @@ function deleteContact() {
 function updateContact() {
   if (!contactInModal) return;
 
-  const firstNameField = document.getElementById("updateFirstName");
-  const lastNameField = document.getElementById("updateLastName");
-  const numberField = document.getElementById("updateNumber");
-  const emailField = document.getElementById("updateEmail");
+  const firstNameField = document.getElementById('updateFirstName');
+  const lastNameField = document.getElementById('updateLastName');
+  const numberField = document.getElementById('updateNumber');
+  const emailField = document.getElementById('updateEmail');
 
   const isValid = verifyInput(
     firstNameField.value,
@@ -339,9 +339,9 @@ function updateContact() {
     emailField.value
   );
 
-  const updateResult = document.getElementById("updateResult");
+  const updateResult = document.getElementById('updateResult');
   if (isValid !== true) {
-    updateResult.style.display = "block";
+    updateResult.style.display = 'block';
     updateResult.innerHTML = isValid;
     return;
   }
@@ -355,10 +355,10 @@ function updateContact() {
   });
 
   sendRequest(
-    "UpdateContact",
+    'UpdateContact',
     payload,
     (res) => {
-      console.log("Successfully updated contact");
+      console.log('Successfully updated contact');
       closeModal();
 
       // Update contact in contacts array
@@ -368,7 +368,7 @@ function updateContact() {
       contactInModal.PhoneNumber = numberField.value;
 
       // Change the html of the contact in the table
-      const table = document.getElementById("contactsTable");
+      const table = document.getElementById('contactsTable');
       const row = table.rows[modalIndex + 1];
       row.cells[0].innerHTML = firstNameField.value;
       row.cells[1].innerHTML = lastNameField.value;
@@ -377,17 +377,17 @@ function updateContact() {
 
       // Change the html of the contact in the cards
       const card =
-        document.getElementById("cardsContainer").children[modalIndex];
+        document.getElementById('cardsContainer').children[modalIndex];
       card.children[0].innerHTML = `${firstNameField.value} ${lastNameField.value}`;
 
       const cardContent = card.children[1];
       cardContent.children[0].innerHTML = emailField.value;
       cardContent.children[1].innerHTML = numberField.value;
 
-      updateResult.style.display = "none";
+      updateResult.style.display = 'none';
     },
     (err) => {
-      updateResult.style.display = "block";
+      updateResult.style.display = 'block';
       updateResult.innerHTML = err;
     }
   );
@@ -395,12 +395,12 @@ function updateContact() {
 
 function verifyInput(firstName, lastName, phone, email) {
   if (!firstName || !lastName || !phone || !email)
-    return "All fields are required";
+    return 'All fields are required';
 
   if (!verifyPhone(phone))
-    return "Invalid phone number, please use the format: 555-555-5555";
+    return 'Invalid phone number, please use the format: 555-555-5555';
 
-  if (!verifyEmail(email)) return "Invalid email";
+  if (!verifyEmail(email)) return 'Invalid email';
 
   return true;
 }
@@ -416,25 +416,25 @@ function verifyPhone(phone) {
 }
 
 function gridLayout() {
-  const tableContainer = document.getElementById("tableContainer");
-  tableContainer.style.display = "none";
-  const cardsContainer = document.getElementById("cardsContainer");
-  cardsContainer.style.display = "flex";
+  const tableContainer = document.getElementById('tableContainer');
+  tableContainer.style.display = 'none';
+  const cardsContainer = document.getElementById('cardsContainer');
+  cardsContainer.style.display = 'flex';
 
-  displayMode = "grid";
+  displayMode = 'grid';
 }
 
 function listLayout() {
-  const tableContainer = document.getElementById("tableContainer");
-  tableContainer.style.display = "block";
-  const cardsContainer = document.getElementById("cardsContainer");
-  cardsContainer.style.display = "none";
+  const tableContainer = document.getElementById('tableContainer');
+  tableContainer.style.display = 'block';
+  const cardsContainer = document.getElementById('cardsContainer');
+  cardsContainer.style.display = 'none';
 
-  displayMode = "list";
+  displayMode = 'list';
 }
 
 function setUserNameLabel() {
   const { firstName, lastName } = readCookie();
-  const userNameLabel = document.getElementById("userNameLabel");
+  const userNameLabel = document.getElementById('userNameLabel');
   userNameLabel.innerHTML = `Logged in as: ${firstName} ${lastName}`;
 }
