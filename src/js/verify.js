@@ -1,28 +1,30 @@
 function verifyInput(firstName, lastName, phone, email) {
   if (!firstName || !lastName || !phone || !email)
-    return 'All fields are required';
+    return "All fields are required";
+
+  if (!verifyName(firstName) || !verifyName(lastName))
+    return "Name must only contain letters";
 
   if (!verifyPhone(phone))
-    return 'Invalid phone number, please use the format: 555-555-5555';
+    return "Invalid phone number, please use the format: 555-555-5555";
 
-  if (!verifyEmail(email)) return 'Invalid email';
+  if (!verifyEmail(email)) return "Invalid email";
 
   return true;
 }
 
 function verifyRegisterForm(firstName, lastName, username, password) {
   if (!firstName || !lastName || !username || !password)
-    return 'All fields are required';
+    return "All fields are required";
 
   if (!verifyUsername(username))
-    return 'Username must be at least 4 characters long and not contain symbols';
+    return "Username must be at least 4 characters long and not contain symbols";
 
   if (!verifyPassword(password))
-    return 'Password must be at least 8 characters long';
+    return "Password must be at least 8 characters long";
 
   return true;
 }
-
 
 function verifyEmail(email) {
   const re = /\S+@\S+\.\S+/;
@@ -52,12 +54,12 @@ function verifyPassword(password) {
 
 function inputEdit(e, validateFunction) {
   if (validateFunction(e.value)) {
-    e.nextElementSibling.classList.add('good');
-    e.nextElementSibling.classList.remove('bad');
+    e.nextElementSibling.classList.add("good");
+    e.nextElementSibling.classList.remove("bad");
     return true;
   }
 
-  e.nextElementSibling.classList.add('bad');
-  e.nextElementSibling.classList.remove('good');
+  e.nextElementSibling.classList.add("bad");
+  e.nextElementSibling.classList.remove("good");
   return false;
 }
