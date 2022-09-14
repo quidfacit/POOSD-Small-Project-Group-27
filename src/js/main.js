@@ -437,7 +437,7 @@ function setUserNameLabel() {
 // Set up Enter for inputs
 ["firstNameInput", "lastNameInput", "emailInput", "numberInput"]
   .forEach((id) => {
-    document.getElementById(id).addEventListener('keydown', (e) => {
+    document.getElementById(id).addEventListener('submit', (e) => {
       if (e.key == 'Enter') {
         document.getElementById('addButton').click();
         e.preventDefault();
@@ -447,7 +447,7 @@ function setUserNameLabel() {
 
 ["updateFirstName", "updateLastName", "updateEmail", "updateNumber"]
   .forEach((id) => {
-    document.getElementById(id).addEventListener('keydown', (e) => {
+    document.getElementById(id).addEventListener('submit', (e) => {
       if (e.key == 'Enter') {
         document.getElementById('updateButton').click();
         e.preventDefault();
