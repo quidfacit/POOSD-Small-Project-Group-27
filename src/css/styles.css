@@ -144,6 +144,11 @@ h3 {
   margin: 0 5px;
 }
 
+#showModalBtn,
+#logoutBtn {
+  width: 90px;
+}
+
 .center {
   margin: auto;
   width: 50%;
@@ -200,7 +205,7 @@ button:hover {
   height: 50px;
   margin: auto;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 #updateButtonContainer {
@@ -249,11 +254,12 @@ button:hover {
   display: none;
   position: fixed;
   min-width: 600px;
-  width: 50%;
-  min-height: 50%;
+  width: 40%;
+  height: 40%;
   background-color: rgb(41, 147, 179);
-  left: 25%;
-  top: 25%;
+  margin: auto;
+  left: 30%;
+  top: 30%;
   z-index: 1; /* ontop */
   border-radius: 20px;
 }
