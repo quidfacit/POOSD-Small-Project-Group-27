@@ -15,19 +15,27 @@ function doLogin() {
 }
 
 function doRegister() {
-    const payload = JSON.stringify({
-        Login: document.getElementById('firstNameInput').value,
-        Password: document.getElementById('lastNameInput').value,
-        FirstName: document.getElementById('usernameInput').value,
-        LastName: document.getElementById('passwordInput').value,
-    });
+    const FirstName = document.getElementById('firstNameInput').value;
+    const LastName = document.getElementById('lastNameInput').value;
+    const Login = document.getElementById('usernameInput').value;
+    const Password = document.getElementById('passwordInput').value;
 
+    const registerResultLabel = document.getElementById('registerResult');
+    const isValid = verifyRegisterForm(FirstName, LastName, Login, Password);
+    if (isValid !== true) {
+        registerResultLabel.innerHTML = isValid;
+        return;
+    }
+
+    const payload = JSON.stringify({
+        FirstName, LastName, Login, Password
+    });
 
     sendRequest('Register', payload, (res) => {
         console.log('Successfully registered user.');
 
         // Tell user they are registered
-        document.getElementById('registerResult').innerHTML = 'You have been successfully registered'
+        registerResultLabel.innerHTML = 'You have been successfully registered'
         // Clear fields
         ['firstNameInput', 'lastNameInput', 'usernameInput', 'passwordInput'].forEach((id) => {
             document.getElementById(id).value = '';

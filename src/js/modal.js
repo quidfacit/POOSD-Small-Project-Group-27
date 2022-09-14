@@ -21,8 +21,12 @@ function closeModal() {
     modals.forEach((modal) => (modal.style.display = 'none'));
     mainContainer.classList.remove('haze');
 
-    addResult = document.getElementById('addResult');
-    addResult.style.display = 'none';
+    // Clear misc result labels
+    ['addResult', 'registerResult'].forEach((id) => {
+        if (document.getElementById(id)) {
+            document.getElementById(id).innerHTML = '';
+        }
+    })
 
     Array.from(document.getElementsByClassName('incorrectLabel')).forEach((e) =>
         e.classList.add('hidden')

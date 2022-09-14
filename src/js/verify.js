@@ -10,6 +10,20 @@ function verifyInput(firstName, lastName, phone, email) {
   return true;
 }
 
+function verifyRegisterForm(firstName, lastName, username, password) {
+  if (!firstName || !lastName || !phone || !email)
+    return 'All fields are required';
+
+  if (!verifyUsername(username))
+    return 'Username must be at least 4 characters long and not contain symbols';
+
+  if (!verifyPassword(password))
+    return 'Password must be at least 8 characters long';
+
+  return true;
+}
+
+
 function verifyEmail(email) {
   const re = /\S+@\S+\.\S+/;
   return re.test(email);
@@ -23,6 +37,17 @@ function verifyPhone(phone) {
 function verifyName(name) {
   const re = /^[a-zA-Z]+$/;
   return re.test(name);
+}
+
+function verifyUsername(username) {
+  // Must be at least 4 characters long and not symbols
+  const re = /^[a-zA-Z0-9]{4,}$/;
+  return re.test(username);
+}
+
+function verifyPassword(password) {
+  // Must be at least 8 characters long
+  return password.length >= 8;
 }
 
 function inputEdit(e, validateFunction) {
