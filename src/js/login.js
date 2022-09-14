@@ -50,7 +50,8 @@ function doRegister() {
         console.log('Successfully registered user.');
 
         // Tell user they are registered
-        registerResultLabel.innerHTML = 'You have been successfully registered'
+        registerResultLabel.innerHTML = 'You have been successfully registered';
+
         // Clear fields
         ['firstNameInput', 'lastNameInput', 'usernameInput', 'passwordInput'].forEach((id) => {
             document.getElementById(id).value = '';
