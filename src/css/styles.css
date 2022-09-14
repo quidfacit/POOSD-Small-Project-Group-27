@@ -161,9 +161,32 @@ h3 {
   padding: 0;
 }
 
-.formInputContainer {
+.form > li {
   display: flex;
   width: 100%;
+  justify-content: space-between;
+}
+
+.labelInputPair {
+  display: block;
+  /* width: 100%; */
+}
+
+.name {
+  width: 47.5%;
+}
+
+.email {
+  width: 67.5%;
+}
+
+.phoneNumber {
+  width: 27.5%;
+}
+
+.formInputContainer {
+  width: 100%;
+  display: flex;
   /* margin: auto; */
   margin-bottom: 10px;
 }
@@ -252,10 +275,8 @@ button:hover {
 .modal {
   display: none;
   position: absolute;
-  min-width: 600px;
-  width: 40%;
+  width: 650px;
   background-color: rgb(41, 147, 179);
-  margin: auto;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
