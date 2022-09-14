@@ -2,7 +2,7 @@ function doLogin() {
     const Login = document.getElementById('loginName').value;
     const Password = document.getElementById('loginPassword').value;
 
-    const payload = JSON.stringify({ Login: Login, Password: Password });
+    const payload = JSON.stringify({ Login: Login, Password: md5(Password) });
     sendRequest('Login', payload, (res) => {
         const { FirstName, LastName, ID, Error } = JSON.parse(res.responseText);
         if (ID < 1) {
@@ -37,7 +37,7 @@ function doRegister() {
     }
 
     const payload = JSON.stringify({
-        FirstName, LastName, Login, Password
+        FirstName, LastName, Login, Password: md5(Password)
     });
 
     sendRequest('Register', payload, (res) => {
