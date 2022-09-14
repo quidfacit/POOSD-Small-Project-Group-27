@@ -13,17 +13,56 @@
     <div class="modal" id="addModal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <h1>Add a contact</h1>
             <div class="inputContainer" style="width:100%" id="addContainer">
-                <h1>Add a contact</h1>
-                <ul id="form">
-                    <li><label>First Name</label></li>
-                    <li><input type="text" maxlength="20" id="firstNameInput"></li>
-                    <li><label>Last Name</label></li>
-                    <li><input type="text" maxlength="20" id="lastNameInput"></li>
-                    <li><label>Email</label></li>
-                    <li><input type="text" maxlength="30" id="emailInput"></li>
-                    <li><label>Phone Number</label></li>
-                    <li><input type="text" maxlength="12" id="numberInput"></li>
+                <ul class="form">
+                    <li>
+
+                        <div class="labelInputPair name">
+                            <label>First Name</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
+                                    id="firstNameInput">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="labelInputPair name">
+                            <label>Last Name</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
+                                    id="lastNameInput">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li>
+
+                        <div class="labelInputPair email">
+                            <label>Email</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyEmail)" type="text" maxlength="30"
+                                    id="emailInput">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="labelInputPair phoneNumber">
+                            <label>Phone Number</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyPhone)" type="text" maxlength="12"
+                                    id="numberInput">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+
+                    </li>
+
                 </ul>
                 <button id="addButton" onclick="addContact()">Add Contact</button>
                 <div class="center" style="display:none" id="addResult">Done</div>
@@ -34,21 +73,57 @@
     <div class="modal" id="contactModal">
         <div class="modal-content">
             <span class="close">&times;</span>
+            <h1>Edit Contact</h1>
             <div class="inputContainer" style="width:100%" id="addContainer">
-                <h1>Contact</h1>
-                <ul id="form">
-                    <li><label>First Name</label></li>
-                    <li><input type="text" maxlength="20" id="updateFirstName"></li>
-                    <li><label>Last Name</label></li>
-                    <li><input type="text" maxlength="20" id="updateLastName"></li>
-                    <li><label>Email</label></li>
-                    <li><input type="text" maxlength="30" id="updateEmail"></li>
-                    <li><label>Phone Number</label></li>
-                    <li><input type="text" maxlength="12" id="updateNumber"></li>
+                <ul class="form">
+                    <li>
+                        <div class="labelInputPair name">
+                            <label>First Name</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
+                                    id="updateFirstName">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="labelInputPair name">
+                            <label>Last Name</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
+                                    id="updateLastName">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="labelInputPair email">
+
+                            <label>Email</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyEmail)" type="text" maxlength="30"
+                                    id="updateEmail">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="labelInputPair phoneNumber">
+
+                            <label>Phone Number</label>
+                            <div class="formInputContainer">
+                                <input oninput="inputEdit(this, verifyPhone)" type="text" maxlength="12"
+                                    id="updateNumber">
+                                <div class="verifyLabel bad">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
                 </ul>
 
                 <span id="updateButtonContainer">
-                    <div></div>
                     <button id="updateButton" onclick="updateContact()">Update Contact</button>
                     <button id="deleteButton" onclick="deleteContact()"></button>
                 </span>
@@ -101,6 +176,7 @@
 
 <footer>
     <script src="js/requests.js"></script>
+    <script src="js/verify.js"></script>
     <script src="js/main.js"></script>
 </footer>
 
