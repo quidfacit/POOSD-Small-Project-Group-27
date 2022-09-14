@@ -17,7 +17,7 @@ for (let i = 0; i < 300; i++) {
     LastName: "Doe" + i,
     Email: `JohnnyAppleseed${i}@gmail.com`,
     PhoneNumber: "555-555-5555",
-    DateCreated: "1999-01-01",
+    DateCreated: "Web Sep 14 2022",
   });
 }
 

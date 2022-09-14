@@ -34,12 +34,6 @@ button {
   margin: 0 auto;
 }
 
-#showRegisterModalButton {
-}
-
-#loginButton {
-}
-
 .labelInputPair {
   display: flex;
   flex-direction: column;
