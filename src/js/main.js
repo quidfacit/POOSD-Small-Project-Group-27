@@ -278,6 +278,8 @@ function openContactModal(e) {
     return e.target.parentNode.rowIndex - 1;
   }
   closeModal();
+
+
   // Get index of contact that was clicked
 
   const index = findIndex(e);
@@ -300,6 +302,18 @@ function openContactModal(e) {
   lastNameField.value = contact.LastName;
   numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
+
+  ['firstNameInput', 'lastNameInput', 'updateFirstName', 'updateLastName'].forEach((id) => {
+    inputEdit(document.getElementById(id), verifyName)
+  });
+
+  ['numberInput', 'updateNumber'].forEach((id) => {
+    inputEdit(document.getElementById(id), verifyPhone)
+  });
+
+  ['emailInput', 'updateEmail'].forEach((id) => {
+    inputEdit(document.getElementById(id), verifyEmail)
+  });
 }
 
 // TODO: Ask for confirmation

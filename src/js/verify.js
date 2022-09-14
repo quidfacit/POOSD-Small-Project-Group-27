@@ -27,13 +27,13 @@ function verifyName(name) {
 
 function inputEdit(e, validateFunction) {
   if (validateFunction(e.value)) {
-    e.nextElementSibling.classList.add('hidden');
+    e.nextElementSibling.classList.add('good');
+    e.nextElementSibling.classList.remove('bad');
     return true;
   }
 
-  // Show the incorrectLabel
-  // Which is a sibling of the input
-  e.nextElementSibling.classList.remove('hidden');
+  e.nextElementSibling.classList.add('bad');
+  e.nextElementSibling.classList.remove('good');
   return false;
 }
 

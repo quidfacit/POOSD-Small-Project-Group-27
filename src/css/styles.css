@@ -173,12 +173,19 @@ h3 {
   width: 100%;
 }
 
-.incorrectLabel {
-  margin: auto 0 auto 10px;
+.verifyLabel {
+  margin: auto 0 auto -30px;
   height: 20px;
   width: 20px;
-  background-color: red;
   border-radius: 50%;
+}
+
+.good {
+  background-color: green;
+}
+
+.bad {
+  background-color: red;
 }
 
 /* Center button */
@@ -399,35 +406,4 @@ button:hover {
 #listLayoutButton:hover {
   background-color: rgb(45, 248, 255);
   transition: 0.75s;
-}
-
-.hidden {
-  visibility: hidden;
-}
-
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  z-index: 1;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
 }
