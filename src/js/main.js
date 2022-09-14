@@ -25,11 +25,10 @@ showContacts(true);
 
 // -------------------------- Set up Modal --------------------------
 
-const modals = [].slice.call(document.getElementsByClassName('modal'));
+const modals = Array.from(document.getElementsByClassName('modal'));
 const showModalBtn = document.getElementById('showModalBtn');
 const mainContainer = document.getElementsByClassName('mainContainer')[0];
-[].slice
-  .call(document.getElementsByClassName('close'))
+Array.from(document.getElementsByClassName('close'))
   .forEach((c) => (c.onclick = closeModal));
 
 document.addEventListener('keydown', (e) => {
@@ -278,7 +277,6 @@ function openContactModal(e) {
     // List display mode
     return e.target.parentNode.rowIndex - 1;
   }
-
   closeModal();
   // Get index of contact that was clicked
 
