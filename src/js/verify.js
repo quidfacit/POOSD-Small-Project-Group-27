@@ -11,7 +11,7 @@ function verifyInput(firstName, lastName, phone, email) {
 }
 
 function verifyRegisterForm(firstName, lastName, username, password) {
-  if (!firstName || !lastName || !phone || !email)
+  if (!firstName || !lastName || !username || !password)
     return 'All fields are required';
 
   if (!verifyUsername(username))
