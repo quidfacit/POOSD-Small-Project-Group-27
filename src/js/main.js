@@ -433,3 +433,24 @@ function setUserNameLabel() {
   const userNameLabel = document.getElementById('userNameLabel');
   userNameLabel.innerHTML = `Logged in as: ${firstName} ${lastName}`;
 }
+
+// Set up Enter for inputs
+["firstNameInput", "lastNameInput", "emailInput", "numberInput"]
+  .forEach((id) => {
+    document.getElementById(id).addEventListener('keydown', (e) => {
+      if (e.key == 'Enter') {
+        document.getElementById('addButton').click();
+        e.preventDefault();
+      }
+    });
+  });
+
+["updateFirstName", "updateLastName", "updateEmail", "updateNumber"]
+  .forEach((id) => {
+    document.getElementById(id).addEventListener('keydown', (e) => {
+      if (e.key == 'Enter') {
+        document.getElementById('updateButton').click();
+        e.preventDefault();
+      }
+    });
+  });

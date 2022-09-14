@@ -16,10 +16,10 @@ function doLogin() {
 
 function doRegister() {
     const payload = JSON.stringify({
-        Login: document.getElementById('loginName').value,
-        Password: document.getElementById('loginPassword').value,
-        FirstName: document.getElementById('FirstName').value,
-        LastName: document.getElementById('LastName').value,
+        Login: document.getElementById('firstNameInput').value,
+        Password: document.getElementById('lastNameInput').value,
+        FirstName: document.getElementById('usernameInput').value,
+        LastName: document.getElementById('passwordInput').value,
     });
 
 
@@ -28,12 +28,12 @@ function doRegister() {
 
         // Tell user they are registered
         document.getElementById('registerResult').innerHTML = 'You have been successfully registered'
-
         // Clear fields
-        document.getElementById('FirstName').value = '';
-        document.getElementById('LastName').value = '';
-        document.getElementById('loginName').value = '';
-        document.getElementById('loginPassword').value = '';
+        ['firstNameInput', 'lastNameInput', 'usernameInput', 'passwordInput'].forEach((id) => {
+            document.getElementById(id).value = '';
+        });
+    }, (err) => {
+        document.getElementById('registerResult').innerHTML = `An error occurred while registering you. ${err}`;
     });
 }
 
