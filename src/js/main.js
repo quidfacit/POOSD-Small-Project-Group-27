@@ -237,8 +237,8 @@ function readCookie() {
     .find((c) => c.includes("firstName"));
 
   if (!loginCookie) {
-    // window.location.href = 'index.html';
-    return { firstName: "Lab", lastName: "Rat", userId: -1 };
+    window.location.href = 'index.html';
+    return { firstName: 'Lab', lastName: 'Rat', userId: -1 };
   }
 
   const details = loginCookie.split(",").map((e) => e.split("=")[1]);
@@ -442,22 +442,22 @@ function setUserNameLabel() {
 }
 
 // Set up Enter for inputs
-["firstNameInput", "lastNameInput", "emailInput", "numberInput"].forEach(
-  (id) => {
-    document.getElementById(id).addEventListener("keydown", (e) => {
-      if (e.key == "Enter") {
-        document.getElementById("addButton").click();
+["firstNameInput", "lastNameInput", "emailInput", "numberInput"]
+  .forEach((id) => {
+    document.getElementById(id).addEventListener('submit', (e) => {
+      if (e.key == 'Enter') {
+        document.getElementById('addButton').click();
         e.preventDefault();
       }
     });
   }
 );
 
-["updateFirstName", "updateLastName", "updateEmail", "updateNumber"].forEach(
-  (id) => {
-    document.getElementById(id).addEventListener("keydown", (e) => {
-      if (e.key == "Enter") {
-        document.getElementById("updateButton").click();
+["updateFirstName", "updateLastName", "updateEmail", "updateNumber"]
+  .forEach((id) => {
+    document.getElementById(id).addEventListener('submit', (e) => {
+      if (e.key == 'Enter') {
+        document.getElementById('updateButton').click();
         e.preventDefault();
       }
     });
