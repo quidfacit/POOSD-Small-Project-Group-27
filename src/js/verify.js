@@ -36,3 +36,25 @@ function inputEdit(e, validateFunction) {
   e.nextElementSibling.classList.remove('hidden');
   return false;
 }
+
+
+// Set up Enter for inputs
+["firstNameInput", "lastNameInput", "emailInput", "numberInput"]
+  .forEach((id) => {
+    document.getElementById(id).addEventListener('keydown', (e) => {
+      if (e.key == 'Enter') {
+        document.getElementById('addButton').click();
+        e.preventDefault();
+      }
+    });
+  });
+
+["updateFirstName", "updateLastName", "updateEmail", "updateNumber"]
+  .forEach((id) => {
+    document.getElementById(id).addEventListener('keydown', (e) => {
+      if (e.key == 'Enter') {
+        document.getElementById('updateButton').click();
+        e.preventDefault();
+      }
+    });
+  });
