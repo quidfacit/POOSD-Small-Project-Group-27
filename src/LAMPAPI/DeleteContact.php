@@ -1,18 +1,22 @@
 <?php
-	$res = false;
-	$request = json_decode(file_get_contents("php://input"));
-	$id = $request->UserID;
-	$fName = $request->FirstName;
-	$lName = $request->LastName;
-	$conn = mysqli("localhost", "admin", "27isBest", "main");
+	$request = json_decode(file_get_contents("php://input"), true);
+	$id = $request["ID"];
+	$conn = new mysqli("localhost", "admin", "27isBest", "main");
 
-	if($conn->connect_error == null){
-		$res = $conn->query("DLETE FROM Contacts WHERE UserID = $id AND FirstName = $fName AND LastName = $lName");
-
+	if(!$conn->connect_error){
+		$query = $conn->prepare("DELETE FROM Contacts WHERE ID = ?");
+		$query->bind_param("s", $id);
+		$query->execute();
+		$query->get_result();
 		$conn->close();
 	}
+	else{
+		$error = $conn->connect_error;
+	}
 
-	header("Content-Type: application/json; charset = utf-8");
+	$out = '{"Error": "'.$error.'"}';
 
-	print("$res");
+	header("Content-Type: application/json");
+
+	echo $out;
 ?>

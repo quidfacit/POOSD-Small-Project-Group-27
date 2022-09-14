@@ -1,26 +1,37 @@
 <?php
-	$res = false;
+	$error = null;
 	$request = json_decode(file_get_contents("php://input"), true);
-	$id->ID;
-	$fName = $request->FirstName;
-	$lName = $request->LastName;
-	$login = $request->Login;
-	$password = $request->Password;
-	$dateC = date('n').'/'.date('j').'/'.date('y');
-	$dateL = null;
-	$conn = mysqli("localhost", "admin", "27isBest", "main");
+	$fName = $request["FirstName"];
+	$lName = $request["LastName"];
+	$login = $request["Login"];
+	$pass= $request["Password"];
+	$date = date("Y-m-d H:i:s");
+	$conn = new mysqli("localhost", "admin", "27isBest", "main");
 
-	if($conn->connect_error = null){
-		$res = $conn->query("SELECT * FROM Users WHERE ID = $id AND Login = $login AND Password = $password");
-
+	if(!$conn->connect_error){
+		$query = $conn->prepare("SELECT * FROM Users WHERE Login = ? AND FirstName = ? AND LastName = ?");
+		$query->bind_param("sss", $login, $fName, $lName);
+		$query->execute();
+		$res = $query->get_result();
+		
 		if($res->num_rows == 0){
-			$res = $conn->query("INSERT INTO Users (ID, DateCreated, DateLastLoggedIn, FirstName, LastName, Login, Password) VALUES ($id, $dateC, $dateL, $fName, $lName, $login, $password)");
-
-			$res = true;
+			$query = $conn->prepare("INSERT into Users (DateCreated, DateLastLoggedIn, FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?, ?, ?)");
+			$query->bind_param("ssssss", $date, $date, $fName, $lName, $login, $pass);
+			$query->execute();
 		}
+		else{
+			$error = "This User Already Exists";
+		}
+
+		$conn->close();
+	}
+	else{
+		$error = $conn->connect_error;
 	}
 
-	header("Content-Type: application/json; charset = utf-8");
+	$out = '{"Error":"'.$error.'"}';
 
-	print($res);
+	header("Content-Type: application/json");
+
+	echo $out;
 ?>
