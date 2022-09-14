@@ -93,8 +93,8 @@ function closeModal() {
 
       console.log(
         `Showing ${DISPLAY_AMOUT} more contacts\n` +
-          `${displayedAmount + DISPLAY_AMOUT} ` +
-          `out of ${contacts.length} contacts shown`
+        `${displayedAmount + DISPLAY_AMOUT} ` +
+        `out of ${contacts.length} contacts shown`
       );
 
       showContacts(false);
@@ -183,6 +183,7 @@ function search() {
       // If no contacts found, clear table
       document.getElementById('searchResult').innerHTML = err;
       contacts = [];
+      showContacts(true);
     }
   );
 }
