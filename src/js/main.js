@@ -234,7 +234,7 @@ function readCookie() {
     .find((c) => c.includes('firstName'));
 
   if (!loginCookie) {
-    // window.location.href = 'index.html';
+    window.location.href = 'index.html';
     return { firstName: 'Lab', lastName: 'Rat', userId: -1 };
   }
 
