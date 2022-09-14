@@ -1,27 +1,28 @@
 <?php
-	$res = false;
-	$request = json_decode(file_get_contents("php://input"));
-	$id = $request->UserID;
-	$currDate = date('n').'/'.date('j').'/'.date('y');
-	$fName = $request->FirstName;
-	$lName = $request->LastName;
-	$email = $request->Email;
-	$number = $request->PhoneNumber;
-	$conn = mysqli("localhost", "admin", "27isBest", "main");
+	date_default_timezone_set("America/New_York");
+	$error = null;
+	$request = json_decode(file_get_contents("php://input"), true);
+	$date = date("Y-m-d H:i:s");
+	$fName = $request["FirstName"];
+	$lName = $request["LastName"];
+	$email = $request["Email"];
+	$number = $request["PhoneNumber"];
+	$id = $request["UserID"];
+	$conn = new mysqli("localhost", "admin", "27isBest", "main");
 
-	if($conn->connect_error == null){
-		$data = $conn->query("SELECT * FROM Contacts WHERE UserID = $id");
-
-		if($data->num_rows == 0){
-			$conn->query("INSERT INTO Contacts (UserID, DateCreated, FirstName, LastName, Email, PhoneNumber) VALUES ($id, $currDate, $fName, $lName, $email, $number)");
-			$res = true;
-		}
-
+	if(!$conn->connect_error){
+		$query = $conn->prepare("INSERT INTO Contacts (DateCreated, FirstName, LastName, Email, PhoneNumber, UserID) VALUES (?, ?, ?, ?, ?, ?)");
+		$query->bind_param("ssssss", $date, $fName, $lName, $email, $number, $id);
+		$query->execute();
 		$conn->close();
 	}
+	else{
+		$error = $conn->connect_error;
+	}
 
-	header("Content-Type: application/json; charset = utf-8");
+	$out = '{"Error": "'.$error.'"}';
 
-	print($res);
+	header("Content-Type: application/json");
+
+	echo $out;
 ?>
-

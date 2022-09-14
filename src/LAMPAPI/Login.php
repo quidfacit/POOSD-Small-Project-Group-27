@@ -1,58 +1,37 @@
-
 <?php
-
-	$inData = getRequestInfo();
-
-	$id = 0;
-	$FirstName = "";
-	$LastName = "";
-
+	date_default_timezone_set("America/New_York");
+	$fName = $lName = $date = $error = null;
+	$request = json_decode(file_get_contents('php://input'), true);
+	$login = $request["Login"];
+	$pass = $request["Password"];
 	$conn = new mysqli("localhost", "admin", "27isBest", "main");
-	if( $conn->connect_error )
-	{
-		returnWithError( $conn->connect_error );
-	}
-	else
-	{
-		$stmt = $conn->prepare("SELECT ID,FirstName,LastName FROM Users WHERE Login=? AND Password =?");
-		$stmt->bind_param("ss", $inData["login"], $inData["password"]);
-		$stmt->execute();
-		$result = $stmt->get_result();
 
-		if( $row = $result->fetch_assoc()  )
-		{
-			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
+	if(!$conn->connect_error){
+		$query = $conn->prepare("SELECT * FROM Users WHERE Login =? AND Password =?");
+		$query->bind_param("ss", $login, $pass);
+		$query->execute();
+		$res = $query->get_result();
+		
+		if($res->num_rows != 0){
+			$data = $res->fetch_assoc();
+			$fName = $data["FirstName"];
+			$lName = $data["LastName"];
+			$id = $data["ID"];
+			$date = date("Y-m-d H:i:s");
 		}
-		else
-		{
-			returnWithError("No Records Found");
+		else{
+			$error = "Invalid Login or Password";
 		}
 
-		$stmt->close();
 		$conn->close();
 	}
-
-	function getRequestInfo()
-	{
-		return json_decode(file_get_contents('php://input'), true);
+	else{
+		$error = $conn->connect_error;
 	}
 
-	function sendResultInfoAsJson( $obj )
-	{
-		header('Content-type: application/json');
-		echo $obj;
-	}
+	$out = '{"FirstName": "'.$fName.'", "LastName":"'.$lName.'", "ID": "'.$id.'", "Date": "'.$date.'", "Error": "'.$error.'"}';
 
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"FirstName":"","LastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
-	}
+	header("Content-Type: application/json");
 
-	function returnWithInfo( $FirstName, $LastName, $id )
-	{
-		$retValue = '{"id":' . $id . ',"FirstName":"' . $FirstName . '","LastName":"' . $LastName . '","error":""}';
-		sendResultInfoAsJson( $retValue );
-	}
-
+	echo $out;
 ?>
