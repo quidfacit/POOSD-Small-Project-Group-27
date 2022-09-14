@@ -51,6 +51,7 @@ button {
   height: 30px;
   border-radius: 20px;
   padding: 0 10px;
+  margin-bottom: 10px;
 }
 
 .mainContainer {
@@ -62,7 +63,15 @@ button {
   margin: auto;
 }
 
-#registerResult {
+#registerResult,
+#loginResult {
   color: #ffffff;
   margin-bottom: 20px;
+}
+
+.idontknowwhattonamethisitis3AM {
+  /* margin: 10px 0; */
+  padding: 10px;
+  display: block;
+  text-align: center;
 }

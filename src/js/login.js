@@ -4,13 +4,22 @@ function doLogin() {
 
     const payload = JSON.stringify({ Login: Login, Password: Password });
     sendRequest('Login', payload, (res) => {
-        const { FirstName, LastName, ID } = JSON.parse(res.responseText);
+        const { FirstName, LastName, ID, Error } = JSON.parse(res.responseText);
         if (ID < 1) {
+            return;
+        }
+
+        if (Error) {
+            document.getElementById('loginResult').innerHTML = Error;
+            document.getElementById('loginPassword').value = '';
             return;
         }
 
         saveCookie(FirstName, LastName, ID);
         window.location.href = 'contact.html';
+    }, (err) => {
+        document.getElementById('loginResult').innerHTML = err;
+        document.getElementById('loginPassword').value = '';
     });
 }
 
@@ -32,6 +41,12 @@ function doRegister() {
     });
 
     sendRequest('Register', payload, (res) => {
+        const { error } = JSON.parse(res.responseText);
+        if (error) {
+            document.getElementById('registerResult').innerHTML = `An error occurred while registering you. ${error}`;
+            return;
+        }
+
         console.log('Successfully registered user.');
 
         // Tell user they are registered
@@ -43,22 +58,6 @@ function doRegister() {
     }, (err) => {
         document.getElementById('registerResult').innerHTML = `An error occurred while registering you. ${err}`;
     });
-}
-
-function loginToggle() {
-    let divShown = document.getElementById('LoginDiv');
-    let divHidden = document.getElementById('register');
-
-    divShown.style.display = 'block';
-    divHidden.style.display = 'none';
-}
-
-function registerToggle() {
-    let divShown = document.getElementById('register');
-    let divHidden = document.getElementById('LoginDiv');
-
-    divShown.style.display = 'block';
-    divHidden.style.display = 'none';
 }
 
 function saveCookie(FirstName, LastName, ID) {
@@ -75,3 +74,26 @@ function saveCookie(FirstName, LastName, ID) {
         ';expires=' +
         date.toGMTString();
 }
+
+// Set up Enter for inputs
+// Register
+["firstNameInput", "lastNameInput", "usernameInput", "passwordInput"]
+    .forEach((id) => {
+        document.getElementById(id).addEventListener('keydown', (e) => {
+            if (e.key == 'Enter') {
+                document.getElementById('registerButton').click();
+                e.preventDefault();
+            }
+        });
+    });
+
+// Login
+["loginName", "loginPassword"]
+    .forEach((id) => {
+        document.getElementById(id).addEventListener('keydown', (e) => {
+            if (e.key == 'Enter') {
+                document.getElementById('loginButton').click();
+                e.preventDefault();
+            }
+        });
+    });
