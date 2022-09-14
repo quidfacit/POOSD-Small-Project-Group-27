@@ -1,108 +1,69 @@
-function doLogin()
-{
-    ID = 0;
-    FirstName = "";
-    LastName = "";
+function doLogin() {
+    const Login = document.getElementById('loginName').value;
+    const Password = document.getElementById('loginPassword').value;
 
-    let Login = document.getElementById("Login").value;
-    let Password = document.getElementById("Password").value;
+    const payload = JSON.stringify({ Login: Login, Password: Password });
+    sendRequest('Login', payload, (res) => {
+        const { FirstName, LastName, ID } = JSON.parse(res.responseText);
+        if (ID < 1) {
+            return;
+        }
 
-    document.getElementById("LoginResult").innerHTML = "";
-
-    let tmp = {Login:Login,Password:Password};
-    let jsonPayload = JSON.stringify( tmp );
-
-    let url = urlBase + '/Login.' + extension;
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    try
-    {
-        xhr.onreadystatechange = function()
-        {
-            if (this.readyState == 4 && this.status == 200)
-            {
-                let jsonObject = JSON.parse( xhr.responseText );
-                ID = jsonObject.id;
-
-                if( ID < 1 )
-                {
-                    document.getElementById("LoginResult").innerHTML = "User/Password combination incorrect";
-                    return;
-                }
-
-                FirstName = jsonObject.FirstName;
-                LastName = jsonObject.LastName;
-
-                saveCookie();
-
-                window.location.href = "search.html";
-            }
-        };
-        xhr.send(jsonPayload);
-    }
-    catch(err)
-    {
-        document.getElementById("LoginResult").innerHTML = err.message;
-    }
+        saveCookie(FirstName, LastName, ID);
+        window.location.href = 'contact.html';
+    });
 }
 
 function doRegister() {
-    // send to api
-      const urlBase = 'http://contacts27.com/LAMPAPI';
-      const extension = 'php';
+    const payload = JSON.stringify({
+        Login: document.getElementById('loginName').value,
+        Password: document.getElementById('loginPassword').value,
+        FirstName: document.getElementById('FirstName').value,
+        LastName: document.getElementById('LastName').value,
+    });
 
-      const payload = JSON.stringify({
-          Login: document.getElementById("regUsername").value,
-          Password: document.getElementById("regPassword").value,
-          FirstName: document.getElementById("firstName").value,
-          LastName: document.getElementById("lastName").value  
-      });
 
-      let url = urlBase + "/Register." + extension;
+    sendRequest('Register', payload, (res) => {
+        console.log('Successfully registered user.');
 
-      let xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-      try {
-          xhr.onreadystatechange = function () {
-              if (this.readyState == 4 && this.status == 200) {
-                  const { Error: err } = JSON.parse(xhr.responseText);
-                  if (err) {
-                      throw new Error(err);
-                  }
+        // Tell user they are registered
+        document.getElementById('registerResult').innerHTML = 'You have been successfully registered'
 
-                  console.log("Successfully registered user.");
+        // Clear fields
+        document.getElementById('FirstName').value = '';
+        document.getElementById('LastName').value = '';
+        document.getElementById('loginName').value = '';
+        document.getElementById('loginPassword').value = '';
+    });
+}
 
-                  //Check if the user exists already
-              }
+function loginToggle() {
+    let divShown = document.getElementById('LoginDiv');
+    let divHidden = document.getElementById('register');
 
-          // Clear fields
-              document.getElementById("firstName").value = "";
-              document.getElementById("lastName").value = "";
-              document.getElementById("regUsername").value = "";
-              document.getElementById("regPassword").value = "";
-          };
+    divShown.style.display = 'block';
+    divHidden.style.display = 'none';
+}
 
-          xhr.send(payload);
-      } catch (e) {
-          console.error(e);
-      }     
-  }
+function registerToggle() {
+    let divShown = document.getElementById('register');
+    let divHidden = document.getElementById('LoginDiv');
 
-  function loginToggle() {
-      let divShown = document.getElementById("loginDiv")
-      let divHidden = document.getElementById("register")
+    divShown.style.display = 'block';
+    divHidden.style.display = 'none';
+}
 
-      divShown.style.display = "block";
-      divHidden.style.display = "none";
-  }
-
-  function registerToggle() {
-      let divShown = document.getElementById("register")
-      let divHidden = document.getElementById("loginDiv")
-
-      divShown.style.display = "block";
-      divHidden.style.display = "none";
-  }
+function saveCookie(FirstName, LastName, ID) {
+    let minutes = 20;
+    let date = new Date();
+    date.setTime(date.getTime() + minutes * 60 * 1000);
+    document.cookie =
+        'firstName=' +
+        FirstName +
+        ',LastName=' +
+        LastName +
+        ',ID=' +
+        ID +
+        ';expires=' +
+        date.toGMTString();
+}
