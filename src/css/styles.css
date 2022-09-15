@@ -12,8 +12,8 @@ body {
 
 body {
   background-color: rgb(51, 51, 51);
-  background-image: url("../images/Glacier.jpg");
-  font-family: "Roboto", sans-serif;
+  background-image: url('../images/Glacier.jpg');
+  font-family: 'Roboto', sans-serif;
 }
 
 .mainContainer {
@@ -30,6 +30,7 @@ table {
   border-collapse: collapse;
   margin: auto;
   width: 100%;
+  table-layout: fixed;
 }
 
 #tableContainer {
@@ -45,9 +46,17 @@ tr {
   border: 1px solid black;
   background-color: rgb(46, 194, 199);
   transition: 0.75s;
+  justify-content: space-between;
 }
 
-#contactsTable > tbody > tr:hover {
+th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(46, 194, 199);
+}
+
+#contactsTable > tbody > tr:hover,
+th:hover {
   background-color: rgb(45, 248, 255);
   height: 60px;
   transition: 0.75s;
@@ -69,7 +78,7 @@ th {
   margin-left: 40px;
   background-color: rgb(41, 147, 179);
 
-  background-image: url("../images/search-icon.png");
+  background-image: url('../images/search-icon.png');
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -205,7 +214,7 @@ h3 {
 
 .good {
   /* background-color: green; */
-  background-image: url("../images/check-icon.png");
+  background-image: url('../images/check-icon.png');
   background-size: 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -213,7 +222,7 @@ h3 {
 
 .bad {
   /* background-color: red; */
-  background-image: url("../images/x-icon.png");
+  background-image: url('../images/x-icon.png');
   background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
@@ -260,7 +269,7 @@ button:hover {
   margin-left: calc(100% - 50px);
 
   background-color: rgb(255, 0, 0);
-  background-image: url("../images/trash-icon.png");
+  background-image: url('../images/trash-icon.png');
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -425,11 +434,11 @@ button:hover {
 }
 
 #gridLayoutButton {
-  background-image: url("../images/grid-icon.png");
+  background-image: url('../images/grid-icon.png');
 }
 
 #listLayoutButton {
-  background-image: url("../images/list-icon.png");
+  background-image: url('../images/list-icon.png');
 }
 
 #gridLayoutButton:hover,
