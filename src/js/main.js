@@ -7,20 +7,6 @@ let displayMode = "list";
 
 setUserNameLabel();
 search();
-
-// --------------------------- For Testing ---------------------------
-
-for (let i = 0; i < 300; i++) {
-  addEntry({
-    ID: i,
-    FirstName: "John" + i,
-    LastName: "Doe" + i,
-    Email: `JohnnyAppleseed${i}@gmail.com`,
-    PhoneNumber: "555-555-5555",
-    DateCreated: "Web Sep 14 2022",
-  });
-}
-
 showContacts(true);
 
 // -------------------------- Set up Modal --------------------------
@@ -93,8 +79,8 @@ function closeModal() {
 
       console.log(
         `Showing ${DISPLAY_AMOUT} more contacts\n` +
-          `${displayedAmount + DISPLAY_AMOUT} ` +
-          `out of ${contacts.length} contacts shown`
+        `${displayedAmount + DISPLAY_AMOUT} ` +
+        `out of ${contacts.length} contacts shown`
       );
 
       showContacts(false);
