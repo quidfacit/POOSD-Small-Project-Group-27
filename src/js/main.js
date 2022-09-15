@@ -56,8 +56,7 @@ function closeModal() {
   modals.forEach((modal) => (modal.style.display = "none"));
   mainContainer.classList.remove("haze");
 
-  addResult = document.getElementById("addResult");
-  addResult.style.display = "none";
+  document.getElementById("addResult").innerHTML = "";
 
   Array.from(document.getElementsByClassName("incorrectLabel")).forEach((e) =>
     e.classList.add("hidden")
@@ -208,6 +207,9 @@ function addContact() {
     [firstNameField, lastNameField, numberField, emailField].forEach(
       (e) => (e.value = "")
     );
+
+    addResult.style.display = "block";
+    addResult.innerHTML = "Contact has been added";
   });
 }
 
