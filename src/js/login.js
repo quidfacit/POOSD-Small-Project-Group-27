@@ -47,8 +47,6 @@ function doRegister() {
             return;
         }
 
-        console.log('Successfully registered user.');
-
         // Tell user they are registered
         registerResultLabel.innerHTML = 'You have been successfully registered';
 

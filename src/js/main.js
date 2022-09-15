@@ -78,12 +78,6 @@ function closeModal() {
       // Max amount shown
       if (displayedAmount == contacts.length) return;
 
-      console.log(
-        `Showing ${DISPLAY_AMOUT} more contacts\n` +
-        `${displayedAmount + DISPLAY_AMOUT} ` +
-        `out of ${contacts.length} contacts shown`
-      );
-
       showContacts(false);
     }
   });
@@ -147,7 +141,6 @@ function clearTable() {
 
 function search() {
   const searchTerm = document.getElementById("searchInput").value;
-  console.log(searchTerm);
 
   // Get results from API
   const jsonPayload = JSON.stringify({
@@ -208,7 +201,6 @@ function addContact() {
   });
 
   sendRequest("AddContact", payload, (res) => {
-    console.log("Successfully added contact");
     // Call search to add the contact if it matches the search
     search();
 
@@ -246,7 +238,6 @@ function readCookie() {
   }
 
   const details = loginCookie.split(",").map((e) => e.split("=")[1]);
-  console.log(details);
 
   // Not logged in
   // send to login page
@@ -275,7 +266,6 @@ function openContactModal(e) {
         if (target == document.body) return -1;
       }
 
-      console.log(target);
       return Array.from(
         document.getElementById("cardsContainer").children
       ).indexOf(target);
@@ -289,15 +279,12 @@ function openContactModal(e) {
   // Get index of contact that was clicked
 
   const index = findIndex(e);
-  console.log(index);
   if (index == -1) return; // Dont show for the header row
   showModal(document.getElementById("contactModal"));
 
   contactInModal = contacts[index];
   modalIndex = index;
   const contact = contacts[index];
-
-  console.log(contact);
 
   const firstNameField = document.getElementById("updateFirstName");
   const lastNameField = document.getElementById("updateLastName");
@@ -338,8 +325,6 @@ function deleteContact() {
   });
 
   sendRequest("DeleteContact", payload, (res) => {
-    console.log("Successfully deleted contact");
-
     // Remove the contact from the table
     const table = document.getElementById("contactsTable");
     table.deleteRow(modalIndex + 1);
@@ -386,7 +371,6 @@ function updateContact() {
     "UpdateContact",
     payload,
     (res) => {
-      console.log("Successfully updated contact");
       closeModal();
 
       // Update contact in contacts array
