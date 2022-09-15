@@ -319,6 +319,12 @@ function deleteContact() {
   if (!contactInModal) return;
   const { ID } = contactInModal;
 
+  const shouldContinue = confirm(
+    `Are you sure you want to delete ${contactInModal.FirstName} ${contactInModal.LastName}?`
+  );
+
+  if (!shouldContinue) return;
+
   // // Send Delete Request to API
   const payload = JSON.stringify({
     ID,
