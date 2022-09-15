@@ -4,6 +4,7 @@ let modalIndex = -1;
 const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
 let displayMode = "list";
+let sortedBy = "DateCreated";
 
 setUserNameLabel();
 search();
@@ -216,6 +217,22 @@ function addContact() {
       (e) => (e.value = "")
     );
   });
+}
+
+function sortBy(field) {
+  // If already sorted by this field, reverse the order
+  if (field === sortedBy) {
+    contacts.reverse();
+  } else {
+    sortedBy = field;
+    contacts.sort((a, b) => {
+      if (a[field] < b[field]) return -1;
+      if (a[field] > b[field]) return 1;
+      return 0;
+    });
+  }
+
+  showContacts(true);
 }
 
 function readCookie() {
