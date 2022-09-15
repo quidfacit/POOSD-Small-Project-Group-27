@@ -52,7 +52,11 @@ function verifyPassword(password) {
   return password.length >= 8;
 }
 
-function inputEdit(e, validateFunction) {
+function inputEdit(e, validateFunction, isPhone) {
+  if (isPhone) {
+    e.value = formatPhone(e.value);
+  }
+
   if (validateFunction(e.value)) {
     e.nextElementSibling.classList.add("good");
     e.nextElementSibling.classList.remove("bad");
@@ -62,4 +66,21 @@ function inputEdit(e, validateFunction) {
   e.nextElementSibling.classList.add("bad");
   e.nextElementSibling.classList.remove("good");
   return false;
+}
+
+function formatPhone(original) {
+  // Goal: xxx-xxx-xxxx
+
+  // Remove non-numeric characters
+  n = original.replace(/\D/g, "");
+
+  // Add first hypen
+  if (n.length === 4)
+    return `${n.slice(0, 3)}-${n.slice(3)}`
+
+  // Add hyphen
+  if (n.length === 8)
+    return `${n.slice(0, 3)}-${n.slice(3, 6)}-${n.slice(6)}`
+
+  return original;
 }
