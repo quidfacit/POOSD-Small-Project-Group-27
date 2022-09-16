@@ -20,24 +20,28 @@ function showModal(modal) {
     mainContainer.classList.add('haze');
 
     // Reset validation
+    validateAllInputs();
+}
+
+function validateAllInputs(){
     [
-        "firstNameInput",
-        "lastNameInput",
-        "updateFirstName",
-        "updateLastName",
+      "firstNameInput",
+      "lastNameInput",
+      "updateFirstName",
+      "updateLastName",
     ].forEach((id) => {
-        if (document.getElementById(id))
-            inputEdit(document.getElementById(id), verifyName);
+      if (document.getElementById(id))
+        inputEdit(document.getElementById(id), verifyName);
     });
 
     ["numberInput", "updatePhoneNumber"].forEach((id) => {
-        if (document.getElementById(id))
-            inputEdit(document.getElementById(id), verifyPhone);
+      if (document.getElementById(id))
+        inputEdit(document.getElementById(id), verifyPhone);
     });
 
     ["emailInput", "updateEmail"].forEach((id) => {
-        if (document.getElementById(id))
-            inputEdit(document.getElementById(id), verifyEmail);
+      if (document.getElementById(id))
+        inputEdit(document.getElementById(id), verifyEmail);
     });
 }
 
@@ -58,7 +62,7 @@ function closeModal() {
         if (document.getElementById(id)) {
             document.getElementById(id).value = '';
         }
-    })
+    });
 
     Array.from(document.getElementsByClassName('incorrectLabel')).forEach((e) =>
         e.classList.add('hidden')

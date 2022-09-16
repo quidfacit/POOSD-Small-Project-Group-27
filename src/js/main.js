@@ -23,33 +23,35 @@ showContacts(true);
   }
 );
 
-["updateFirstName", "updateLastName", "updateEmail", "updatePhoneNumber"].forEach(
-  (id) => {
-    document.getElementById(id).addEventListener("keyup", (e) => {
-      if (e.key === "Enter") {
-        updateContactModal();
-      }
-    });
-  }
-);
+[
+  "updateFirstName",
+  "updateLastName",
+  "updateEmail",
+  "updatePhoneNumber",
+].forEach((id) => {
+  document.getElementById(id).addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+      updateContactModal();
+    }
+  });
+});
 
 // ------------------------ Set up lazy loading ------------------------
-[
-  "tableContainer", "cardsContainer",].forEach((id) => {
-    const container = document.getElementById(id);
-    container.addEventListener("scroll", () => {
-      // you're at the bottom of the page
-      if (
-        container.offsetHeight + container.scrollTop >=
-        container.scrollHeight
-      ) {
-        // Max amount shown
-        if (displayedAmount == contacts.length) return;
+["tableContainer", "cardsContainer"].forEach((id) => {
+  const container = document.getElementById(id);
+  container.addEventListener("scroll", () => {
+    // you're at the bottom of the page
+    if (
+      container.offsetHeight + container.scrollTop >=
+      container.scrollHeight
+    ) {
+      // Max amount shown
+      if (displayedAmount == contacts.length) return;
 
-        showContacts(false);
-      }
-    });
+      showContacts(false);
+    }
   });
+});
 
 //------------------------------------------------------
 
@@ -90,8 +92,8 @@ function addCard(contact) {
   <p>${DateCreated}</p>
   </div>`;
 
-  div.addEventListener('click', () => {
-    highlightCard(div)
+  div.addEventListener("click", () => {
+    highlightCard(div);
   });
   document.getElementById("cardsContainer").appendChild(div);
 }
@@ -147,12 +149,7 @@ function addContact() {
   const Email = document.getElementById("emailInput").value;
   const PhoneNumber = document.getElementById("numberInput").value;
 
-  const isValid = verifyInput(
-    FirstName,
-    LastName,
-    PhoneNumber,
-    Email
-  );
+  const isValid = verifyInput(FirstName, LastName, PhoneNumber, Email);
 
   const addResult = document.getElementById("addResult");
   if (isValid !== true) {
@@ -175,10 +172,11 @@ function addContact() {
     search();
 
     // Clear fields
-    ['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
+    ["firstNameInput", "lastNameInput", "emailInput", "numberInput"].forEach(
       (id) => (document.getElementById(id).value = "")
     );
 
+    validateAllInputs();
     addResult.style.display = "block";
     addResult.innerHTML = "Contact has been added";
   });
@@ -258,7 +256,7 @@ function openContactModal(e) {
   modalIndex = index;
 
   const contact = contacts[index];
-  ['FirstName', 'LastName', 'PhoneNumber', 'Email'].forEach((field) => {
+  ["FirstName", "LastName", "PhoneNumber", "Email"].forEach((field) => {
     document.getElementById(`update${field}`).value = contact[field];
   });
 
@@ -299,7 +297,8 @@ function deleteContact(callback) {
 }
 
 function updateContactModal() {
-  updateContact(document.getElementById("updateFirstName").value,
+  updateContact(
+    document.getElementById("updateFirstName").value,
     document.getElementById("updateLastName").value,
     document.getElementById("updateEmail").value,
     document.getElementById("updatePhoneNumber").value
@@ -309,12 +308,7 @@ function updateContactModal() {
 function updateContact(NewFirst, NewLast, NewEmail, NewNumber) {
   if (!contactInModal) return;
 
-  const isValid = verifyInput(
-    NewFirst,
-    NewLast,
-    NewNumber,
-    NewEmail,
-  );
+  const isValid = verifyInput(NewFirst, NewLast, NewNumber, NewEmail);
 
   const updateResult = document.getElementById("updateResult");
   if (isValid !== true) {
@@ -403,13 +397,16 @@ function setUserNameLabel() {
   }
 );
 
-["updateFirstName", "updateLastName", "updateEmail", "updatePhoneNumber"].forEach(
-  (id) => {
-    document.getElementById(id).addEventListener("submit", (e) => {
-      if (e.key == "Enter") {
-        document.getElementById("updateButton").click();
-        e.preventDefault();
-      }
-    });
-  }
-);
+[
+  "updateFirstName",
+  "updateLastName",
+  "updateEmail",
+  "updatePhoneNumber",
+].forEach((id) => {
+  document.getElementById(id).addEventListener("submit", (e) => {
+    if (e.key == "Enter") {
+      document.getElementById("updateButton").click();
+      e.preventDefault();
+    }
+  });
+});
