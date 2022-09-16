@@ -37,7 +37,7 @@ function verifyPhone(phone) {
 }
 
 function verifyName(name) {
-  const re = /^[a-zA-Z]+$/;
+  const re = /^[a-zA-Z\-]+$/;
   return re.test(name);
 }
 
