@@ -80,35 +80,37 @@
             <h1 class="center">Contact Manager</h1>
         </div>
 
-        <div class="controlContainer">
-            <h1>Welcome to Contacts27</h1>
+        <div class="loginContainer">
+            <div class="controlContainer">
+                <h1>Welcome to Contacts27</h1>
 
-            <div class="container">
-                <h2>Please Log in</h2>
-                <div class="inputContainer" id="loginContainer">
+                <div class="container">
+                    <h2>Please Log in</h2>
+                    <div class="inputContainer" id="loginContainer">
 
-                    <div class="labelInputPair">
-                        <label for="loginName">Username</label>
-                        <input type="text" id="loginName" name="loginName">
+                        <div class="labelInputPair">
+                            <label for="loginName">Username</label>
+                            <input type="text" id="loginName" name="loginName">
+                        </div>
+                        <div class="labelInputPair">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" name="loginPassword">
+                        </div>
+
+                        <div class="idontknowwhattonamethisitis3AM">
+                            <button id="loginButton" onclick="doLogin();">Log in</button>
+                            <div></div>
+                            <span class="center" id="loginResult"></span>
+                        </div>
+
                     </div>
-                    <div class="labelInputPair">
-                        <label for="loginPassword">Password</label>
-                        <input type="password" id="loginPassword" name="loginPassword">
-                    </div>
-
-                    <div class="idontknowwhattonamethisitis3AM">
-                        <button id="loginButton" onclick="doLogin();">Log in</button>
-                        <div></div>
-                        <span class="center" id="loginResult"></span>
-                    </div>
-
                 </div>
-            </div>
 
-            <div style="width: 35%;" class="container">
-                <h2>Are you new? Register Here</h2>
-                <button id="showRegisterModalButton"
-                    onclick="showModal(document.getElementById('registerModal'));">Register</button>
+                <div style="width: 35%;" class="container">
+                    <h2>Are you new? Register Here</h2>
+                    <button id="showRegisterModalButton"
+                        onclick="showModal(document.getElementById('registerModal'));">Register</button>
+                </div>
             </div>
         </div>
     </div>

@@ -15,6 +15,14 @@ button {
   color: black;
 }
 
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 50px); /* 50px is the height of the topBar */
+}
+
 .controlContainer {
   display: table;
   width: 50%;
@@ -22,7 +30,6 @@ button {
   background-color: rgba(41, 147, 179, 0.5);
   border-radius: 20px;
   margin: auto;
-  margin-top: 10%;
   text-align: center;
   padding: 10px 0;
 }
