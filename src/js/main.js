@@ -77,7 +77,7 @@ function showContacts(resetTable) {
   }
 
   const displayLabel = document.getElementById("displayLabel");
-  displayLabel.innerHTML = `<b>${displayedAmount} - ${contacts.length} displayed</b>`;
+  displayLabel.innerHTML = `<b>${displayedAmount} of ${contacts.length} displayed</b>`;
 }
 
 function addCard(contact) {
