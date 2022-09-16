@@ -45,7 +45,7 @@ th {
   margin-left: 40px;
   background-color: rgb(41, 147, 179);
 
-  background-image: url('../images/search-icon.png');
+  background-image: url("../images/search-icon.png");
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -121,7 +121,7 @@ th {
   margin-left: calc(100% - 50px);
 
   background-color: rgb(255, 0, 0);
-  background-image: url('../images/trash-icon.png');
+  background-image: url("../images/trash-icon.png");
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -241,6 +241,10 @@ th {
   height: 80%;
 }
 
+#pedestalEditor {
+  min-width: 600px;
+}
+
 .rotate {
   -webkit-animation: spin 1s linear;
 }
@@ -283,11 +287,11 @@ th {
 }
 
 #gridLayoutButton {
-  background-image: url('../images/grid-icon.png');
+  background-image: url("../images/grid-icon.png");
 }
 
 #listLayoutButton {
-  background-image: url('../images/list-icon.png');
+  background-image: url("../images/list-icon.png");
 }
 
 #gridLayoutButton:hover,
