@@ -34,28 +34,23 @@ showContacts(true);
 
 // ------------------------ Set up lazy loading ------------------------
 [
-  document.getElementById("tableContainer"),
-  document.getElementById("cardsContainer"),
-].forEach((container) => {
-  container.addEventListener("scroll", () => {
-    // you're at the bottom of the page
-    if (
-      container.offsetHeight + container.scrollTop >=
-      container.scrollHeight
-    ) {
-      // Max amount shown
-      if (displayedAmount == contacts.length) return;
+  "tableContainer", "cardsContainer",].forEach((id) => {
+    const container = document.getElementById(id);
+    container.addEventListener("scroll", () => {
+      // you're at the bottom of the page
+      if (
+        container.offsetHeight + container.scrollTop >=
+        container.scrollHeight
+      ) {
+        // Max amount shown
+        if (displayedAmount == contacts.length) return;
 
-      showContacts(false);
-    }
+        showContacts(false);
+      }
+    });
   });
-});
 
 //------------------------------------------------------
-
-function addEntry(contact) {
-  contacts.push(contact);
-}
 
 function showContacts(resetTable) {
   if (resetTable) {
@@ -68,7 +63,6 @@ function showContacts(resetTable) {
 
   for (let i = 0; i < DISPLAY_AMOUT && displayedAmount < contacts.length; i++) {
     const contact = contacts[displayedAmount++];
-
     addCard(contact);
 
     const { FirstName, LastName, Email, PhoneNumber, DateCreated } = contact;
@@ -140,16 +134,16 @@ function search() {
 }
 
 function addContact() {
-  const firstNameField = document.getElementById("firstNameInput");
-  const lastNameField = document.getElementById("lastNameInput");
-  const numberField = document.getElementById("numberInput");
-  const emailField = document.getElementById("emailInput");
+  const FirstName = document.getElementById("firstNameInput").value;
+  const LastName = document.getElementById("lastNameInput").value;
+  const Email = document.getElementById("emailInput").value;
+  const PhoneNumber = document.getElementById("numberInput").value;
 
   const isValid = verifyInput(
-    firstNameField.value,
-    lastNameField.value,
-    numberField.value,
-    emailField.value
+    FirstName,
+    LastName,
+    PhoneNumber,
+    Email
   );
 
   const addResult = document.getElementById("addResult");
@@ -161,10 +155,10 @@ function addContact() {
 
   // send to api
   const payload = JSON.stringify({
-    FirstName: firstNameField.value,
-    LastName: lastNameField.value,
-    Email: emailField.value,
-    PhoneNumber: numberField.value,
+    FirstName,
+    LastName,
+    Email,
+    PhoneNumber,
     UserID: readCookie().userId,
   });
 
@@ -173,8 +167,8 @@ function addContact() {
     search();
 
     // Clear fields
-    [firstNameField, lastNameField, numberField, emailField].forEach(
-      (e) => (e.value = "")
+    ['firstNameInput', 'lastNameInput', 'emailInput', 'numberInput'].forEach(
+      (id) => (document.getElementById(id).value = "")
     );
 
     addResult.style.display = "block";
