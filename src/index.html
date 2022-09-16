@@ -25,7 +25,8 @@
                             <div class="formInputContainer">
                                 <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
                                     id="firstNameInput">
-                                <div class="verifyLabel bad">
+                                <div class="verifyLabel bad tooltip">
+                                    <span class="tooltiptext">Please fill out this field</span>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +36,8 @@
                             <div class="formInputContainer">
                                 <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
                                     id="lastNameInput">
-                                <div class="verifyLabel bad">
+                                <div class="verifyLabel bad tooltip">
+                                    <span class="tooltiptext">Please fill out this field</span>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +50,9 @@
                             <div class="formInputContainer">
                                 <input oninput="inputEdit(this, verifyUsername)" type="text" maxlength="30"
                                     id="usernameInput">
-                                <div class="verifyLabel bad">
+                                <div class="verifyLabel bad tooltip">
+                                    <span class="tooltiptext">Username must be at least 4 characters long and not
+                                        contain symbols</span>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +62,8 @@
                             <div class="formInputContainer">
                                 <input oninput="inputEdit(this, verifyPassword)" type="password" maxlength="12"
                                     id="passwordInput">
-                                <div class="verifyLabel bad">
+                                <div class="verifyLabel bad tooltip">
+                                    <span class="tooltiptext">Password must be at least 8 characters long</span>
                                 </div>
                             </div>
                         </div>
