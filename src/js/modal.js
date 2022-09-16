@@ -26,7 +26,7 @@ function showModal(modal) {
             inputEdit(document.getElementById(id), verifyName);
     });
 
-    ["numberInput", "updateNumber"].forEach((id) => {
+    ["numberInput", "updatePhoneNumber"].forEach((id) => {
         if (document.getElementById(id))
             inputEdit(document.getElementById(id), verifyPhone);
     });
