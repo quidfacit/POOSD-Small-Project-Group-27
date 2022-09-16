@@ -141,8 +141,10 @@
             <h1 class="center">Contact Manager</h1>
 
             <div id="optionsContainer">
-                <button onclick="gridLayout()" id="gridLayoutButton"></button>
-                <button onclick="listLayout()" id="listLayoutButton"></button>
+                <div class="layoutContainer">
+                    <button onclick="gridLayout()" id="gridLayoutButton"></button>
+                    <button onclick="listLayout()" id="listLayoutButton"></button>
+                </div>
 
                 <button id="showModalBtn" onclick="showModal(document.getElementById('addModal'))">Add Contact</button>
                 <button id="logoutBtn" onclick="logout()">Log out</button>

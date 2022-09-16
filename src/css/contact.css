@@ -97,6 +97,11 @@ th {
   margin: 0 5px;
 }
 
+.layoutContainer {
+  background-color: rgb(23, 84, 102);
+  border-radius: 20px;
+}
+
 #showModalBtn,
 #logoutBtn {
   width: 90px;
