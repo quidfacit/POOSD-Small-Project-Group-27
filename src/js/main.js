@@ -254,17 +254,13 @@ function openContactModal(e) {
 
   contactInModal = contacts[index];
   modalIndex = index;
+
   const contact = contacts[index];
+  document.getElementById("updateFirstName").value = contact.FirstName;
+  document.getElementById("updateLastName").value = contact.LastName;
+  document.getElementById("updateNumber").value = contact.PhoneNumber;
+  document.getElementById("updateEmail").value = contact.Email;
 
-  const firstNameField = document.getElementById("updateFirstName");
-  const lastNameField = document.getElementById("updateLastName");
-  const numberField = document.getElementById("updateNumber");
-  const emailField = document.getElementById("updateEmail");
-
-  firstNameField.value = contact.FirstName;
-  lastNameField.value = contact.LastName;
-  numberField.value = contact.PhoneNumber;
-  emailField.value = contact.Email;
   showModal(document.getElementById("contactModal"));
 }
 
@@ -300,16 +296,17 @@ function deleteContact() {
 function updateContact() {
   if (!contactInModal) return;
 
-  const firstNameField = document.getElementById("updateFirstName");
-  const lastNameField = document.getElementById("updateLastName");
-  const numberField = document.getElementById("updateNumber");
-  const emailField = document.getElementById("updateEmail");
+  const NewFirst = document.getElementById("updateFirstName").value;
+  const NewLast = document.getElementById("updateLastName").value;
+  const NewEmail = document.getElementById("updateEmail").value;
+  const NewNumber = document.getElementById("updateNumber").value;
+  console.log(NewNumber);
 
   const isValid = verifyInput(
-    firstNameField.value,
-    lastNameField.value,
-    numberField.value,
-    emailField.value
+    NewFirst,
+    NewLast,
+    NewNumber,
+    NewEmail,
   );
 
   const updateResult = document.getElementById("updateResult");
@@ -321,10 +318,10 @@ function updateContact() {
 
   const payload = JSON.stringify({
     ID: contactInModal.ID,
-    NewFirst: firstNameField.value,
-    NewLast: lastNameField.value,
-    NewEmail: emailField.value,
-    NewNumber: numberField.value,
+    NewFirst,
+    NewLast,
+    NewEmail,
+    NewNumber,
   });
 
   sendRequest(
@@ -334,27 +331,26 @@ function updateContact() {
       closeModal();
 
       // Update contact in contacts array
-      contactInModal.FirstName = firstNameField.value;
-      contactInModal.LastName = lastNameField.value;
-      contactInModal.Email = emailField.value;
-      contactInModal.PhoneNumber = numberField.value;
+      contactInModal.FirstName = NewFirst;
+      contactInModal.LastName = NewLast;
+      contactInModal.Email = NewEmail;
+      contactInModal.PhoneNumber = NewNumber;
 
       // Change the html of the contact in the table
       const table = document.getElementById("contactsTable");
       const row = table.rows[modalIndex + 1];
-      row.cells[0].innerHTML = firstNameField.value;
-      row.cells[1].innerHTML = lastNameField.value;
-      row.cells[2].innerHTML = emailField.value;
-      row.cells[3].innerHTML = numberField.value;
+      [NewFirst, NewLast, NewEmail, NewNumber].forEach((e, i) => {
+        row.cells[i].innerHTML = e;
+      });
 
       // Change the html of the contact in the cards
       const card =
         document.getElementById("cardsContainer").children[modalIndex];
-      card.children[0].innerHTML = `${firstNameField.value} ${lastNameField.value}`;
+      card.children[0].innerHTML = `${NewFirst} ${NewLast}`;
 
       const cardContent = card.children[1];
-      cardContent.children[0].innerHTML = emailField.value;
-      cardContent.children[1].innerHTML = numberField.value;
+      cardContent.children[0].innerHTML = NewEmail;
+      cardContent.children[1].innerHTML = NewNumber;
 
       updateResult.style.display = "none";
     },
