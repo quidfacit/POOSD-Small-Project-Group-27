@@ -22,7 +22,7 @@ showContacts(true);
   }
 );
 
-["updateFirstName", "updateLastName", "updateEmail", "updateNumber"].forEach(
+["updateFirstName", "updateLastName", "updateEmail", "updatePhoneNumber"].forEach(
   (id) => {
     document.getElementById(id).addEventListener("keyup", (e) => {
       if (e.key === "Enter") {
@@ -250,10 +250,9 @@ function openContactModal(e) {
   modalIndex = index;
 
   const contact = contacts[index];
-  document.getElementById("updateFirstName").value = contact.FirstName;
-  document.getElementById("updateLastName").value = contact.LastName;
-  document.getElementById("updateNumber").value = contact.PhoneNumber;
-  document.getElementById("updateEmail").value = contact.Email;
+  ['FirstName', 'LastName', 'PhoneNumber', 'Email'].forEach((field) => {
+    document.getElementById(`update${field}`).value = contact[field];
+  });
 
   showModal(document.getElementById("contactModal"));
 }
@@ -293,7 +292,7 @@ function updateContact() {
   const NewFirst = document.getElementById("updateFirstName").value;
   const NewLast = document.getElementById("updateLastName").value;
   const NewEmail = document.getElementById("updateEmail").value;
-  const NewNumber = document.getElementById("updateNumber").value;
+  const NewNumber = document.getElementById("updatePhoneNumber").value;
   console.log(NewNumber);
 
   const isValid = verifyInput(
@@ -391,7 +390,7 @@ function setUserNameLabel() {
   }
 );
 
-["updateFirstName", "updateLastName", "updateEmail", "updateNumber"].forEach(
+["updateFirstName", "updateLastName", "updateEmail", "updatePhoneNumber"].forEach(
   (id) => {
     document.getElementById(id).addEventListener("submit", (e) => {
       if (e.key == "Enter") {
