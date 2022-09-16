@@ -14,6 +14,27 @@ document.addEventListener('keydown', (e) => {
 function showModal(modal) {
     modal.style.display = 'block';
     mainContainer.classList.add('haze');
+
+    // Reset validation
+    [
+        "firstNameInput",
+        "lastNameInput",
+        "updateFirstName",
+        "updateLastName",
+    ].forEach((id) => {
+        if (document.getElementById(id))
+            inputEdit(document.getElementById(id), verifyName);
+    });
+
+    ["numberInput", "updateNumber"].forEach((id) => {
+        if (document.getElementById(id))
+            inputEdit(document.getElementById(id), verifyPhone);
+    });
+
+    ["emailInput", "updateEmail"].forEach((id) => {
+        if (document.getElementById(id))
+            inputEdit(document.getElementById(id), verifyEmail);
+    });
 }
 
 // Closes all modals
@@ -25,6 +46,13 @@ function closeModal() {
     ['addResult', 'registerResult'].forEach((id) => {
         if (document.getElementById(id)) {
             document.getElementById(id).innerHTML = '';
+        }
+    });
+
+    // Clear all inputs
+    ['firstNameInput', 'lastNameInput', 'usernameInput', 'passwordInput'].forEach((id) => {
+        if (document.getElementById(id)) {
+            document.getElementById(id).value = '';
         }
     })
 
