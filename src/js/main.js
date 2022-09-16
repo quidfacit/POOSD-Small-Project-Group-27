@@ -12,19 +12,6 @@ showContacts(true);
 
 // -------------------------- Set up Modal --------------------------
 
-const modals = Array.from(document.getElementsByClassName("modal"));
-const showModalBtn = document.getElementById("showModalBtn");
-const mainContainer = document.getElementsByClassName("mainContainer")[0];
-Array.from(document.getElementsByClassName("close")).forEach(
-  (c) => (c.onclick = closeModal)
-);
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeModal();
-  }
-});
-
 ["firstNameInput", "lastNameInput", "emailInput", "numberInput"].forEach(
   (id) => {
     document.getElementById(id).addEventListener("keyup", (e) => {
@@ -44,24 +31,6 @@ document.addEventListener("keydown", (e) => {
     });
   }
 );
-
-// Opens modal that called this function
-function showModal(modal) {
-  modal.style.display = "block";
-  mainContainer.classList.add("haze");
-}
-
-// Closes all modals
-function closeModal() {
-  modals.forEach((modal) => (modal.style.display = "none"));
-  mainContainer.classList.remove("haze");
-
-  document.getElementById("addResult").innerHTML = "";
-
-  Array.from(document.getElementsByClassName("incorrectLabel")).forEach((e) =>
-    e.classList.add("hidden")
-  );
-}
 
 // ------------------------ Set up lazy loading ------------------------
 [
@@ -282,7 +251,6 @@ function openContactModal(e) {
 
   const index = findIndex(e);
   if (index == -1) return; // Dont show for the header row
-  showModal(document.getElementById("contactModal"));
 
   contactInModal = contacts[index];
   modalIndex = index;
@@ -297,6 +265,7 @@ function openContactModal(e) {
   lastNameField.value = contact.LastName;
   numberField.value = contact.PhoneNumber;
   emailField.value = contact.Email;
+  showModal(document.getElementById("contactModal"));
 }
 
 // TODO: Ask for confirmation
