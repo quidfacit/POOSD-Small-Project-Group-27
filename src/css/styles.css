@@ -1,8 +1,3 @@
-/* For debug */
-/* div {
-  border: 1px solid red;
-} */
-
 html,
 body {
   height: 100%;
@@ -20,102 +15,9 @@ body {
   text-align: center;
 }
 
-.bottomPane {
-  display: flex;
-  float: right;
-  width: 50%;
-}
-
-table {
-  border-collapse: collapse;
-  margin: auto;
-  width: 100%;
-  table-layout: fixed;
-}
-
-#tableContainer {
-  display: block;
-  overflow: auto;
-  height: 1000px;
-  background-color: rgba(41, 147, 179, 0.5);
-  border-radius: 20px;
-  margin: 10px 40px 0 40px;
-}
-
-tr {
-  border: 1px solid black;
-  background-color: rgb(46, 194, 199);
-  transition: 0.75s;
-  justify-content: space-between;
-}
-
-th {
-  position: sticky;
-  top: 0;
-  background-color: rgb(46, 194, 199);
-}
-
-#contactsTable > tbody > tr:hover,
-th:hover {
-  background-color: rgb(45, 248, 255);
-  height: 60px;
-  transition: 0.75s;
-}
-
-td,
-th {
-  height: 40px;
-  border: 1px solid black;
-  width: 100px;
-}
-
 .inputContainer {
   display: block;
   text-align: center;
-}
-
-#searchContainer {
-  margin-left: 40px;
-  background-color: rgb(41, 147, 179);
-
-  background-image: url('../images/search-icon.png');
-  background-size: 20px;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-
-  width: 40px;
-  height: 40px;
-  font-size: 0%;
-  transition: 0.75s;
-}
-
-#searchContainer:hover {
-  background-color: rgba(45, 248, 255, 0);
-  background-image: none;
-  width: 300px;
-  /* height: 30px; */
-  border-radius: 20px;
-  font-size: 90%;
-  transition: 0.75s;
-}
-
-#searchContainer > * {
-  visibility: hidden;
-}
-
-#searchContainer:hover > * {
-  visibility: visible;
-  transition: 0.75s;
-}
-
-#searchInput {
-  width: 100%;
-  height: 100%;
-  border-radius: 20px;
-  padding-left: 10px;
-  margin: 0;
-  border: 0;
 }
 
 h1,
@@ -130,6 +32,7 @@ h3 {
 
   background-color: rgb(41, 147, 179);
   height: 50px;
+  display: flex;
 }
 
 .topBar > h3 {
@@ -138,29 +41,9 @@ h3 {
   margin-left: 100px;
 }
 
-#optionsContainer {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px;
-}
-
-#optionsContainer > * {
-  height: 40px;
-  margin: 0 5px;
-}
-
-#showModalBtn,
-#logoutBtn {
-  width: 90px;
-}
-
 .center {
   margin: auto;
   width: 50%;
-}
-
-.topBar {
-  display: flex;
 }
 
 .form {
@@ -212,23 +95,6 @@ h3 {
   border-radius: 50%;
 }
 
-.good {
-  /* background-color: green; */
-  background-image: url('../images/check-icon.png');
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.bad {
-  /* background-color: red; */
-  background-image: url('../images/x-icon.png');
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* Center button */
 button {
   border-radius: 20px;
   background-color: rgb(46, 194, 199);
@@ -249,90 +115,7 @@ button:hover {
   margin-bottom: 20px;
 }
 
-#updateButtonContainer {
-  /* width: 80%; */
-  margin: 20px 0px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  text-align: left;
-  justify-content: space-between;
-}
-
-#updateButton {
-  width: 200px;
-  height: 50px;
-}
-
-#deleteButton {
-  width: 50px;
-  height: 50px;
-  margin-left: calc(100% - 50px);
-
-  background-color: rgb(255, 0, 0);
-  background-image: url('../images/trash-icon.png');
-  background-size: 20px;
-  border-radius: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-#deleteButton:hover {
-  background-color: rgb(255, 101, 101);
-  transition: 0.5s;
-}
-
-#deleteButton::after {
-  float: none;
-}
-
-#addResult {
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.modal {
-  display: none;
-  position: absolute;
-  width: 650px;
-  background-color: rgb(41, 147, 179);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1; /* ontop */
-  border-radius: 20px;
-}
-
-.modal-content {
-  width: 90%;
-  margin: auto;
-}
-
-.modal-content > h1 {
-  border-bottom: 1px solid black;
-  text-align: left;
-}
-
-.close {
-  color: #ffffff;
-  float: right;
-  font-size: 36px;
-  font-weight: bold;
-}
-
-.close:hover {
-  color: black;
-  cursor: pointer;
-}
-
-.haze {
-  filter: brightness(50%);
-}
-
-#searchResult,
-#addResult {
-  color: white;
-}
-
+/* --------------------- Scroll bars --------------------- */
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -353,97 +136,4 @@ button:hover {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(160, 209, 224);
-}
-
-.toolBar {
-  margin: 20px 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-#displayLabel {
-  margin-right: 40px;
-  padding: 10px;
-  width: calc(190px - 20px);
-  border-radius: 20px;
-
-  background-color: rgb(41, 147, 179);
-}
-
-#cardsContainer {
-  height: 1000px;
-  margin-top: 5px;
-  margin: 10px 40px;
-
-  background-color: rgba(41, 147, 179, 0.5);
-  border-radius: 20px;
-
-  /* On show */
-  /* display: flex; */
-
-  /* On hide */
-  display: none;
-  flex-wrap: wrap;
-  overflow: auto;
-  justify-content: center;
-  align-content: flex-start;
-}
-
-.card {
-  padding: 10px;
-  min-width: 380px;
-  height: 193px;
-  margin: 10px;
-  border-radius: 20px;
-
-  background-color: rgb(46, 194, 199);
-
-  cursor: pointer;
-}
-
-.card > h1 {
-  text-align: left;
-  color: black;
-}
-
-.card-content {
-  background-color: rgb(41, 147, 179);
-  border-radius: 20px;
-  padding: 5px;
-}
-
-.card-content > * {
-  padding: 5px;
-  display: flex;
-  text-align: left;
-  color: black;
-}
-
-.card-content > p {
-  margin: 5px;
-}
-
-#gridLayoutButton,
-#listLayoutButton {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgb(46, 194, 199);
-  background-size: 20px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-#gridLayoutButton {
-  background-image: url('../images/grid-icon.png');
-}
-
-#listLayoutButton {
-  background-image: url('../images/list-icon.png');
-}
-
-#gridLayoutButton:hover,
-#listLayoutButton:hover {
-  background-color: rgb(45, 248, 255);
-  transition: 0.75s;
 }
