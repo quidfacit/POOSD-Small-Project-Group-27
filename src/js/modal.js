@@ -41,6 +41,9 @@ function validateAllInputs() {
     if (document.getElementById(id))
       inputEdit(document.getElementById(id), verifyEmail);
   });
+
+  inputEdit(document.getElementById("usernameInput"), verifyUsername);
+  inputEdit(document.getElementById("passwordInput"), verifyPassword);
 }
 
 // Closes all modals
