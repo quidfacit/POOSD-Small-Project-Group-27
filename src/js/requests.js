@@ -9,10 +9,14 @@ function sendRequest(path, payload, callback, errorCallback) {
     if (this.readyState == 4 && this.status == 200) {
       const { Error: err } = JSON.parse(xhr.responseText);
       if (err) {
-        errorCallback(err);
-      } else {
-        callback(xhr);
+        if (!errorCallback)
+          console.log(`${url} threw unhandled error: ${err}`);
+        else
+          errorCallback(err);
+        return
       }
+
+      callback(xhr);
     }
   };
 
