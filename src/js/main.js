@@ -1,6 +1,7 @@
 let contacts = [];
 let contactInModal = null;
 let modalIndex = -1;
+let cardInModal = null;
 const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
 let displayMode = "list";
@@ -26,7 +27,7 @@ showContacts(true);
   (id) => {
     document.getElementById(id).addEventListener("keyup", (e) => {
       if (e.key === "Enter") {
-        updateContact();
+        updateContactModal();
       }
     });
   }
@@ -89,6 +90,9 @@ function addCard(contact) {
   <p>${DateCreated}</p>
   </div>`;
 
+  div.addEventListener('click', () => {
+    highlightCard(div)
+  });
   document.getElementById("cardsContainer").appendChild(div);
 }
 
@@ -98,7 +102,9 @@ function clearTable() {
   tbody.replaceChildren(tbody.children[0]);
 
   const cardsContainer = document.getElementById("cardsContainer");
-  cardsContainer.replaceChildren();
+
+  // Remove all cards, but not pedestal
+  cardsContainer.replaceChildren(cardsContainer.children[0]);
 }
 
 function search() {
@@ -122,12 +128,14 @@ function search() {
         c.DateCreated = new Date(c.DateCreated).toDateString();
         return c;
       });
+      removeFromPedestal();
       showContacts(true);
     },
     (err) => {
       // If no contacts found, clear table
       document.getElementById("searchResult").innerHTML = err;
       contacts = [];
+      removeFromPedestal();
       showContacts(true);
     }
   );
@@ -257,8 +265,22 @@ function openContactModal(e) {
   showModal(document.getElementById("contactModal"));
 }
 
-// TODO: Ask for confirmation
-function deleteContact() {
+function deleteContactModal() {
+  deleteContact((res) => {
+    // Remove the contact from the table
+    const table = document.getElementById("contactsTable");
+    table.deleteRow(modalIndex + 1);
+
+    // Remove contact from contacts array
+    const { ID } = contactInModal;
+    contacts = contacts.filter((contact) => contact.ID != ID);
+
+    contactInModal = null;
+    closeModal();
+  });
+}
+
+function deleteContact(callback) {
   if (!contactInModal) return;
   const { ID } = contactInModal;
 
@@ -273,27 +295,19 @@ function deleteContact() {
     ID,
   });
 
-  sendRequest("DeleteContact", payload, (res) => {
-    // Remove the contact from the table
-    const table = document.getElementById("contactsTable");
-    table.deleteRow(modalIndex + 1);
-
-    // Remove contact from contacts array
-    contacts = contacts.filter((contact) => contact.ID != ID);
-
-    contactInModal = null;
-    closeModal();
-  });
+  sendRequest("DeleteContact", payload, callback);
 }
 
-function updateContact() {
-  if (!contactInModal) return;
+function updateContactModal() {
+  updateContact(document.getElementById("updateFirstName").value,
+    document.getElementById("updateLastName").value,
+    document.getElementById("updateEmail").value,
+    document.getElementById("updatePhoneNumber").value
+  );
+}
 
-  const NewFirst = document.getElementById("updateFirstName").value;
-  const NewLast = document.getElementById("updateLastName").value;
-  const NewEmail = document.getElementById("updateEmail").value;
-  const NewNumber = document.getElementById("updatePhoneNumber").value;
-  console.log(NewNumber);
+function updateContact(NewFirst, NewLast, NewEmail, NewNumber) {
+  if (!contactInModal) return;
 
   const isValid = verifyInput(
     NewFirst,
@@ -337,13 +351,9 @@ function updateContact() {
       });
 
       // Change the html of the contact in the cards
-      const card =
-        document.getElementById("cardsContainer").children[modalIndex];
-      card.children[0].innerHTML = `${NewFirst} ${NewLast}`;
-
-      const cardContent = card.children[1];
-      cardContent.children[0].innerHTML = NewEmail;
-      cardContent.children[1].innerHTML = NewNumber;
+      if (cardInModal) {
+        animateCardChange(NewFirst, NewLast, NewEmail, NewNumber);
+      }
 
       updateResult.style.display = "none";
     },
@@ -360,6 +370,7 @@ function gridLayout() {
   const cardsContainer = document.getElementById("cardsContainer");
   cardsContainer.style.display = "flex";
 
+  showContacts(true);
   displayMode = "grid";
 }
 
@@ -369,6 +380,8 @@ function listLayout() {
   const cardsContainer = document.getElementById("cardsContainer");
   cardsContainer.style.display = "none";
 
+  removeFromPedestal();
+  showContacts(true);
   displayMode = "list";
 }
 

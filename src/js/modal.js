@@ -2,11 +2,15 @@ const modals = Array.from(document.getElementsByClassName('modal'));
 const showModalBtn = document.getElementById('showModalBtn');
 const mainContainer = document.getElementsByClassName('mainContainer')[0];
 Array.from(document.getElementsByClassName('close'))
-    .forEach((c) => (c.onclick = closeModal));
+    .forEach((c) => {
+        if (c.id !== 'closePedestal')
+            c.onclick = closeModal;
+    });
 
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeModal();
+        removeFromPedestal();
     }
 });
 

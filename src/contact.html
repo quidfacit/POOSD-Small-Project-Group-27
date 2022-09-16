@@ -126,8 +126,8 @@
                 </ul>
 
                 <span id="updateButtonContainer">
-                    <button id="updateButton" onclick="updateContact()">Update Contact</button>
-                    <button id="deleteButton" onclick="deleteContact()"></button>
+                    <button id="updateButtonModal" onclick="updateContactModal()">Update Contact</button>
+                    <button id="deleteButtonModal" onclick="deleteContactModal()"></button>
                 </span>
                 <div class="center" style="display:none" id="updateResult">Done</div>
             </div>
@@ -171,7 +171,70 @@
         </div>
 
         <div id="cardsContainer" onclick="openContactModal(event)">
+            <div id="pedestal">
+                <div id="pedestalEditor">
+                    <div class="modal-content">
+                        <span onclick="removeFromPedestal()" class="close" id="closePedestal">&times;</span>
+                        <h1>Edit Contact</h1>
+                        <div class="inputContainer" style="width:100%">
+                            <ul class="form">
+                                <li>
+                                    <div class="labelInputPair name">
+                                        <label>First Name</label>
+                                        <div class="formInputContainer">
+                                            <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
+                                                id="updateFirstNamePedestal">
+                                            <div class="verifyLabel bad">
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <div class="labelInputPair name">
+                                        <label>Last Name</label>
+                                        <div class="formInputContainer">
+                                            <input oninput="inputEdit(this, verifyName)" type="text" maxlength="20"
+                                                id="updateLastNamePedestal">
+                                            <div class="verifyLabel bad">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="labelInputPair email">
+
+                                        <label>Email</label>
+                                        <div class="formInputContainer">
+                                            <input oninput="inputEdit(this, verifyEmail)" type="text" maxlength="30"
+                                                id="updateEmailPedestal">
+                                            <div class="verifyLabel bad">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="labelInputPair phoneNumber">
+
+                                        <label>Phone Number</label>
+                                        <div class="formInputContainer">
+                                            <input oninput="inputEdit(this, verifyPhone, true)" type="text"
+                                                maxlength="12" id="updatePhoneNumberPedestal">
+                                            <div class="verifyLabel bad">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <span id="updateButtonContainer">
+                                <button id="updateButtonPedestal" onclick="updateContactPedestal()">Update
+                                    Contact</button>
+                                <button id="deleteButtonPedestal" onclick="deleteContactPedestal()"></button>
+                            </span>
+                            <div class="center" style="display:none" id="updateResult">Done</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
@@ -179,6 +242,7 @@
 <footer>
     <script src="js/requests.js"></script>
     <script src="js/modal.js"></script>
+    <script src="js/pedestal.js"></script>
     <script src="js/verify.js"></script>
     <script src="js/main.js"></script>
 </footer>

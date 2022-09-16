@@ -108,12 +108,14 @@ th {
   justify-content: space-between;
 }
 
-#updateButton {
+#updateButtonModal,
+#updateButtonPedestal {
   width: 200px;
   height: 50px;
 }
 
-#deleteButton {
+#deleteButtonModal,
+#deleteButtonPedestal {
   width: 50px;
   height: 50px;
   margin-left: calc(100% - 50px);
@@ -211,6 +213,62 @@ th {
 
 .card-content > p {
   margin: 5px;
+}
+
+#pedestal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  visibility: hidden;
+
+  height: 0;
+  width: 0;
+  transition: height ease 750ms;
+}
+
+#pedestal:has(.card) {
+  visibility: visible;
+  height: 50%;
+  width: 100%;
+  padding: 0 180px;
+  transition: height ease 750ms;
+}
+
+#pedestalEditor {
+  background-color: rgb(41, 147, 179);
+  border-radius: 20px;
+  width: 40%;
+  height: 80%;
+}
+
+.rotate {
+  -webkit-animation: spin 1s linear;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate3d(0, 1, 0, 0deg);
+    -ms-transform: rotate3d(0, 1, 0, 0deg);
+    -o-transform: rotate3d(0, 1, 0, 0deg);
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  50% {
+    -webkit-transform: rotate3d(0, 1, 0, 90deg);
+    -ms-transform: rotate3d(0, 1, 0, 90deg);
+    -o-transform: rotate3d(0, 1, 0, 90deg);
+    transform: rotate3d(0, 1, 0, 90deg);
+  }
+  100% {
+    -webkit-transform: rotate3d(0, 1, 0, 0);
+    -ms-transform: rotate3d(0, 1, 0, 0);
+    -o-transform: rotate3d(0, 1, 0, 0);
+    transform: rotate3d(0, 1, 0, 0);
+  }
+}
+
+.shrink {
+  scale: 0;
+  transition: 1s;
 }
 
 #gridLayoutButton,
