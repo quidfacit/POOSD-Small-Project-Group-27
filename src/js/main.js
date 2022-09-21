@@ -111,6 +111,7 @@ function clearTable() {
 
 function search() {
   const searchTerm = document.getElementById("searchInput").value;
+  console.log(searchTerm);
 
   // Get results from API
   const jsonPayload = JSON.stringify({
@@ -132,6 +133,9 @@ function search() {
       });
       removeFromPedestal();
       showContacts(true);
+      sortedBy = 'DateCreated'; //Default sorting from API
+
+      console.log(`Found ${contacts.length} contacts with search term ${searchTerm}`);
     },
     (err) => {
       // If no contacts found, clear table
