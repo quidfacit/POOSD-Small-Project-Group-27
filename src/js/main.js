@@ -6,6 +6,7 @@ const DISPLAY_AMOUT = 30;
 let displayedAmount = 0;
 let displayMode = "list";
 let sortedBy = "DateCreated";
+let sortDirection = 'ascending';
 
 setUserNameLabel();
 search();
@@ -111,7 +112,6 @@ function clearTable() {
 
 function search() {
   const searchTerm = document.getElementById("searchInput").value;
-  console.log(searchTerm);
 
   // Get results from API
   const jsonPayload = JSON.stringify({
@@ -134,8 +134,7 @@ function search() {
       removeFromPedestal();
       showContacts(true);
       sortedBy = 'DateCreated'; //Default sorting from API
-
-      console.log(`Found ${contacts.length} contacts with search term ${searchTerm}`);
+      sortDirection = 'ascending';
     },
     (err) => {
       // If no contacts found, clear table
@@ -189,15 +188,31 @@ function addContact() {
 function sortBy(field) {
   // If already sorted by this field, reverse the order
   if (field === sortedBy) {
+    sortDirection = sortDirection === 'ascending' ? 'descending' : 'ascending';
     contacts.reverse();
   } else {
     sortedBy = field;
+    sortDirection = 'ascending';
     contacts.sort((a, b) => {
       if (a[field] < b[field]) return -1;
       if (a[field] > b[field]) return 1;
       return 0;
     });
   }
+
+
+
+  // Set the rest of the sort indicators to both
+  [...document.getElementsByClassName("sortIndicator")].forEach((e) => {
+    e.classList.remove('indicateUp');
+    e.classList.remove('indicateDown');
+    e.classList.add('indicateBoth');
+  });
+
+  const sortIndicator = document.getElementById(`indicator${field}`);
+  sortIndicator.classList.remove('indicateBoth');
+  sortIndicator.classList.add(sortDirection === 'ascending' ? 'indicateDown' : 'indicateUp');
+  sortIndicator.classList.remove(sortDirection === 'ascending' ? 'indicateUp' : 'indicateDown');
 
   showContacts(true);
 }

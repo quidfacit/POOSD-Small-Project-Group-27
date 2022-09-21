@@ -171,11 +171,21 @@
         <div id="tableContainer">
             <table id="contactsTable" onclick="openContactModal(event)">
                 <tr class="tableEntry">
-                    <th onclick="sortBy('FirstName')">First Name</th>
-                    <th onclick="sortBy('LastName')">Last Name</th>
-                    <th onclick="sortBy('Email')">Email</th>
-                    <th onclick="sortBy('PhoneNumber')">Phone Number</th>
-                    <th onclick="sortBy('DateCreated')">Date created</th>
+                    <th onclick="sortBy('FirstName')">First Name
+                        <span class="sortIndicator indicateBoth" id="indicatorFirstName"></span>
+                    </th>
+                    <th onclick="sortBy('LastName')">Last Name
+                        <span class="sortIndicator indicateBoth" id="indicatorLastName"></span>
+                    </th>
+                    <th onclick="sortBy('Email')">Email
+                        <span class="sortIndicator indicateBoth" id="indicatorEmail"></span>
+                    </th>
+                    <th onclick="sortBy('PhoneNumber')">Phone Number
+                        <span class="sortIndicator indicateBoth" id="indicatorPhoneNumber"></span>
+                    </th>
+                    <th onclick="sortBy('DateCreated')">Date created
+                        <span class="sortIndicator indicateDown" id="indicatorDateCreated"></span>
+                    </th>
                 </tr>
             </table>
         </div>

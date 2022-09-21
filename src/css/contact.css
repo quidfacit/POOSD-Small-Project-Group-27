@@ -45,7 +45,7 @@ th {
   margin-left: 40px;
   background-color: rgb(41, 147, 179);
 
-  background-image: url("../images/search-icon.png");
+  background-image: url('../images/search-icon.png');
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -128,7 +128,7 @@ th {
   margin-left: calc(100% - 50px);
 
   background-color: rgb(255, 0, 0);
-  background-image: url("../images/trash-icon.png");
+  background-image: url('../images/trash-icon.png');
   background-size: 20px;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -294,15 +294,47 @@ th {
 }
 
 #gridLayoutButton {
-  background-image: url("../images/grid-icon.png");
+  background-image: url('../images/grid-icon.png');
 }
 
 #listLayoutButton {
-  background-image: url("../images/list-icon.png");
+  background-image: url('../images/list-icon.png');
 }
 
 #gridLayoutButton:hover,
 #listLayoutButton:hover {
   background-color: rgb(45, 248, 255);
   transition: 0.75s;
+}
+
+.sortIndicator {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+  margin-left: 5px;
+  margin-top: -10px;
+}
+
+.indicateBoth::before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+  margin-left: 5px;
+  transform: rotate(180deg);
+}
+
+.indicateUp {
+}
+
+.indicateDown {
+  border-bottom: 5px solid black;
+
+  transform: rotate(180deg);
 }
